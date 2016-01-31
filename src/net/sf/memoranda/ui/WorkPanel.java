@@ -6,6 +6,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -17,6 +20,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JCheckBox;
+import javax.swing.BoxLayout;
 
 import net.sf.memoranda.util.Context;
 import net.sf.memoranda.util.Local;
@@ -32,6 +37,7 @@ public class WorkPanel extends JPanel {
 	JToolBar toolBar = new JToolBar();
 	JPanel panel = new JPanel();
 	CardLayout cardLayout1 = new CardLayout();
+	boolean active = true;
 
 	public JButton notesB = new JButton();
 	public DailyItemsPanel dailyItemsPanel = new DailyItemsPanel(this);
@@ -40,9 +46,32 @@ public class WorkPanel extends JPanel {
 	public JButton tasksB = new JButton();
 	public JButton eventsB = new JButton();
 	public JButton filesB = new JButton();
-    JFrame dialog = new JFrame("Event Tutorial");
+    JFrame dialog = new JFrame("Tips and Tricks");
 	JButton currentB = null;
+	JPanel dialPanel = new JPanel();
 	Border border1;
+	
+
+    JLabel dialogLabelEvent = new JLabel("<html><p><div style=\"text-align: center;\">On the Events page you will be able to add events to the Event Manager! <br> <br> You can add a new event by clicking the new event button the event toolbar.<br><br></p></html>", JLabel.CENTER);
+    JLabel dialogLabelAgenda = new JLabel("<html><p><div style=\"text-align: center;\">Welcome to Memoranda! <br><br>On the Agenda page you will be able view all your upcoming events, tasks, and notes!<br><br></p></html>", JLabel.CENTER);
+    JLabel dialogLabelTasks = new JLabel("<html><p><div style=\"text-align: center;\">On the Tasks page you will be able to add tasks. <br><br> You can add a new task by hitting the new task button. <br><br> You can also create a subtask under an already created task. <br><br> Here you can view your created tasks as well.<br><br></p></html>", JLabel.CENTER);
+    JLabel dialogLabelNotes = new JLabel("<html><p><div style=\"text-align: center;\">This is Notes page <br><br> You can add a note simply by typing in the text box below and click on new note to save it! <br><br> The new note will be saved off to the left. <br><br> You can also import and export note files.<br><br></p></html>", JLabel.CENTER);
+    JCheckBox ignore = new JCheckBox("Do not show tips anymore");
+    ItemListener select = new ItemListener(){
+    	public void itemStateChanged(ItemEvent event)
+    	{	
+    		Object source = event.getItemSelectable();
+    		if(source == ignore)
+    		{
+    			if(ignore.isSelected() == true)
+    			{
+    				active = false;
+    			}
+    			else
+    				active = true;
+    		}
+    	}
+    };
 
 	public WorkPanel() {
 		try {
@@ -124,9 +153,8 @@ public class WorkPanel extends JPanel {
 		//eventsB.setSelected(true);
 		
         dialog.setDefaultCloseOperation(dialog.DISPOSE_ON_CLOSE);
-        JLabel dialogLabel = new JLabel("Here is some dialog for the box");
-        dialog.getContentPane().add(dialogLabel, BorderLayout.CENTER);
-        dialog.setSize(400,400);
+    	ignore.addItemListener(select);
+        ignore.setSelected(false);
         dialog.setVisible(false);
 		
 		
@@ -245,6 +273,10 @@ public class WorkPanel extends JPanel {
 		dailyItemsPanel.selectPanel("AGENDA");
 		setCurrentButton(agendaB);
 		Context.put("CURRENT_PANEL", "AGENDA");
+		if(active == true)
+		{
+			setDialogAgenda();
+		}
 	}
 
 	public void notesB_actionPerformed(ActionEvent e) {
@@ -252,6 +284,10 @@ public class WorkPanel extends JPanel {
 		dailyItemsPanel.selectPanel("NOTES");
 		setCurrentButton(notesB);
 		Context.put("CURRENT_PANEL", "NOTES");
+		if(active == true)
+		{
+			setDialogNotes();
+		}
 	}
 
 	public void tasksB_actionPerformed(ActionEvent e) {
@@ -259,6 +295,10 @@ public class WorkPanel extends JPanel {
 		dailyItemsPanel.selectPanel("TASKS");
 		setCurrentButton(tasksB);
 		Context.put("CURRENT_PANEL", "TASKS");
+		if(active == true)
+		{
+			setDialogTasks();
+		}
 	}
 
 	public void eventsB_actionPerformed(ActionEvent e) {
@@ -266,8 +306,10 @@ public class WorkPanel extends JPanel {
 		dailyItemsPanel.selectPanel("EVENTS");
 		setCurrentButton(eventsB);
 		Context.put("CURRENT_PANEL", "EVENTS");
-        dialog.setVisible(true);
-        dialog.toFront();
+		if(active == true)
+		{
+			setDialogEvent();
+		}
 	}
 
 	public void filesB_actionPerformed(ActionEvent e) {
@@ -283,5 +325,69 @@ public class WorkPanel extends JPanel {
 		// Default color blue
 		currentB.setBackground(new Color(215, 225, 250));
 		currentB.setOpaque(true);
+	}
+	
+	public void setDialogEvent()
+	{
+		dialog.setVisible(false);
+		dialPanel.removeAll();
+		dialog.setVisible(true);
+		dialog.toFront();
+        dialPanel.setLayout(new BoxLayout(dialPanel, BoxLayout.Y_AXIS));
+        dialPanel.add(dialogLabelEvent);
+        dialPanel.add(ignore);
+        dialog.getContentPane().add(dialPanel, BorderLayout.CENTER);
+        dialog.setSize(300,175);
+        dialog.setLocation(800,400);
+        dialPanel.revalidate();
+        dialPanel.repaint();
+	}
+	
+	public void setDialogAgenda()
+	{
+		dialog.setVisible(false);
+		dialPanel.removeAll();
+		dialog.setVisible(true);
+		dialog.toFront();
+        dialPanel.setLayout(new BoxLayout(dialPanel, BoxLayout.Y_AXIS));
+        dialPanel.add(dialogLabelAgenda);
+        dialPanel.add(ignore);
+        dialog.getContentPane().add(dialPanel, BorderLayout.CENTER);
+        dialog.setSize(300,160);
+        dialog.setLocation(800,400);
+        dialPanel.revalidate();
+        dialPanel.repaint();
+	}
+	
+	public void setDialogTasks()
+	{
+		dialog.setVisible(false);
+		dialPanel.removeAll();
+		dialog.setVisible(true);
+		dialog.toFront();
+        dialPanel.setLayout(new BoxLayout(dialPanel, BoxLayout.Y_AXIS));
+        dialPanel.add(dialogLabelTasks);
+        dialPanel.add(ignore);
+        dialog.getContentPane().add(dialPanel, BorderLayout.CENTER);
+        dialog.setSize(300,240);
+        dialog.setLocation(800,400);
+        dialPanel.revalidate();
+        dialPanel.repaint();
+	}
+	
+	public void setDialogNotes()
+	{
+		dialog.setVisible(false);
+		dialPanel.removeAll();
+		dialog.setVisible(true);
+		dialog.toFront();
+        dialPanel.setLayout(new BoxLayout(dialPanel, BoxLayout.Y_AXIS));
+        dialPanel.add(dialogLabelNotes);
+        dialPanel.add(ignore);
+        dialog.getContentPane().add(dialPanel, BorderLayout.CENTER);
+        dialog.setSize(300,225);
+        dialog.setLocation(800,400);
+        dialPanel.revalidate();
+        dialPanel.repaint();
 	}
 }
