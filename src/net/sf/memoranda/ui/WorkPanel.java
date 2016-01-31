@@ -15,6 +15,8 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import net.sf.memoranda.util.Context;
 import net.sf.memoranda.util.Local;
@@ -38,6 +40,7 @@ public class WorkPanel extends JPanel {
 	public JButton tasksB = new JButton();
 	public JButton eventsB = new JButton();
 	public JButton filesB = new JButton();
+    JFrame dialog = new JFrame("Event Tutorial");
 	JButton currentB = null;
 	Border border1;
 
@@ -78,7 +81,7 @@ public class WorkPanel extends JPanel {
 		agendaB.setContentAreaFilled(false);
 		agendaB.setFocusPainted(false);
 		agendaB.setHorizontalTextPosition(SwingConstants.CENTER);
-		agendaB.setText(/*Local.getString("Agenda")*/"Something");
+		agendaB.setText(Local.getString("Agenda"));
 		agendaB.setVerticalAlignment(SwingConstants.TOP);
 		agendaB.setVerticalTextPosition(SwingConstants.BOTTOM);
 		agendaB.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +122,14 @@ public class WorkPanel extends JPanel {
 		eventsB.setOpaque(false);
 		eventsB.setMargin(new Insets(0, 0, 0, 0));
 		//eventsB.setSelected(true);
-
+		
+        dialog.setDefaultCloseOperation(dialog.DISPOSE_ON_CLOSE);
+        JLabel dialogLabel = new JLabel("Here is some dialog for the box");
+        dialog.getContentPane().add(dialogLabel, BorderLayout.CENTER);
+        dialog.setSize(400,400);
+        dialog.setVisible(false);
+		
+		
 		tasksB.setSelected(true);
 		tasksB.setFont(new java.awt.Font("Dialog", 1, 10));
 		tasksB.setMargin(new Insets(0, 0, 0, 0));
@@ -256,6 +266,8 @@ public class WorkPanel extends JPanel {
 		dailyItemsPanel.selectPanel("EVENTS");
 		setCurrentButton(eventsB);
 		Context.put("CURRENT_PANEL", "EVENTS");
+        dialog.setVisible(true);
+        dialog.toFront();
 	}
 
 	public void filesB_actionPerformed(ActionEvent e) {

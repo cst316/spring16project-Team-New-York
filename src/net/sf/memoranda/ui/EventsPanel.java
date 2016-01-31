@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -73,6 +75,8 @@ public class EventsPanel extends JPanel {
         historyBackB.setMinimumSize(new Dimension(24, 24));
         historyBackB.setMaximumSize(new Dimension(24, 24));
         historyBackB.setText("");
+        
+
 
         historyForwardB.setAction(History.historyForwardAction);
         historyForwardB.setBorderPainted(false);
