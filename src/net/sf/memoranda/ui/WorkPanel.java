@@ -25,6 +25,7 @@ import javax.swing.BoxLayout;
 
 import net.sf.memoranda.util.Context;
 import net.sf.memoranda.util.Local;
+import net.sf.memoranda.util.Util;
 
 /**
  * 
@@ -269,6 +270,8 @@ public class WorkPanel extends JPanel {
 	}
 
 	public void agendaB_actionPerformed(ActionEvent e) {
+		String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
+		Util.playSound(soundFile);
 		cardLayout1.show(panel, "DAILYITEMS");
 		dailyItemsPanel.selectPanel("AGENDA");
 		setCurrentButton(agendaB);
@@ -280,6 +283,8 @@ public class WorkPanel extends JPanel {
 	}
 
 	public void notesB_actionPerformed(ActionEvent e) {
+		String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
+		Util.playSound(soundFile);
 		cardLayout1.show(panel, "DAILYITEMS");
 		dailyItemsPanel.selectPanel("NOTES");
 		setCurrentButton(notesB);
@@ -291,6 +296,8 @@ public class WorkPanel extends JPanel {
 	}
 
 	public void tasksB_actionPerformed(ActionEvent e) {
+		String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
+		Util.playSound(soundFile);
 		cardLayout1.show(panel, "DAILYITEMS");
 		dailyItemsPanel.selectPanel("TASKS");
 		setCurrentButton(tasksB);
@@ -302,6 +309,8 @@ public class WorkPanel extends JPanel {
 	}
 
 	public void eventsB_actionPerformed(ActionEvent e) {
+		String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
+		Util.playSound(soundFile);
 		cardLayout1.show(panel, "DAILYITEMS");
 		dailyItemsPanel.selectPanel("EVENTS");
 		setCurrentButton(eventsB);
@@ -313,6 +322,8 @@ public class WorkPanel extends JPanel {
 	}
 
 	public void filesB_actionPerformed(ActionEvent e) {
+		String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
+		Util.playSound(soundFile);
 		cardLayout1.show(panel, "FILES");
 		setCurrentButton(filesB);
 		Context.put("CURRENT_PANEL", "FILES");

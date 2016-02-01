@@ -24,6 +24,11 @@ import net.sf.memoranda.ui.AppFrame;
 import net.sf.memoranda.ui.ExceptionDialog;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.*;
 /**
  *
  */
@@ -181,4 +186,17 @@ public class Util {
         }
         System.out.println("[ERROR] Stack Trace: " + stackTrace);
     }
+    public static void playSound(String audioFilePath)
+	{
+		try {
+			String afp = audioFilePath;
+	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(afp).getAbsoluteFile());
+	        Clip clip = AudioSystem.getClip();
+	        clip.open(audioInputStream);
+	        clip.start();
+	    } catch(Exception ex) {
+	        System.out.println("Error with playing sound.");
+	        ex.printStackTrace();
+	    }
+	}
 }

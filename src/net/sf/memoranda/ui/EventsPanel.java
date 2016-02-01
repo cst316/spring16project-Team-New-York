@@ -366,11 +366,11 @@ public class EventsPanel extends JPanel {
  	   time2 = time1 - hh * 60 * 60 * 1000;//Milli sec converted to hours
  	   //Date date2 = new Date(time2);
  	   
- 	  long days =  Math.floor(time2/(24 * 60 * 60 * 1000));//Number of days
+ 	 // long days =  Math.floor(time2/(24 * 60 * 60 * 1000));//Number of days
  	   	  
- 	  long hours =  Math.floor(time2/(60 * 60 * 1000));//Number of days
+ 	 // long hours =  Math.floor(time2/(60 * 60 * 1000));//Number of days
  	 
- 	  long minutes =  Math.floor(time2/60 * 1000));//Number of days
+ 	 // long minutes =  Math.floor(time2/(60 * 1000));//Number of days
 		
 		//end of changes
 		
