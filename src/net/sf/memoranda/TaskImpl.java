@@ -270,6 +270,18 @@ public class TaskImpl implements Task, Comparable {
         if ((p >= 0) && (p <= 100))
             setAttr("progress", new Integer(p).toString());
     }
+  
+    public int getCategory() {
+        Attribute pa = _element.getAttribute("category");
+        if (pa == null)
+            return Task.CATEGORY_HOME;
+        return new Integer(pa.getValue()).intValue();
+    }
+    
+    public void setCategory(int c) {
+        setAttr("category", String.valueOf(c));
+    }
+    
     /**
      * @see net.sf.memoranda.Task#getPriority()
      */

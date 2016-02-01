@@ -69,11 +69,20 @@ public class TaskDialog extends JDialog {
     Border border8;
     CalendarFrame startCalFrame = new CalendarFrame();
     CalendarFrame endCalFrame = new CalendarFrame();
+   
+    String[] category = {Local.getString("Home"), Local.getString("Work"),
+            Local.getString("School"), Local.getString("Other")};
+    
     String[] priority = {Local.getString("Lowest"), Local.getString("Low"),
         Local.getString("Normal"), Local.getString("High"),
         Local.getString("Highest")};
     boolean ignoreStartChanged = false;
     boolean ignoreEndChanged = false;
+   
+  
+    JPanel jPanec4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+    
     JPanel jPanel4 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     JPanel jPanel6 = new JPanel(new FlowLayout(FlowLayout.LEFT));
     JLabel jLabel6 = new JLabel();
@@ -91,6 +100,9 @@ public class TaskDialog extends JDialog {
     
     JButton setNotifB = new JButton();
     JComboBox priorityCB = new JComboBox(priority);
+    JLabel jLabec7 = new JLabel();
+   
+    JComboBox categoryCB = new JComboBox(category);
     JLabel jLabel7 = new JLabel();
     // added by rawsushi
     JLabel jLabelEffort = new JLabel();
@@ -317,13 +329,24 @@ public class TaskDialog extends JDialog {
                 setNotifB_actionPerformed(e);
             }
         });
-        jLabel7.setMaximumSize(new Dimension(100, 16));
+       
+         jLabel7.setMaximumSize(new Dimension(100, 16));
         jLabel7.setMinimumSize(new Dimension(60, 16));
         //jLabel7.setPreferredSize(new Dimension(60, 16));
         jLabel7.setText(Local.getString("Priority"));
-
+       
         priorityCB.setFont(new java.awt.Font("Dialog", 0, 11));
         jPanel4.add(jLabel7, null);
+        
+    
+        jLabec7.setMaximumSize(new Dimension(100, 16));
+        jLabec7.setMinimumSize(new Dimension(60, 16));
+        //jLabel7.setPreferredSize(new Dimension(60, 16));
+        jLabec7.setText(Local.getString("Category"));
+        
+        
+        categoryCB.setFont(new java.awt.Font("Dialog", 0, 11));
+        jPanec4.add(jLabec7, null);
         getContentPane().add(mPanel);
         mPanel.add(areaPanel, BorderLayout.CENTER);
         mPanel.add(buttonsPanel, BorderLayout.SOUTH);
@@ -351,6 +374,9 @@ public class TaskDialog extends JDialog {
         jPanelEffort.add(effortField, null);
 
         jPanel2.add(jPanel4, null);
+        jPanel2.add(jPanec4, null);
+     
+        jPanec4.add(categoryCB, null);
         jPanel4.add(priorityCB, null);
         jPanel2.add(jPanel3, null);
         
@@ -361,6 +387,7 @@ public class TaskDialog extends JDialog {
         jPanelProgress.add(progress, null);
         jPanel2.add(jPanelProgress);
         
+        categoryCB.setSelectedItem(Local.getString("Home"));
         priorityCB.setSelectedItem(Local.getString("Normal"));
         startCalFrame.cal.addSelectionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

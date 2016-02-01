@@ -41,6 +41,15 @@ public interface Task {
     public static final int PRIORITY_HIGH = 3;
     
     public static final int PRIORITY_HIGHEST = 4;
+        
+    public static final int CATEGORY_HOME = 0;
+    
+    public static final int CATEGORY_WORK= 1;
+    
+    public static final int CATEGORY_SCHOOL = 2;
+    
+    public static final int CATEGORY_OTHER = 3;
+
     
     CalendarDate getStartDate();
     void setStartDate(CalendarDate date);
@@ -52,6 +61,10 @@ public interface Task {
     
     int getProgress();
     void setProgress(int p);
+    
+    int getCategory();
+    void setCategory(int p);
+    
     
     int getPriority();
     void setPriority(int p);
