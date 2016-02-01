@@ -351,20 +351,28 @@ public class EventsPanel extends JPanel {
 		
     	// Added changes below 
 		
-		int yy = calendar.get(Calendar.YEAR);//We need to subtract the years
+		//int yy = calendar.get(Calendar.YEAR);//We need to subtract the years
 		
-		int xx = calendar.get(Calendar.MONTH);//We need to subtract the months
+		//int xx = calendar.get(Calendar.MONTH);//We need to subtract the months
 		
-		int zz = calendar.get(Calendar.DAY_OF_MONTH);//We need to subtract the days
+		//int zz = calendar.get(Calendar.DAY_OF_MONTH);//We need to subtract the days
 		
     	Date date1 = new Date();
  	   long time1 = date1.getTime();
  	   
+ 	   
+ 	   //below we subtract the hours and minutes from a task to today's date
  	   long time2 = time1 - mm * 60 * 1000;//Milli sec converted to minutes
  	   time2 = time1 - hh * 60 * 60 * 1000;//Milli sec converted to hours
- 	   Date date2 = new Date(time2);
+ 	   //Date date2 = new Date(time2);
+ 	   
+ 	  long days =  Math.floor(time2/(24 * 60 * 60 * 1000));//Number of days
+ 	   	  
+ 	  long hours =  Math.floor(time2/(60 * 60 * 1000));//Number of days
+ 	 
+ 	  long minutes =  Math.floor(time2/60 * 1000));//Number of days
 		
-		
+		//end of changes
 		
     	if (dlg.noRepeatRB.isSelected())
     		EventsManager.createEvent(eventCalendarDate, hh, mm, text);
