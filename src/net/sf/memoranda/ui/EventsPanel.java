@@ -348,11 +348,31 @@ public class EventsPanel extends JPanel {
 		
 		CalendarDate eventCalendarDate = new CalendarDate(dlg.getEventDate());
 		
+		
+    	// Added changes below 
+		
+		int yy = calendar.get(Calendar.YEAR);//We need to subtract the years
+		
+		int xx = calendar.get(Calendar.MONTH);//We need to subtract the months
+		
+		int zz = calendar.get(Calendar.DAY_OF_MONTH);//We need to subtract the days
+		
+    	Date date1 = new Date();
+ 	   long time1 = date1.getTime();
+ 	   
+ 	   long time2 = time1 - mm * 60 * 1000;//Milli sec converted to minutes
+ 	   time2 = time1 - hh * 60 * 60 * 1000;//Milli sec converted to hours
+ 	   Date date2 = new Date(time2);
+		
+		
+		
     	if (dlg.noRepeatRB.isSelected())
     		EventsManager.createEvent(eventCalendarDate, hh, mm, text);
     	else {
     		updateEvents(dlg,hh,mm,text);
     	}
+    	
+    	
     	saveEvents();
     }
 
