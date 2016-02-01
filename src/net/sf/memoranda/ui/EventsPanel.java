@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.math.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -366,11 +367,15 @@ public class EventsPanel extends JPanel {
  	   time2 = time1 - hh * 60 * 60 * 1000;//Milli sec converted to hours
  	   //Date date2 = new Date(time2);
  	   
- 	 // long days =  Math.floor(time2/(24 * 60 * 60 * 1000));//Number of days
- 	   	  
- 	 // long hours =  Math.floor(time2/(60 * 60 * 1000));//Number of days
- 	 
- 	 // long minutes =  Math.floor(time2/(60 * 1000));//Number of days
+	   int days =  (int) Math.floor(time2/(24 * 60 * 60 * 1000));//Number of days
+	 	  
+	 	  int time3 = (int) (time2 -  days * (24 * 60 * 60 * 1000));
+	 	   	  
+	 	  int hours =  (int) Math.floor(time3/(60 * 60 * 1000));//Number of hours
+	 	  
+	 	 int time4 = (int) (time3 -  hours * (60 * 60 * 1000));
+	 	 
+	 	  int minutes = (int) Math.floor(time4/(60 * 1000));//Number of minutes
 		
 		//end of changes
 		
