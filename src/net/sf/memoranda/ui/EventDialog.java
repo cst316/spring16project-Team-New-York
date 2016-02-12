@@ -16,9 +16,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-/// Added
-import java.util.TimerTask;
-import java.util.Timer;
+
+
+
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -32,7 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.JTextArea; 
+
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
@@ -526,9 +526,9 @@ public class EventDialog extends JDialog implements WindowListener {
 	    eventDate = d;
 	}
 	
-    /// Use This for getting Day of event. 
+ 
 	public Date getEventDate() {
-		System.out.println("The day of the event is : " + eventDate);
+		
 		return eventDate;
 	}
 	
