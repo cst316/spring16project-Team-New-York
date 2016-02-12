@@ -111,9 +111,7 @@ public class EventDialog extends JDialog implements WindowListener {
         headerPanel.add(header);
         
         // Build eventPanel
-        lblClock.setText(Local.getString("CountDown"));
         lblTime.setText(Local.getString("Time"));
-        lblClock.setMinimumSize(new Dimension(60, 24));
         lblTime.setMinimumSize(new Dimension(60, 24));
         
         gbc = new GridBagConstraints();
@@ -121,7 +119,11 @@ public class EventDialog extends JDialog implements WindowListener {
         gbc.insets = new Insets(10, 10, 5, 10);
         gbc.anchor = GridBagConstraints.WEST;
         eventPanel.add(lblTime, gbc);
+<<<<<<< HEAD
      
+=======
+   
+>>>>>>> US-3
         timeSpin.setPreferredSize(new Dimension(60, 24));
         
         gbc = new GridBagConstraints();
@@ -129,7 +131,11 @@ public class EventDialog extends JDialog implements WindowListener {
         gbc.insets = new Insets(10, 0, 5, 0);
         gbc.anchor = GridBagConstraints.WEST;
         eventPanel.add(timeSpin, gbc);
+<<<<<<< HEAD
         
+=======
+       
+>>>>>>> US-3
         lblText.setText(Local.getString("Text"));
         lblText.setMinimumSize(new Dimension(120, 24));
         gbc = new GridBagConstraints();
