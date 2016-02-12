@@ -523,7 +523,6 @@ public class EventDialog extends JDialog implements WindowListener {
 	
  
 	public Date getEventDate() {
-		
 		return eventDate;
 	}
 	
