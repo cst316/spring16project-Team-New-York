@@ -16,7 +16,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
+/// Added//////////////////////
+//import java.util.TimerTask;//
+//import java.util.Timer;//////
+//////////////////////////////
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -29,7 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
-
+import javax.swing.JTextArea; 
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
@@ -53,6 +56,12 @@ public class EventDialog extends JDialog implements WindowListener {
     GridBagConstraints gbc; 
     JLabel lblTime = new JLabel();
     JLabel lblClock = new JLabel();	
+    ////////////Change to work with output/////////////////////////
+   // DisplayCountdown displayClock = new DisplayCountdown();//////
+    //CountDownClockTest displayClock = new CountDownClockTest();//
+    //DisplayCountdown clockName = new DisplayCountdown("This");///////////////
+    //public JTextArea clockField = new JTextArea(clockName.getDisplayTime());/
+    ///////////////////////////////////////////////////////////////////////////
     public JSpinner timeSpin = new JSpinner(new SpinnerDateModel(new Date(), null, null, Calendar.MINUTE));
     JLabel lblText = new JLabel();
     public JTextField textField = new JTextField();
@@ -108,6 +117,10 @@ public class EventDialog extends JDialog implements WindowListener {
         headerPanel.add(header);
         
         // Build eventPanel
+        ////////////////////////////////////////////////////
+       // lblClock.setText(Local.getString("CountDown"));//
+       ///lblClock.setMinimumSize(new Dimension(60, 24));//
+        ////////////////////////////////////////////////////
         lblTime.setText(Local.getString("Time"));
         lblTime.setMinimumSize(new Dimension(60, 24));
         
@@ -116,7 +129,18 @@ public class EventDialog extends JDialog implements WindowListener {
         gbc.insets = new Insets(10, 10, 5, 10);
         gbc.anchor = GridBagConstraints.WEST;
         eventPanel.add(lblTime, gbc);
-
+        
+        ///////////////////////////////////////////////////
+        //gbc = new GridBagConstraints();//////////////////
+       /// gbc.gridx = 2; gbc.gridy = 0;///////////////////
+       // gbc.insets = new Insets(15, 10, 5, 10);//////////
+        //gbc.anchor = GridBagConstraints.FIRST_LINE_END;//
+       // eventPanel.add(lblClock, gbc);///////////////////
+       ////////////////////////////////////////////////////
+        
+        /// Sets the size of ClockField//////////////////////////
+        // clockField.setPreferredSize(new Dimension(150, 24));//
+        ////////////////////////////////////////////////////////
         timeSpin.setPreferredSize(new Dimension(60, 24));
         
         gbc = new GridBagConstraints();
@@ -124,7 +148,15 @@ public class EventDialog extends JDialog implements WindowListener {
         gbc.insets = new Insets(10, 0, 5, 0);
         gbc.anchor = GridBagConstraints.WEST;
         eventPanel.add(timeSpin, gbc);
-
+        
+       ////////////////////////////////////
+       // gbc = new GridBagConstraints();/////////////////
+       /// gbc.gridx = 3; gbc.gridy = 0;////////////////////
+       // gbc.insets = new Insets(10, 0, 5, 0);///////////
+       // gbc.anchor = GridBagConstraints.FIRST_LINE_END;//
+       // eventPanel.add(clockField, gbc);*///////////////
+        ///////////////////////////////////////////////////
+       
         lblText.setText(Local.getString("Text"));
         lblText.setMinimumSize(new Dimension(120, 24));
         gbc = new GridBagConstraints();
@@ -411,6 +443,9 @@ public class EventDialog extends JDialog implements WindowListener {
         });
         disableElements();
         ((JSpinner.DateEditor) timeSpin.getEditor()).getFormat().applyPattern("HH:mm");
+        ////////////////////////////////////////////////////////////////////////////////////
+        //((JSpinner.DateEditor) clockSpin.getEditor()).getFormat().applyPattern("00:00");//
+        ////////////////////////////////////////////////////////////////////////////////////
         enableEndDateCB_actionPerformed(null);
         
     }
@@ -520,11 +555,108 @@ public class EventDialog extends JDialog implements WindowListener {
     public void setEventDate(Date d) {
 	    eventDate = d;
 	}
-	
- 
+	/////////////////////////////////////////
+    /// Use This for getting Day of event. //
+    /////////////////////////////////////////
 	public Date getEventDate() {
+		//////////////////////////////////////////////////////////////////
+		///System.out.println("The day of the event is : " + eventDate);//
+		//////////////////////////////////////////////////////////////////
 		return eventDate;
 	}
+	
+	///////////////Code added ////////////////////////////////////////
+	/*public class CountDownClockTest {//////////////////////////////
+		
+		private String displayTime = "";
+		
+		Timer timer;
+
+		public CountDownClockTest() {
+
+			timer = new Timer();
+			timer.schedule(new DisplayCountdown("This clock"), 0, 1000);
+		}
+		
+		public String getDisplayTime()
+		{
+			return displayTime; 
+		}
+	}
+
+	public class DisplayCountdown extends TimerTask {
+		
+		//Timer timer;
+		
+		private String displayTime = ""; 
+		private String displayName = "This is in Jfield";
+		
+		public DisplayCountdown(String name) {
+			displayName = name; 
+			getDisplayTime(); 
+		}
+		
+		Date currentDate = new Date(); 
+
+		long time19= (currentDate.getTime() + (3 * 60 * 1000)) - currentDate.getTime(); 
+
+		int days =  (int) Math.floor(time19/(24 * 60 * 60 * 1000));//Number of days
+		
+		int time4 = (int) (time19 -  days * (24 * 60 * 60 * 1000));
+		
+		int hours =  (int) Math.floor(time4/(60 * 60 * 1000));//Number of hours
+		
+		int time5 = (int) (time4 -  hours * (60 * 60 * 1000));
+		
+		int minutes = (int) Math.floor(time5/(60 * 1000));//Number of minutes
+		
+		int time6 = (int) (time5 - minutes * (60 * 1000)); 
+		
+		int seconds2 = (int) Math.floor(time6/(1000));  
+		
+		public String getDisplayTime()
+		{
+			System.out.println("This is being executed");
+			return displayTime; 
+		}
+		//int seconds = displayTime2*60;
+		
+		int seconds = 10; 
+		
+		public void run() {
+
+			if (seconds > 0) {
+
+				System.out.println("Days: " + days + " Hours: " + " Minutes: " + minutes + " Seconds: " + seconds2);
+				
+				displayTime = "Days: " + days + " Hours: " + " Minutes: " + minutes + " Seconds: " + seconds2;
+				
+				clockField.insert("This is some text", 0);
+				
+				//System.out.println(seconds + " seconds remaining");
+
+				seconds--;
+
+				if(seconds2 == 0)
+				{
+					minutes--;
+					seconds2 = 59; 
+				}
+				else
+				{
+					seconds2--; 
+				}
+
+			} else {
+
+				System.out.println("Countdown finished");
+
+				//System.exit(0);
+
+			}
+		}
+	}*//////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////
 	
     public void windowClosed( WindowEvent e ) {}
 
