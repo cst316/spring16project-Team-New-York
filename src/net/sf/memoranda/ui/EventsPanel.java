@@ -349,7 +349,7 @@ public class EventsPanel extends JPanel {
 		
 		CalendarDate eventCalendarDate = new CalendarDate(dlg.getEventDate());
 		
-		
+		/* Commenting out our clock code
     	// Added changes below 
 		
 		//int yy = calendar.get(Calendar.YEAR);//We need to subtract the years
@@ -378,6 +378,7 @@ public class EventsPanel extends JPanel {
 	 	  int minutes = (int) Math.floor(time4/(60 * 1000));//Number of minutes
 		
 		//end of changes
+		 */
 		
     	if (dlg.noRepeatRB.isSelected())
     		EventsManager.createEvent(eventCalendarDate, hh, mm, text);
