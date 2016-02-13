@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.util.Vector;
+import java.util.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -262,6 +263,7 @@ public class TaskPanel extends JPanel {
     ppEditTask.setEnabled(false);
     ppEditTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_edit.png")));
     taskPPMenu.setFont(new java.awt.Font("Dialog", 1, 10));
+    
     ppRemoveTask.setFont(new java.awt.Font("Dialog", 1, 11));
     ppRemoveTask.setText(Local.getString("Remove task"));
     ppRemoveTask.addActionListener(new java.awt.event.ActionListener() {
@@ -271,6 +273,7 @@ public class TaskPanel extends JPanel {
         });
     ppRemoveTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_remove.png")));
     ppRemoveTask.setEnabled(false);
+    
     ppNewTask.setFont(new java.awt.Font("Dialog", 1, 11));
     ppNewTask.setText(Local.getString("New task")+"...");
     ppNewTask.addActionListener(new java.awt.event.ActionListener() {
@@ -709,7 +712,9 @@ public class TaskPanel extends JPanel {
     //Adding a remove all tasks method
     void removeAllTasksB_actionPerformed(ActionEvent e) {
     	Vector v = new Vector();
-    	v = CurrentProject.getTaskList().getAllRootTasks();
+    	Collection c = null;
+    	c = CurrentProject.getTaskList().getAllRootTasks();
+    	v.addAll(c);
     	for(int i = 0; i < v.size(); i++)
     	{
     		CurrentProject.getTaskList().removeTask((Task)v.get(i));
