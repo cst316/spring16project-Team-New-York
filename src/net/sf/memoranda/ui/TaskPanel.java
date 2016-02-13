@@ -50,6 +50,8 @@ public class TaskPanel extends JPanel {
     JButton subTaskB = new JButton();
     JButton editTaskB = new JButton();
     JButton removeTaskB = new JButton();
+    //Adding remove all tasks button: David Scott
+    JButton removeAllTasksB = new JButton();
     JButton completeTaskB = new JButton();
     
 	JCheckBoxMenuItem ppShowActiveOnlyChB = new JCheckBoxMenuItem();
@@ -59,6 +61,7 @@ public class TaskPanel extends JPanel {
 	JMenuItem ppEditTask = new JMenuItem();
 	JPopupMenu taskPPMenu = new JPopupMenu();
 	JMenuItem ppRemoveTask = new JMenuItem();
+	JMenuItem ppRemoveAllTasks = new JMenuItem();
 	JMenuItem ppNewTask = new JMenuItem();
 	JMenuItem ppCompleteTask = new JMenuItem();
 	//JMenuItem ppSubTasks = new JMenuItem();
@@ -157,6 +160,22 @@ public class TaskPanel extends JPanel {
         removeTaskB.setPreferredSize(new Dimension(24, 24));
         removeTaskB.setRequestFocusEnabled(false);
         removeTaskB.setToolTipText(Local.getString("Remove task"));
+        removeTaskB.setMinimumSize(new Dimension(24, 24));
+        removeTaskB.setMaximumSize(new Dimension(24, 24));
+        removeTaskB.setIcon(
+            new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_remove.png")));
+        
+        //Creating a identical button for now will change it later.
+        removeTaskB.setBorderPainted(false);
+        removeTaskB.setFocusable(false);
+        removeTaskB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                removeTaskB_actionPerformed(e);
+            }
+        });
+        removeTaskB.setPreferredSize(new Dimension(24, 24));
+        removeTaskB.setRequestFocusEnabled(false);
+        removeTaskB.setToolTipText(Local.getString("Remove all tasks"));
         removeTaskB.setMinimumSize(new Dimension(24, 24));
         removeTaskB.setMaximumSize(new Dimension(24, 24));
         removeTaskB.setIcon(
@@ -685,6 +704,16 @@ public class TaskPanel extends JPanel {
         parentPanel.updateIndicators();
         //taskTable.updateUI();
 
+    }
+    
+    //Adding a remove all tasks method
+    void removeAllTasksB_actionPerformed(ActionEvent e) {
+    	Vector v = new Vector();
+    	v = CurrentProject.getTaskList().getAllRootTasks();
+    	for(int i = 0; i < v.size(); i++)
+    	{
+    		CurrentProject.getTaskList().removeTask((Task)v.get(i));
+    	}
     }
 
 	void ppCompleteTask_actionPerformed(ActionEvent e) {
