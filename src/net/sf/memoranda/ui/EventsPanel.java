@@ -197,7 +197,7 @@ public class EventsPanel extends JPanel {
             }
         });
         ppRecoverEvent.setIcon(
-            new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/event_recover.png")))
+            new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/event_recover.png")));
         ////////////////////// End
         ppNewEvent.setFont(new java.awt.Font("Dialog", 1, 11));
         ppNewEvent.setText(Local.getString("New event") + "...");
