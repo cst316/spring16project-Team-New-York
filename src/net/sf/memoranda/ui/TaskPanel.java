@@ -46,7 +46,7 @@ import net.sf.memoranda.util.Util;
 public class TaskPanel extends JPanel {
     BorderLayout borderLayout1 = new BorderLayout();
     JButton historyBackB = new JButton();
-    JToolBar tasksToolBar = new JToolBar();
+    static JToolBar tasksToolBar = new JToolBar();
     JButton historyForwardB = new JButton();
     JButton newTaskB = new JButton();
     JButton subTaskB = new JButton();
@@ -61,7 +61,7 @@ public class TaskPanel extends JPanel {
     
 	JCheckBoxMenuItem ppShowActiveOnlyChB = new JCheckBoxMenuItem();
 		
-    JScrollPane scrollPane = new JScrollPane();
+    static JScrollPane scrollPane = new JScrollPane();
     TaskTable taskTable = new TaskTable();
 	JMenuItem ppEditTask = new JMenuItem();
 	JPopupMenu taskPPMenu = new JPopupMenu();
@@ -882,7 +882,13 @@ public class TaskPanel extends JPanel {
 			new Boolean(ppShowActiveOnlyChB.isSelected()));
 		taskTable.tableChanged();
 	}
-
+	public static void setTheme(Color f, Color b)
+	{
+		tasksToolBar.setForeground(f);
+		tasksToolBar.setBackground(b);
+		scrollPane.getViewport().setForeground(f);
+		scrollPane.getViewport().setBackground(b);
+	}
     class PopupListener extends MouseAdapter {
 
         public void mouseClicked(MouseEvent e) {

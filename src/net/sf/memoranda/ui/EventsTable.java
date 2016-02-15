@@ -131,10 +131,19 @@ public class EventsTable extends JTable {
            else if (col == 1){
                //return ev.getEndTimeString();
         	   if (ev.getEndHour() > 11){
-        		   return (ev.getEndHour()-12 )+":"+ev.getEndMinute() + " PM";
+        		   if(ev.getEndMinute() == 0){
+        			   return (ev.getEndHour()-12 )+":"+ev.getEndMinute()+ "0" + " PM";
+        		   }
+        		   else{
+        			   return (ev.getEndHour()-12 )+":"+ev.getEndMinute() + " PM";
+        		   }
         	   }
-        	   
-           return ev.getEndHour()+":"+ev.getEndMinute() + " AM";
+        	   if(ev.getEndMinute() == 0){
+    			   return (ev.getEndHour() )+":"+ev.getEndMinute()+ "0" + " AM";
+    		   }
+    		   else{
+    			   return (ev.getEndHour() )+":"+ev.getEndMinute() + " AM";
+    		   }
            }
            else if (col == 2)
                 return ev.getText();
