@@ -797,15 +797,6 @@ public class TaskPanel extends JPanel {
     }
     
     
-    /*CalendarDate startDate, 
-    CalendarDate endDate, 
-    String text, 
-    int category, 
-    int priority, 
-    long effort, 
-    String description, 
-    String parentTaskId*/
-    
     ///// Adding a recover tasks
     void recoverTaskB_actionPerformed(ActionEvent e) {
     	System.out.println("Tasks List"); 
@@ -850,6 +841,7 @@ public class TaskPanel extends JPanel {
     	taskTable.tableChanged();
         CurrentStorage.get().storeTaskList(CurrentProject.getTaskList(), CurrentProject.get());
         parentPanel.updateIndicators();
+      //taskTable.updateUI();
     	
     }
     ///// End 
