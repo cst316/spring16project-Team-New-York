@@ -52,7 +52,7 @@ public class TaskPanel extends JPanel {
     JButton subTaskB = new JButton();
     JButton editTaskB = new JButton();
     ///Added in 
-    JButton recoverTasksB = new JButton();
+    JButton recoverTaskB = new JButton();
     /// end 
     JButton removeTaskB = new JButton();
     //Adding remove all tasks button: David Scott
@@ -67,7 +67,7 @@ public class TaskPanel extends JPanel {
 	JPopupMenu taskPPMenu = new JPopupMenu();
 	JMenuItem ppRemoveTask = new JMenuItem();
 	JMenuItem ppRemoveAllTasks = new JMenuItem();
-	JMenuItem ppRecoverTasks = new JMenuItem(); 
+	JMenuItem ppRecoverTask = new JMenuItem(); 
 	JMenuItem ppNewTask = new JMenuItem();
 	JMenuItem ppCompleteTask = new JMenuItem();
 	//JMenuItem ppSubTasks = new JMenuItem();
@@ -391,7 +391,7 @@ public class TaskPanel extends JPanel {
         tasksToolBar.add(editTaskB, null);
         tasksToolBar.add(completeTaskB, null);
         /// Added in
-        tasksToolBar.add(recoverTasksB, null);
+        tasksToolBar.add(recoverTaskB, null);
         /// End 
 
 		//tasksToolBar.add(showActiveOnly, null);
@@ -406,15 +406,19 @@ public class TaskPanel extends JPanel {
 
 
         CurrentDate.addDateListener(new DateListener() {
-            public void dateChange(CalendarDate d) {
-                
-B.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), CurrentProject.get().getEndDate()));
-            }
+        	public void dateChange(CalendarDate d) {
+
+        		//B.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), CurrentProject.get().getEndDate()));
+        	}
         });
         CurrentProject.addProjectListener(new ProjectListener() {
             public void projectChange(Project p, NoteList nl, TaskList tl, ResourcesList rl) {
                 newTaskB.setEnabled(
                     CurrentDate.get().inPeriod(p.getStartDate(), p.getEndDate()));
+                ////Added in
+                recoverTaskB.setEnabled(
+                        CurrentDate.get().inPeriod(p.getStartDate(), p.getEndDate()));
+                //// End 
             }
             public void projectWasChanged() {
             	//taskTable.setCurrentRootTask(null); //XXX
@@ -474,6 +478,9 @@ B.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), CurrentProject.get(
     taskPPMenu.addSeparator();
 	taskPPMenu.add(ppCompleteTask);
 	taskPPMenu.add(ppCalcTask);
+	///Added in
+	taskPPMenu.add(ppRecoverTask);
+	/// End 
 	
     //taskPPMenu.addSeparator();
     
@@ -593,7 +600,7 @@ B.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), CurrentProject.get(
 		//XXX Task newTask = CurrentProject.getTaskList().createTask(sd, ed, dlg.todoField.getText(), dlg.priorityCB.getSelectedIndex(),effort, dlg.descriptionField.getText(),parentTaskId);
         
        
-		Task newTask = CurrentProject.getTaskList().createTask(sd, ed, dlg.todoField.getText(), dlg.categoryCB.getSelectedIndex(), dlg.priorityCB.getSelectedIndex(),effort, dlg.descriptionField.getText(),null);
+		Task newTask = CurrentProject.getTaskList().createTask(sd, ed, dlg.todoField.getText(), dlg.categoryCB.getSelectedIndex(), dlg.priorityCB.getSelectedIndex(),effort, dlg.descriptionField.getText(), null);
 //		CurrentProject.getTaskList().adjustParentTasks(newTask);
 		newTask.setProgress(((Integer)dlg.progress.getValue()).intValue());
         CurrentStorage.get().storeTaskList(CurrentProject.getTaskList(), CurrentProject.get());
@@ -719,6 +726,8 @@ B.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), CurrentProject.get(
 //      //taskTable.updateUI();
   }
 
+    public TaskListImpl stored = new TaskListImpl(CurrentProject.get()); 
+    
     void removeTaskB_actionPerformed(ActionEvent e) {
         String msg;
         String thisTaskId = taskTable.getModel().getValueAt(taskTable.getSelectedRow(), TaskTable.TASK_ID).toString();
@@ -746,7 +755,7 @@ B.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), CurrentProject.get(
             return;
         Vector toremove = new Vector();
         /// Added in
-        TaskListImpl stored = new TaskListImpl(CurrentProject.get()); 
+        //TaskListImpl stored = new TaskListImpl(CurrentProject.get()); 
         stored.flushTasksVector(); 
         /// End 
         for (int i = 0; i < taskTable.getSelectedRows().length; i++) {
@@ -763,6 +772,7 @@ B.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), CurrentProject.get(
         for (int i = 0; i < toremove.size(); i++) {
             CurrentProject.getTaskList().removeTask((Task)toremove.get(i));
         }
+        
         taskTable.tableChanged();
         CurrentStorage.get().storeTaskList(CurrentProject.getTaskList(), CurrentProject.get());
         parentPanel.updateIndicators();
@@ -796,6 +806,54 @@ B.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), CurrentProject.get(
     String description, 
     String parentTaskId*/
     
+    ///// Adding a recover tasks
+    void recoverTaskB_actionPerformed(ActionEvent e) {
+    	System.out.println("Tasks List"); 
+    	
+    	String msg;
+    	String thisTaskId = taskTable.getModel().getValueAt(taskTable.getSelectedRow(), TaskTable.TASK_ID).toString();
+    	  /// Added in
+      //  TaskListImpl stored = new TaskListImpl(CurrentProject.get());
+    	if (stored.getNumberOfStoredItems() >= 1)
+    		System.out.println("Something is stored in the vector");
+    	
+    	if (stored.getNumberOfStoredItems() == 0)
+    		System.out.println("Nothing is stored in the vector");
+    	
+    	
+    	if (stored.getNumberOfStoredItems()  > 1)
+    		msg = Local.getString("Recover")+" "+ stored.getNumberOfStoredItems() + " "+ Local.getString("tasks")+"?"
+    				+ "\n"+Local.getString("Are you sure?");
+    	else {        	
+    		Task t = stored.getStoredTasks().get(0); 
+    		
+    				//CurrentProject.getTaskList().getTask(thisTaskId);
+    		
+    		// check if there are subtasks
+    		if(CurrentProject.getTaskList().hasSubTasks(thisTaskId)) {
+    			msg = Local.getString("Recover task")+"\n'" + t.getText() + Local.getString("' and all subtasks") +"\n"+Local.getString("Are you sure?");
+    		}
+    		else {		            
+    			msg = Local.getString("Recover task")+"\n'" + t.getText() + "'\n"+Local.getString("Are you sure?");
+    		}
+    	}
+    	int n =
+    			JOptionPane.showConfirmDialog(
+    					App.getFrame(),
+    					msg,
+    					Local.getString("Remove task"),
+    					JOptionPane.YES_NO_OPTION);
+    	if (n != JOptionPane.YES_OPTION)
+    		return;
+    	
+    	stored.recoverDeletedTasks(); 
+    	taskTable.tableChanged();
+        CurrentStorage.get().storeTaskList(CurrentProject.getTaskList(), CurrentProject.get());
+        parentPanel.updateIndicators();
+    	
+    }
+    ///// End 
+
 
 	void ppCompleteTask_actionPerformed(ActionEvent e) {
 		String msg;
@@ -858,9 +916,16 @@ B.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), CurrentProject.get(
   void ppRemoveTask_actionPerformed(ActionEvent e) {
     removeTaskB_actionPerformed(e);
   }
+  
   void ppRemoveAllTasks_actionPerformed(ActionEvent e) {
 	removeAllTasksB_actionPerformed(e);
   }
+   
+  ////Added In 
+  void ppRecoverTask_actionPerformed(ActionEvent e) {
+	recoverTaskB_actionPerformed(e);
+  }
+  /// End 
   void ppNewTask_actionPerformed(ActionEvent e) {
     newTaskB_actionPerformed(e);
   }
