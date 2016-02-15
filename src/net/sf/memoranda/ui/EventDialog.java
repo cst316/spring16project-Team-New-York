@@ -107,7 +107,6 @@ public class EventDialog extends JDialog implements WindowListener {
             "resources/icons/event48.png")));
         headerPanel.add(header);
         
-        // Build eventPanel
         lblTime.setText(Local.getString("Time"));
         lblTime.setMinimumSize(new Dimension(60, 24));
         
