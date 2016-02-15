@@ -29,7 +29,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
-
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
@@ -53,6 +52,7 @@ public class EventDialog extends JDialog implements WindowListener {
     GridBagConstraints gbc; 
     JLabel lblTime = new JLabel();
     JLabel lblClock = new JLabel();	
+    public JSpinner clockSpin = new JSpinner(new SpinnerDateModel(new Date(), null, null, Calendar.MINUTE));
     public JSpinner timeSpin = new JSpinner(new SpinnerDateModel(new Date(), null, null, Calendar.MINUTE));
     JLabel lblText = new JLabel();
     public JTextField textField = new JTextField();
@@ -108,7 +108,9 @@ public class EventDialog extends JDialog implements WindowListener {
         headerPanel.add(header);
         
         // Build eventPanel
+        lblClock.setText(Local.getString("EndTime"));
         lblTime.setText(Local.getString("Time"));
+        lblClock.setMinimumSize(new Dimension(60, 24));
         lblTime.setMinimumSize(new Dimension(60, 24));
         
         gbc = new GridBagConstraints();
@@ -116,7 +118,14 @@ public class EventDialog extends JDialog implements WindowListener {
         gbc.insets = new Insets(10, 10, 5, 10);
         gbc.anchor = GridBagConstraints.WEST;
         eventPanel.add(lblTime, gbc);
-
+        
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2; gbc.gridy = 0;
+        gbc.insets = new Insets(15, 10, 5, 10);
+        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+        eventPanel.add(lblClock, gbc);
+   
+        clockSpin.setPreferredSize(new Dimension(60, 24));
         timeSpin.setPreferredSize(new Dimension(60, 24));
         
         gbc = new GridBagConstraints();
@@ -124,7 +133,13 @@ public class EventDialog extends JDialog implements WindowListener {
         gbc.insets = new Insets(10, 0, 5, 0);
         gbc.anchor = GridBagConstraints.WEST;
         eventPanel.add(timeSpin, gbc);
-
+       
+        gbc = new GridBagConstraints();
+        gbc.gridx = 3; gbc.gridy = 0;
+        gbc.insets = new Insets(10, 0, 5, 0);
+        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+        eventPanel.add(clockSpin, gbc);
+        
         lblText.setText(Local.getString("Text"));
         lblText.setMinimumSize(new Dimension(120, 24));
         gbc = new GridBagConstraints();
@@ -402,6 +417,13 @@ public class EventDialog extends JDialog implements WindowListener {
                 startDate.getModel().setValue(startCalFrame.cal.get().getCalendar().getTime());
             }
         });
+     // New stuff 420 - 426
+        /*startCalFrame.cal.addSelectionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (ignoreStartChanged) return;
+                startDate.getModel().setValue(startCalFrame.cal.get().getTime());
+            }
+        });*/
         endCalFrame.cal.addSelectionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (ignoreEndChanged)
@@ -411,6 +433,7 @@ public class EventDialog extends JDialog implements WindowListener {
         });
         disableElements();
         ((JSpinner.DateEditor) timeSpin.getEditor()).getFormat().applyPattern("HH:mm");
+        ((JSpinner.DateEditor) clockSpin.getEditor()).getFormat().applyPattern("HH:mm");
         enableEndDateCB_actionPerformed(null);
         
     }
@@ -521,7 +544,6 @@ public class EventDialog extends JDialog implements WindowListener {
 	    eventDate = d;
 	}
 	
- 
 	public Date getEventDate() {
 		return eventDate;
 	}

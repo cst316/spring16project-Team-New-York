@@ -116,11 +116,15 @@ public class EventsManager {
 		CalendarDate date,
 		int hh,
 		int mm,
+		int xx,
+		int yy,
 		String text) {
 		Element el = new Element("event");
 		el.addAttribute(new Attribute("id", Util.generateId()));
 		el.addAttribute(new Attribute("hour", String.valueOf(hh)));
 		el.addAttribute(new Attribute("min", String.valueOf(mm)));
+		el.addAttribute(new Attribute("endhour", String.valueOf(xx)));
+		el.addAttribute(new Attribute("endmin", String.valueOf(yy)));
 		el.appendChild(text);
 		Day d = getDay(date);
 		if (d == null)
@@ -136,6 +140,8 @@ public class EventsManager {
 		int period,
 		int hh,
 		int mm,
+		int xx,
+		int yy,
 		String text,
 		boolean workDays) {
 		Element el = new Element("event");
@@ -148,6 +154,8 @@ public class EventsManager {
 		el.addAttribute(new Attribute("id", Util.generateId()));
 		el.addAttribute(new Attribute("hour", String.valueOf(hh)));
 		el.addAttribute(new Attribute("min", String.valueOf(mm)));
+		el.addAttribute(new Attribute("endhour", String.valueOf(xx)));
+		el.addAttribute(new Attribute("endmin", String.valueOf(yy)));
 		el.addAttribute(new Attribute("startDate", startDate.toString()));
 		if (endDate != null)
 			el.addAttribute(new Attribute("endDate", endDate.toString()));
@@ -224,7 +232,7 @@ public class EventsManager {
 		return getEventsForDate(CalendarDate.today());
 	}
 
-	public static Event getEvent(CalendarDate date, int hh, int mm) {
+	public static Event getEvent(CalendarDate date, int hh, int mm,int xx, int yy) {
 		Day d = getDay(date);
 		if (d == null)
 			return null;
@@ -234,16 +242,20 @@ public class EventsManager {
 			if ((new Integer(el.getAttribute("hour").getValue()).intValue()
 				== hh)
 				&& (new Integer(el.getAttribute("min").getValue()).intValue()
-					== mm))
+					== mm)
+					&& (new Integer(el.getAttribute("endhour").getValue()).intValue()
+							== xx)
+							&& (new Integer(el.getAttribute("endmin").getValue()).intValue()
+									== yy))
 				return new EventImpl(el);
 		}
 		return null;
 	}
 
-	public static void removeEvent(CalendarDate date, int hh, int mm) {
+	public static void removeEvent(CalendarDate date, int hh, int mm, int xx, int yy) {
 		Day d = getDay(date);
 		if (d == null)
-			d.getElement().removeChild(getEvent(date, hh, mm).getContent());
+			d.getElement().removeChild(getEvent(date, hh, mm, xx, yy).getContent());
 	}
 
 	public static void removeEvent(Event ev) {

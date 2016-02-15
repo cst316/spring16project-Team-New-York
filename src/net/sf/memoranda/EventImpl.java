@@ -49,6 +49,27 @@ public class EventImpl implements Event, Comparable {
     public String getTimeString() {
         return Local.getTimeString(getHour(), getMinute());
     }
+    
+    //New stuff through 71
+   
+    /**
+     * @see net.sf.memoranda.Event#getHour()
+     */
+    public int getEndHour() {
+        return new Integer(_elem.getAttribute("endhour").getValue()).intValue();
+    }
+
+    /**
+     * @see net.sf.memoranda.Event#getMinute()
+     */
+    public int getEndMinute() {
+        return new Integer(_elem.getAttribute("endmin").getValue()).intValue();
+    }
+    
+    public String getEndTimeString() {
+        return Local.getEndTimeString(getEndHour(), getEndMinute());
+    }
+    
         
   
     /**
