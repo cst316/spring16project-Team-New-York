@@ -311,9 +311,11 @@ public class EventsManager {
 		{	
 			if(storage.get(i).getRepeat() == 0) {
 				int hours = storage.get(i).getHour();
-				int minutes = storage.get(i).getMinute(); 
-				String text = storage.get(i).getText(); 
-				createEvent(getCalendarDate(), hours, minutes, text);
+				int minutes = storage.get(i).getMinute();
+				int endHours = storage.get(i).getEndHour(); 
+				int endMinutes = storage.get(i).getEndMinute(); 
+				String text = storage.get(i).getText();
+				createEvent(getCalendarDate(), hours, minutes, endHours, endMinutes, text);
 			}
 			else {
 				int type =  storage.get(i).getRepeat(); 
@@ -322,9 +324,11 @@ public class EventsManager {
 				int period = storage.get(i).getPeriod(); 
 				int hours = storage.get(i).getHour();
 				int minutes = storage.get(i).getMinute(); 
+				int endHours = storage.get(i).getEndHour(); 
+				int endMinutes = storage.get(i).getEndMinute(); 
 				String text = storage.get(i).getText(); 
 				boolean workDays =  storage.get(i).getWorkingDays(); 
-				createRepeatableEvent(type, startDate, endDate, period, hours, minutes, text, workDays); 
+				createRepeatableEvent(type, startDate, endDate, period, hours, minutes, endHours, endMinutes, text, workDays); 
 			}
 		}
 		
