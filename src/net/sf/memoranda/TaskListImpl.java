@@ -333,7 +333,7 @@ public class TaskListImpl implements TaskList {
 		return el;
     }
     
-    private Collection getAllRootTasks() {
+    public Collection getAllRootTasks() {
         Elements tasks = _root.getChildElements("task");
         return convertToTaskObjects(tasks);    	    		
     }
