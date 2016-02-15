@@ -12,6 +12,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.util.Date;
 import java.util.Vector;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
@@ -127,8 +128,14 @@ public class EventsTable extends JTable {
            if (col == 0)
                 //return ev.getHour()+":"+ev.getMinute();
                 return ev.getTimeString();
-           else if (col == 1)
-               return ev.getTimeString();
+           else if (col == 1){
+               //return ev.getEndTimeString();
+        	   if (ev.getEndHour() > 11){
+        		   return (ev.getEndHour()-12 )+":"+ev.getEndMinute() + " PM";
+        	   }
+        	   
+           return ev.getEndHour()+":"+ev.getEndMinute() + " AM";
+           }
            else if (col == 2)
                 return ev.getText();
            else if (col == EVENT_ID)
