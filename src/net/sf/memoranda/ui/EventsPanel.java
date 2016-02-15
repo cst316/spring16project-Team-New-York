@@ -43,16 +43,21 @@ import net.sf.memoranda.util.Util;
 public class EventsPanel extends JPanel {
     BorderLayout borderLayout1 = new BorderLayout();
     JButton historyBackB = new JButton();
-    JToolBar eventsToolBar = new JToolBar();
+    static JToolBar eventsToolBar = new JToolBar();
     JButton historyForwardB = new JButton();
     JButton newEventB = new JButton();
     JButton editEventB = new JButton();
     JButton removeEventB = new JButton();
+<<<<<<< HEAD
+    static JScrollPane scrollPane = new JScrollPane();
+    static EventsTable eventsTable = new EventsTable();
+=======
     ///////Added In 
     JButton recoverEventB = new JButton();
     /////////End 
     JScrollPane scrollPane = new JScrollPane();
     EventsTable eventsTable = new EventsTable();
+>>>>>>> e658e75a3d209e8f3c0f9772dd58393ebc61be76
     JPopupMenu eventPPMenu = new JPopupMenu();
     JMenuItem ppEditEvent = new JMenuItem();
     JMenuItem ppRemoveEvent = new JMenuItem();
@@ -420,7 +425,13 @@ public class EventsPanel extends JPanel {
   
     	saveEvents();
     }
-
+    public static void setTheme(Color f, Color b)
+    {
+    	eventsToolBar.setForeground(f);
+    	eventsToolBar.setBackground(b);
+    	scrollPane.getViewport().setForeground(f);
+    	scrollPane.getViewport().setBackground(b);
+    }
     private void saveEvents() {
 	CurrentStorage.get().storeEventsManager();
         eventsTable.refresh();

@@ -1,6 +1,7 @@
 package net.sf.memoranda.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Insets;
@@ -36,17 +37,17 @@ import net.sf.memoranda.util.Configuration;
 /*$Id: NotesControlPanel.java,v 1.16 2005/05/05 16:19:16 ivanrise Exp $*/
 public class NotesControlPanel extends JPanel {
     BorderLayout borderLayout1 = new BorderLayout();
-    SearchPanel searchPanel = new SearchPanel();
-    NotesListPanel notesListPanel = new NotesListPanel();
-    BookmarksPanel bookmarksListPanel = new BookmarksPanel();
-    JTabbedPane tabbedPane = new JTabbedPane();
-    JToolBar toolBar = new JToolBar();
+    static SearchPanel searchPanel = new SearchPanel();
+    static NotesListPanel notesListPanel = new NotesListPanel();
+    static BookmarksPanel bookmarksListPanel = new BookmarksPanel();
+    static JTabbedPane tabbedPane = new JTabbedPane();
+    static JToolBar toolBar = new JToolBar();
 
     NotesList notesList = null;
 
     FlowLayout flowLayout1 = new FlowLayout();
     JButton ppOpenB = new JButton();
-    JPanel buttonsPanel = new JPanel();
+    static JPanel buttonsPanel = new JPanel();
     JMenuItem ppAddBkmrk = new JMenuItem();
     JMenuItem ppClearNote = new JMenuItem();
 //    JMenuItem ppInvertSort = new JMenuItem();
@@ -54,7 +55,7 @@ public class NotesControlPanel extends JPanel {
     JPopupMenu notesPPMenu = new JPopupMenu();
     JMenuItem ppOpenNote = new JMenuItem();
     JMenuItem ppRemoveBkmrk = new JMenuItem();
-
+    
 	
     public NotesControlPanel() {
         try {
@@ -195,7 +196,26 @@ public class NotesControlPanel extends JPanel {
 		bookmarksListPanel.notesList.addKeyListener(delNotes);
 		searchPanel.notesList.addKeyListener(delNotes);
     }
-
+    public static void setTheme(Color f, Color b)
+    {
+    	buttonsPanel.setBackground(b);
+    	buttonsPanel.setForeground(f);
+    	
+    	searchPanel.setBackground(b);
+    	searchPanel.setForeground(f);
+    	
+    	notesListPanel.setBackground(b);
+    	notesListPanel.setForeground(f);
+    	
+    	bookmarksListPanel.setBackground(b);
+    	bookmarksListPanel.setForeground(f);
+    	
+    	tabbedPane.setForeground(f);
+    	tabbedPane.setBackground(b);
+    	
+    	toolBar.setBackground(b);
+    	toolBar.setForeground(f);
+    }
     public void refresh() {
         notesListPanel.notesList.update();
         bookmarksListPanel.notesList.update();
