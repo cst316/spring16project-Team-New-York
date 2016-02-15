@@ -236,7 +236,6 @@ public class EventsPanel extends JPanel {
                 EventsTable.EVENT);
         
         dlg.timeSpin.getModel().setValue(ev.getTime());
-        dlg.clockSpin.getModel().setValue(ev.getTime());
         /*if (new CalendarDate(ev.getTime()).equals(CalendarDate.today())) 
             ((SpinnerDateModel)dlg.timeSpin.getModel()).setStart(new Date());
         else
@@ -335,7 +334,6 @@ public class EventsPanel extends JPanel {
 		dlg.startDate.getModel().setValue(startDate);
 		dlg.endDate.getModel().setValue(endDate);
 		dlg.timeSpin.getModel().setValue(startDate);
-		dlg.clockSpin.getModel().setValue(startDate);
 
     	dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
     	dlg.setEventDate(startDate);
