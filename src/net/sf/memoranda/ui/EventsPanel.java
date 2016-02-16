@@ -425,11 +425,11 @@ public class EventsPanel extends JPanel {
   
     	saveEvents();
     }
-<<<<<<< HEAD
+
     public static void setTheme(Color f, Color b)
-=======
+
     public void setTheme(Color f, Color b)
->>>>>>> origin/master
+
     {
     	eventsToolBar.setForeground(f);
     	eventsToolBar.setBackground(b);
