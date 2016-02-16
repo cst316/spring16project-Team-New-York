@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.awt.Color;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
@@ -51,6 +52,9 @@ import net.sf.memoranda.util.Local;
 import net.sf.memoranda.util.ProjectExporter;
 import net.sf.memoranda.util.ProjectPackager;
 import net.sf.memoranda.util.Util;
+import net.sf.memoranda.ui.WorkPanel;
+import net.sf.memoranda.ui.EventsPanel;
+import net.sf.memoranda.ui.AgendaPanel;
 import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.Element;
@@ -67,11 +71,11 @@ import nu.xom.Elements;
 public class AppFrame extends JFrame {
 
     JPanel contentPane;
-    JMenuBar menuBar = new JMenuBar();
+    static JMenuBar menuBar = new JMenuBar();
     JMenu jMenuFile = new JMenu();
     JMenuItem jMenuFileExit = new JMenuItem();
 
-    JToolBar toolBar = new JToolBar();
+    static JToolBar toolBar = new JToolBar();
     JButton jButton3 = new JButton();
     ImageIcon image1;
     ImageIcon image2;
@@ -81,15 +85,20 @@ public class AppFrame extends JFrame {
     JSplitPane splitPane = new JSplitPane();
     ProjectsPanel projectsPanel = new ProjectsPanel();
     boolean prPanelExpanded = false;
-
+    
     JMenu jMenuEdit = new JMenu();
     JMenu jMenuFormat = new JMenu();
     JMenu jMenuInsert = new JMenu();
+    
+    JMenu jMenuTheme = new JMenu();
 
     public WorkPanel workPanel = new WorkPanel();
     HTMLEditor editor = workPanel.dailyItemsPanel.editorPanel.editor;
 
     static Vector exitListeners = new Vector();
+    
+    public static String bgColor = "";
+    public static String fgColor = "";
 
     public Action prjPackAction = new AbstractAction("Pack current project") {
         public void actionPerformed(ActionEvent e) {
@@ -137,9 +146,11 @@ public class AppFrame extends JFrame {
                         p1Import_actionPerformed(e);
                 }
         };
+    JMenuItem jMenuThemeDayTheme = new JMenuItem();
+    JMenuItem jMenuThemeNightTheme = new JMenuItem();
     
     JMenuItem jMenuFileNewPrj = new JMenuItem();
-        JMenuItem jMenuFileNewNote = new JMenuItem(workPanel.dailyItemsPanel.editorPanel.newAction);
+    JMenuItem jMenuFileNewNote = new JMenuItem(workPanel.dailyItemsPanel.editorPanel.newAction);
     JMenuItem jMenuFilePackPrj = new JMenuItem(prjPackAction);
     JMenuItem jMenuFileUnpackPrj = new JMenuItem(prjUnpackAction);
     JMenuItem jMenuFileExportPrj = new JMenuItem(exportNotesAction);
@@ -267,6 +278,19 @@ public class AppFrame extends JFrame {
         statusBar.setText(" Version:" + App.VERSION_INFO + " (Build "
                 + App.BUILD_INFO + " )");
 
+        jMenuThemeDayTheme.setText(Local.getString("Daytime"));
+        jMenuThemeDayTheme.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                jMenuThemeDayTheme_actionPerformed(e);
+            }
+        });
+        jMenuThemeNightTheme.setText(Local.getString("Nighttime"));
+        jMenuThemeNightTheme.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                jMenuThemeNightTheme_actionPerformed(e);
+            }
+        });
+        
         jMenuFile.setText(Local.getString("File"));
         jMenuFileExit.setText(Local.getString("Exit"));
         jMenuFileExit.addActionListener(new ActionListener() {
@@ -329,6 +353,9 @@ public class AppFrame extends JFrame {
          }
          });
          */
+        
+        
+        
         jMenuFileNewPrj.setAction(projectsPanel.newProjectAction);
 
         jMenuFileUnpackPrj.setText(Local.getString("Unpack project") + "...");
@@ -342,7 +369,7 @@ public class AppFrame extends JFrame {
                 InputEvent.ALT_MASK));
 
         jMenuEdit.setText(Local.getString("Edit"));
-
+        
         jMenuEditUndo.setText(Local.getString("Undo"));
         jMenuEditUndo.setToolTipText(Local.getString("Undo"));
         jMenuEditRedo.setText(Local.getString("Redo"));
@@ -361,6 +388,8 @@ public class AppFrame extends JFrame {
 
         jMenuEditPref.setText(Local.getString("Preferences") + "...");
 
+        jMenuTheme.setText(Local.getString("Theme"));
+        
         jMenuInsert.setText(Local.getString("Insert"));
 
         jMenuInsertImage.setText(Local.getString("Image") + "...");
@@ -445,8 +474,12 @@ public class AppFrame extends JFrame {
         jMenuInsertHR.setToolTipText(Local.getString("Insert Horizontal rule"));
 
         toolBar.add(jButton3);
+        
+        jMenuTheme.add(jMenuThemeDayTheme);
+        jMenuTheme.add(jMenuThemeNightTheme);
+        
         jMenuFile.add(jMenuFileNewPrj);
-                jMenuFile.add(jMenuFileNewNote);
+        jMenuFile.add(jMenuFileNewNote);
         jMenuFile.addSeparator();
         jMenuFile.add(jMenuFilePackPrj);
         jMenuFile.add(jMenuFileUnpackPrj);
@@ -474,6 +507,7 @@ public class AppFrame extends JFrame {
         menuBar.add(jMenuFormat);
         menuBar.add(jMenuGo);
         menuBar.add(jMenuHelp);
+        menuBar.add(jMenuTheme);
         this.setJMenuBar(menuBar);
         //contentPane.add(toolBar, BorderLayout.NORTH);
         contentPane.add(statusBar, BorderLayout.SOUTH);
@@ -631,7 +665,14 @@ public class AppFrame extends JFrame {
         });
 
     }
-   
+    protected void jMenuThemeDayTheme_actionPerformed(ActionEvent e)
+    {
+    	setAppTheme("day");
+    }
+    protected void jMenuThemeNightTheme_actionPerformed(ActionEvent e)
+    {
+    	setAppTheme("night");
+    }
     protected void jMenuHelpBug_actionPerformed(ActionEvent e) {
         Util.runBrowser(App.BUGS_TRACKER_URL);
     }
@@ -1103,5 +1144,47 @@ public class AppFrame extends JFrame {
                     exc.printStackTrace();
             }
         }
-
+        private void setTheme(Color f, Color b)
+        {
+        	menuBar.setBackground(b);
+            jMenuFile.setForeground(f);
+            jMenuEdit.setForeground(f);
+            jMenuInsert.setForeground(f);
+            jMenuFormat.setForeground(f);
+            jMenuGo.setForeground(f);
+            jMenuHelp.setForeground(f);
+            jMenuTheme.setForeground(f);
+        }
+        protected void setAppTheme(String name)
+        {
+        	String t = name;
+        	if(t.equalsIgnoreCase("day"))
+        	{
+        		setTheme(Color.BLACK, Color.white);
+        		WorkPanel.setTheme(Color.BLACK, Color.white);
+        		EventsPanel.setTheme(Color.BLACK, Color.white);
+        		AgendaPanel.setTheme(Color.BLACK, Color.white);
+        		TaskPanel.setTheme(Color.BLACK, Color.white);
+        		NotesControlPanel.setTheme(Color.BLACK, Color.white);
+        		NotesListPanel.setTheme(Color.BLACK, Color.white);
+        		ProjectsPanel.setTheme(Color.BLACK, Color.white);
+        		ResourcesPanel.setTheme(Color.BLACK, Color.white);
+        	}
+        	else if(t.equalsIgnoreCase("night"))
+        	{
+        		setTheme(Color.white, Color.DARK_GRAY);
+        		WorkPanel.setTheme(Color.white, Color.DARK_GRAY);
+        		EventsPanel.setTheme(Color.white, Color.DARK_GRAY);
+        		AgendaPanel.setTheme(Color.white, Color.DARK_GRAY);
+        		TaskPanel.setTheme(Color.white, Color.DARK_GRAY);
+        		NotesControlPanel.setTheme(Color.white, Color.DARK_GRAY);
+        		NotesListPanel.setTheme(Color.white, Color.DARK_GRAY);
+        		ProjectsPanel.setTheme(Color.white, Color.DARK_GRAY);
+        		ResourcesPanel.setTheme(Color.white, Color.DARK_GRAY);
+        	}
+        	else
+        	{
+        		//error
+        	}
+        }
 }

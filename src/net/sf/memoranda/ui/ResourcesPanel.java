@@ -36,11 +36,11 @@ import java.io.*;
 /*$Id: ResourcesPanel.java,v 1.13 2007/03/20 08:22:41 alexeya Exp $*/
 public class ResourcesPanel extends JPanel {
     BorderLayout borderLayout1 = new BorderLayout();
-    JToolBar toolBar = new JToolBar();
+    static JToolBar toolBar = new JToolBar();
     JButton newResB = new JButton();
     ResourcesTable resourcesTable = new ResourcesTable();
     JButton removeResB = new JButton();
-    JScrollPane scrollPane = new JScrollPane();
+    static JScrollPane scrollPane = new JScrollPane();
     JButton refreshB = new JButton();
   JPopupMenu resPPMenu = new JPopupMenu();
   JMenuItem ppRun = new JMenuItem();
@@ -186,7 +186,13 @@ public class ResourcesPanel extends JPanel {
 			public void keyTyped(KeyEvent e){} 
 		});
     }
-
+    public static void setTheme(Color f, Color b)
+    {
+    	toolBar.setForeground(f);
+    	toolBar.setBackground(b);
+    	scrollPane.getViewport().setForeground(f);
+    	scrollPane.getViewport().setBackground(b);
+    }
     void newResB_actionPerformed(ActionEvent e) {
         AddResourceDialog dlg = new AddResourceDialog(App.getFrame(), Local.getString("New resource"));
         Dimension frmSize = App.getFrame().getSize();

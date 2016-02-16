@@ -44,12 +44,12 @@ import nu.xom.Element;
 public class AgendaPanel extends JPanel {
 	BorderLayout borderLayout1 = new BorderLayout();
 	JButton historyBackB = new JButton();
-	JToolBar toolBar = new JToolBar();
+	static JToolBar toolBar = new JToolBar();
 	JButton historyForwardB = new JButton();
 	JButton export = new JButton();
 	JEditorPane viewer = new JEditorPane("text/html", "");
 	String[] priorities = {"Muy Alta","Alta","Media","Baja","Muy Baja"};
-	JScrollPane scrollPane = new JScrollPane();
+	static JScrollPane scrollPane = new JScrollPane();
 
 	DailyItemsPanel parentPanel = null;
 
@@ -290,7 +290,13 @@ public class AgendaPanel extends JPanel {
 		//		ppShowActiveOnlyChB.setSelected(isShao);
 		//		toggleShowActiveOnly_actionPerformed(null);		
 	}
-
+	public static void setTheme(Color f, Color b)
+	{
+		toolBar.setForeground(f);
+		toolBar.setBackground(b);
+		scrollPane.getViewport().setForeground(f);
+		scrollPane.getViewport().setBackground(b);
+	}
 	public void refresh(CalendarDate date) {
 		viewer.setText(AgendaGenerator.getAgenda(date,expandedTasks));
 		SwingUtilities.invokeLater(new Runnable() {
