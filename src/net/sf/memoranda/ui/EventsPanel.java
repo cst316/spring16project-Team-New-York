@@ -48,6 +48,8 @@ public class EventsPanel extends JPanel {
     JButton newEventB = new JButton();
     JButton editEventB = new JButton();
     JButton removeEventB = new JButton();
+    static JScrollPane scrollPane = new JScrollPane();
+    static EventsTable eventsTable = new EventsTable();
 
     ///////Added In 
     JButton recoverEventB = new JButton();
