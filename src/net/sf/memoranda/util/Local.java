@@ -217,6 +217,36 @@ public class Local {
         cal.set(Calendar.MINUTE, mm);
         return getTimeString(cal.getTime());
     }
+<<<<<<< HEAD
+=======
+    //new stuff 220-235
+    public static String getEndTimeString(Date d) {
+        DateFormat dateFormat =
+            DateFormat.getTimeInstance(DateFormat.SHORT, currentLocale);
+        return dateFormat.format(d);
+    }
+    
+    public static String getEndTimeString(Calendar cal) {
+        /*String h = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
+        if (h.length() < 2) {
+            h = "0" + h;
+        }
+        String m = String.valueOf(cal.get(Calendar.MINUTE));
+        if (m.length() < 2) {
+            m = "0" + m;
+        }
+        return h + ":" + m;*/
+        return getEndTimeString(cal.getTime());
+    }
+    
+    public static String getEndTimeString(int xx, int yy) {
+   
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, xx);
+        cal.set(Calendar.MINUTE, yy);
+        return getEndTimeString(cal.getTime());
+    }
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 
     public static int[] parseTimeString(String s) {
         s = s.trim();

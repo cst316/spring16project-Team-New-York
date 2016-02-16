@@ -35,6 +35,7 @@ import net.sf.memoranda.util.Util;
 /*$Id: WorkPanel.java,v 1.9 2004/04/05 10:05:44 alexeya Exp $*/
 public class WorkPanel extends JPanel {
 	BorderLayout borderLayout1 = new BorderLayout();
+<<<<<<< HEAD
 	JToolBar toolBar = new JToolBar();
 	JPanel panel = new JPanel();
 	CardLayout cardLayout1 = new CardLayout();
@@ -47,6 +48,20 @@ public class WorkPanel extends JPanel {
 	public JButton tasksB = new JButton();
 	public JButton eventsB = new JButton();
 	public JButton filesB = new JButton();
+=======
+	static JToolBar toolBar = new JToolBar();
+	JPanel panel = new JPanel();
+	CardLayout cardLayout1 = new CardLayout();
+	boolean active = true;
+	static int themeStyle = 0;
+	public static JButton notesB = new JButton();
+	public DailyItemsPanel dailyItemsPanel = new DailyItemsPanel(this);
+	public static ResourcesPanel filesPanel = new ResourcesPanel();
+	public static JButton agendaB = new JButton();
+	public static JButton tasksB = new JButton();
+	public static JButton eventsB = new JButton();
+	public static JButton filesB = new JButton();
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     JFrame dialog = new JFrame("Tips and Tricks");
 	JButton currentB = null;
 	JPanel dialPanel = new JPanel();
@@ -256,6 +271,22 @@ public class WorkPanel extends JPanel {
 
 	}
 
+<<<<<<< HEAD
+=======
+	public static void setTheme(Color f, Color b)
+	{
+		toolBar.setForeground(f);
+		toolBar.setBackground(b);
+		agendaB.setForeground(f);
+		eventsB.setForeground(f);
+		tasksB.setForeground(f);
+		notesB.setForeground(f);
+		filesPanel.setForeground(f);
+		filesPanel.setBackground(b);
+		filesB.setForeground(f);
+		filesB.setBackground(b);
+	}
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 	public void selectPanel(String pan) {
 		if (pan != null) {
 			if (pan.equals("NOTES"))

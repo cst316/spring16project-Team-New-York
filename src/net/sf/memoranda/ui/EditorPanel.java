@@ -1,6 +1,10 @@
 package net.sf.memoranda.ui;
 
 import java.awt.BorderLayout;
+<<<<<<< HEAD
+=======
+import java.awt.Color;
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -43,7 +47,11 @@ import net.sf.memoranda.util.Configuration;
 public class EditorPanel extends JPanel {
 	BorderLayout borderLayout1 = new BorderLayout();
 
+<<<<<<< HEAD
 	JPanel jPanel1 = new JPanel();
+=======
+	static JPanel jPanel1 = new JPanel();
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 
 	public HTMLEditor editor = null;
 
@@ -587,4 +595,11 @@ public class EditorPanel extends JPanel {
 			new ExceptionDialog(ioe, "Cannot create temporary file", null);
 		}
 	}
+<<<<<<< HEAD
+=======
+	public static void setTheme(Color f, Color b)
+	{
+		
+	}
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 }

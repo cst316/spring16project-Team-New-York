@@ -102,7 +102,11 @@ public class TaskListImpl implements TaskList {
         Collection allTasks = getAllSubTasks(taskId);        
         return filterActiveTasks(allTasks,date);
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     public Task createTask (CalendarDate startDate, CalendarDate endDate, String text, int category, int priority, long effort, String description, String parentTaskId) {
         Element el = new Element("task");
         el.addAttribute(new Attribute("startDate", startDate.toString()));
@@ -138,7 +142,47 @@ public class TaskListImpl implements TaskList {
         
         return new TaskImpl(el, this);
     }
+<<<<<<< HEAD
 	
+=======
+    ////// Added in /////////////////////////////////////////////////////
+    ///// Recreate the task using this method 
+    public Task Re_createTask (CalendarDate startDate, CalendarDate endDate, 
+    						String id, int progress, String text, 
+    						int category, int priority, long effort, 
+    						String description, String parentTaskId) {
+        Element el = new Element("task");
+        el.addAttribute(new Attribute("startDate", startDate.toString()));
+        el.addAttribute(new Attribute("endDate", endDate != null? endDate.toString():""));
+        el.addAttribute(new Attribute("id", id));
+        el.addAttribute(new Attribute("progress", String.valueOf(progress)));
+        el.addAttribute(new Attribute("effort", String.valueOf(effort)));
+        el.addAttribute(new Attribute("category", String.valueOf(category)));       
+        el.addAttribute(new Attribute("priority", String.valueOf(priority)));
+                
+        Element txt = new Element("text");
+        txt.appendChild(text);
+        el.appendChild(txt);
+
+        Element desc = new Element("description");
+        desc.appendChild(description);
+        el.appendChild(desc);
+
+        if (parentTaskId == null) {
+            _root.appendChild(el);
+        }
+        else {
+            Element parent = getTaskElement(parentTaskId);
+            parent.appendChild(el);
+        }
+        
+		elements.put(id, el);
+        Util.debug("Created task with parent " + parentTaskId);   
+        return new TaskImpl(el, this);
+    }
+    ///// End ///////////////////////////////////////////////////////////
+    
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 	/**
      * @see net.sf.memoranda.TaskList#removeTask(import net.sf.memoranda.Task)
      */
@@ -154,7 +198,72 @@ public class TaskListImpl implements TaskList {
         }
 		elements.remove(task.getID());
     }
+<<<<<<< HEAD
 
+=======
+    
+	
+	///////////////////////////   Added In 
+	public Vector<Task> storage = new Vector<Task>(); 
+	
+	//// Returns the number of items in the vector
+	public int getNumberOfStoredItems()
+	{
+		return storage.size(); 
+	}
+	
+	////Clears the stored tasks in the vector
+	public void flushTasksVector() 
+	{
+		storage.removeAllElements(); 
+	}
+	
+	/////// Stores the deleted items in a vector 
+	public void storeDeletedTasks(Task t)
+	{
+		storage.add(t); 
+	}
+	
+	//// Returns a vector containing the tasks that were stored
+	public Vector<Task> getStoredTasks()
+	{
+		return storage; 
+	}
+	  /*CalendarDate startDate, 
+    CalendarDate endDate, 
+    String text, 
+    int category, 
+    int priority, 
+    long effort, 
+    String description, 
+    String parentTaskId
+	Re_createTask (CalendarDate startDate, CalendarDate endDate, 
+			String id, int progress, String text, 
+			int category, int priority, long effort, 
+			String description, String parentTaskId)*/
+	
+	///// Recreates task by recreating the stored tasks in storage vector
+	public void recoverDeletedTasks()
+	{
+		for(int i = 0; i < getNumberOfStoredItems(); i++) {	
+			CalendarDate startDate = storage.get(i).getStartDate(); 
+			CalendarDate endDate = storage.get(i).getEndDate();
+			String id = storage.get(i).getID();
+			int progress = storage.get(i).getProgress();
+			String text = storage.get(i).getText(); 
+		    int category = storage.get(i).getCategory(); 
+		    int priority = storage.get(i).getPriority(); 
+		    long effort = storage.get(i).getEffort(); 
+		    String description = storage.get(i).getDescription(); 
+		    String parentTaskId = storage.get(i).getParentId();
+		    Re_createTask(startDate, endDate, id, progress, text, category, priority, effort, description, parentTaskId);
+		}	
+		flushTasksVector(); 
+	}
+	////////////////////////////////////////////////////////////
+    
+    
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     public boolean hasSubTasks(String id) {
         Element task = getTaskElement(id);
         if (task == null) return false;
@@ -333,7 +442,11 @@ public class TaskListImpl implements TaskList {
 		return el;
     }
     
+<<<<<<< HEAD
     private Collection getAllRootTasks() {
+=======
+    public Collection getAllRootTasks() {
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
         Elements tasks = _root.getChildElements("task");
         return convertToTaskObjects(tasks);    	    		
     }

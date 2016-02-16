@@ -26,6 +26,13 @@ public interface Event {
     
     int getMinute();
     
+<<<<<<< HEAD
+=======
+    int getEndHour();
+    
+    int getEndMinute();
+    
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     //Date getTime();
     
     String getText();

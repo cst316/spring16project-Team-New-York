@@ -12,6 +12,10 @@ import java.awt.Component;
 import java.awt.Font;
 import java.util.Date;
 import java.util.Vector;
+<<<<<<< HEAD
+=======
+import java.text.SimpleDateFormat;
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
@@ -97,8 +101,15 @@ public class EventsTable extends JTable {
 
         String[] columnNames = {
             //Local.getString("Task name"),
+<<<<<<< HEAD
             Local.getString("Time"),
                 Local.getString("Text")
+=======
+            Local.getString("Start"),
+            Local.getString("End"),
+                Local.getString("Text")
+                
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
         };
 
         EventsTableModel() {
@@ -106,7 +117,11 @@ public class EventsTable extends JTable {
         }
 
         public int getColumnCount() {
+<<<<<<< HEAD
             return 2;
+=======
+            return 3;
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
         }
 
         public int getRowCount() {
@@ -125,7 +140,28 @@ public class EventsTable extends JTable {
            if (col == 0)
                 //return ev.getHour()+":"+ev.getMinute();
                 return ev.getTimeString();
+<<<<<<< HEAD
            else if (col == 1)
+=======
+           else if (col == 1){
+               //return ev.getEndTimeString();
+        	   if (ev.getEndHour() > 11){
+        		   if(ev.getEndMinute() == 0){
+        			   return (ev.getEndHour()-12 )+":"+ev.getEndMinute()+ "0" + " PM";
+        		   }
+        		   else{
+        			   return (ev.getEndHour()-12 )+":"+ev.getEndMinute() + " PM";
+        		   }
+        	   }
+        	   if(ev.getEndMinute() == 0){
+    			   return (ev.getEndHour() )+":"+ev.getEndMinute()+ "0" + " AM";
+    		   }
+    		   else{
+    			   return (ev.getEndHour() )+":"+ev.getEndMinute() + " AM";
+    		   }
+           }
+           else if (col == 2)
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
                 return ev.getText();
            else if (col == EVENT_ID)
                 return ev.getId();
@@ -136,4 +172,8 @@ public class EventsTable extends JTable {
             return columnNames[col];
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
