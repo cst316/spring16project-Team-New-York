@@ -25,6 +25,7 @@ import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Elements;
 import nu.xom.ParentNode;
+import nu.xom.Node;
 
 /**
  *  
@@ -110,16 +111,20 @@ public class EventsManager {
 		Collections.sort(v);
 		return v;
 	}
-
+		
 	public static Event createEvent(
 		CalendarDate date,
 		int hh,
 		int mm,
+		int xx,
+		int yy,
 		String text) {
 		Element el = new Element("event");
 		el.addAttribute(new Attribute("id", Util.generateId()));
 		el.addAttribute(new Attribute("hour", String.valueOf(hh)));
 		el.addAttribute(new Attribute("min", String.valueOf(mm)));
+		el.addAttribute(new Attribute("endhour", String.valueOf(xx)));
+		el.addAttribute(new Attribute("endmin", String.valueOf(yy)));
 		el.appendChild(text);
 		Day d = getDay(date);
 		if (d == null)
@@ -135,6 +140,8 @@ public class EventsManager {
 		int period,
 		int hh,
 		int mm,
+		int xx,
+		int yy,
 		String text,
 		boolean workDays) {
 		Element el = new Element("event");
@@ -147,6 +154,8 @@ public class EventsManager {
 		el.addAttribute(new Attribute("id", Util.generateId()));
 		el.addAttribute(new Attribute("hour", String.valueOf(hh)));
 		el.addAttribute(new Attribute("min", String.valueOf(mm)));
+		el.addAttribute(new Attribute("endhour", String.valueOf(xx)));
+		el.addAttribute(new Attribute("endmin", String.valueOf(yy)));
 		el.addAttribute(new Attribute("startDate", startDate.toString()));
 		if (endDate != null)
 			el.addAttribute(new Attribute("endDate", endDate.toString()));
@@ -223,7 +232,7 @@ public class EventsManager {
 		return getEventsForDate(CalendarDate.today());
 	}
 
-	public static Event getEvent(CalendarDate date, int hh, int mm) {
+	public static Event getEvent(CalendarDate date, int hh, int mm,int xx, int yy) {
 		Day d = getDay(date);
 		if (d == null)
 			return null;
@@ -233,23 +242,100 @@ public class EventsManager {
 			if ((new Integer(el.getAttribute("hour").getValue()).intValue()
 				== hh)
 				&& (new Integer(el.getAttribute("min").getValue()).intValue()
-					== mm))
+					== mm)
+					&& (new Integer(el.getAttribute("endhour").getValue()).intValue()
+							== xx)
+							&& (new Integer(el.getAttribute("endmin").getValue()).intValue()
+									== yy))
 				return new EventImpl(el);
 		}
 		return null;
 	}
 
-	public static void removeEvent(CalendarDate date, int hh, int mm) {
+	public static void removeEvent(CalendarDate date, int hh, int mm, int xx, int yy) {
 		Day d = getDay(date);
 		if (d == null)
-			d.getElement().removeChild(getEvent(date, hh, mm).getContent());
+			d.getElement().removeChild(getEvent(date, hh, mm, xx, yy).getContent());
 	}
 
 	public static void removeEvent(Event ev) {
 		ParentNode parent = ev.getContent().getParent();
 		parent.removeChild(ev.getContent());
 	}
-
+	
+	///////////////////////////   Added In 
+	public static Vector<Event> storage = new Vector<Event>(); 
+	/// Holds the CalendarDate of the Events
+	private static CalendarDate eventDate;
+	
+	//// Returns the number of items in the vector
+	public static int getNumberOfStoredItems()
+	{
+		return storage.size(); 
+	}
+	
+	////Clears the stored events in the vector
+	public static void flushEventsVector() 
+	{
+		storage.removeAllElements(); 
+	}
+	
+	///// Stores the Calendar Date of events
+	public static void storeCalendarDate(CalendarDate eventCalendarDate)
+	{
+		eventDate = eventCalendarDate;
+	}
+	
+	//// Returns the Calendar Date for events
+	public static CalendarDate getCalendarDate()
+	{
+		return eventDate; 
+	}
+	
+	/////// Stores the deleted items in a vector 
+	public static void storeDeletedEvents(Event ev)
+	{
+		storage.add(ev); 
+	}
+	
+	//// Returns a vector containing the events that were stored
+	public static Vector<Event> getStoredEvents()
+	{
+		return storage; 
+	}
+	
+	///// Recreates Event by recreating Events in vector
+	public static void recoverDeletedEvents()
+	{
+		for(int i = 0; i < storage.size(); i++)
+		{	
+			if(storage.get(i).getRepeat() == 0) {
+				int hours = storage.get(i).getHour();
+				int minutes = storage.get(i).getMinute();
+				int endHours = storage.get(i).getEndHour(); 
+				int endMinutes = storage.get(i).getEndMinute(); 
+				String text = storage.get(i).getText();
+				createEvent(getCalendarDate(), hours, minutes, endHours, endMinutes, text);
+			}
+			else {
+				int type =  storage.get(i).getRepeat(); 
+				CalendarDate startDate = storage.get(i).getStartDate(); 
+				CalendarDate endDate = storage.get(i).getEndDate(); 
+				int period = storage.get(i).getPeriod(); 
+				int hours = storage.get(i).getHour();
+				int minutes = storage.get(i).getMinute(); 
+				int endHours = storage.get(i).getEndHour(); 
+				int endMinutes = storage.get(i).getEndMinute(); 
+				String text = storage.get(i).getText(); 
+				boolean workDays =  storage.get(i).getWorkingDays(); 
+				createRepeatableEvent(type, startDate, endDate, period, hours, minutes, endHours, endMinutes, text, workDays); 
+			}
+		}
+		
+		flushEventsVector(); 
+	}
+	////////////////////////////////////////////////////////////
+	
 	private static Day createDay(CalendarDate date) {
 		Year y = getYear(date.getYear());
 		if (y == null)
@@ -279,7 +365,7 @@ public class EventsManager {
 		//return createYear(y);
 		return null;
 	}
-
+	
 	private static Day getDay(CalendarDate date) {
 		Year y = getYear(date.getYear());
 		if (y == null)
