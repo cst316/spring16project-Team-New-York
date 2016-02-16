@@ -300,11 +300,21 @@ public class EventsPanel extends JPanel {
         
         //int hh = ((Date) dlg.timeSpin.getModel().getValue()).getHours();
         //int mm = ((Date) dlg.timeSpin.getModel().getValue()).getMinutes();
-        String text = dlg.textField.getText();
+        /*String text = dlg.textField.getText();
         if (dlg.noRepeatRB.isSelected())
+   	    
+   	    
+   	    
+   	    
+   	    
+   	    
+   	    
+   	    
+   	    
+   	    
    	    EventsManager.createEvent(CurrentDate.get(), hh, mm, xx, yy, text);
         else {
-	    updateEvents(dlg,hh,mm, xx, yytext);
+	    updateEvents(dlg,hh,mm, xx, yy, text);*/
 	}    
 	saveEvents();
     }
@@ -379,10 +389,20 @@ public class EventsPanel extends JPanel {
 		
 		//end of changes
 		
-    	if (dlg.noRepeatRB.isSelected())
+	 	  
+	 	  
+	 	  
+	 	  
+	 	  
+	 	  
+	 	  
+	 	  
+	 	  
+	 	  
+    	/*if (dlg.noRepeatRB.isSelected())
     		EventsManager.createEvent(eventCalendarDate, hh, mm, xx, yy, text);
     	else {
-    		updateEvents(dlg,hh,mm,xx,yy,text);
+    		updateEvents(dlg,hh,mm,xx,yy,text);*/
     	}
     	
     	
@@ -431,7 +451,11 @@ public class EventsPanel extends JPanel {
             rtype = EventsManager.REPEAT_MONTHLY;
             period = ((Integer) dlg.dayOfMonthSpin.getModel().getValue()).intValue();
         }
-        EventsManager.createRepeatableEvent(rtype, sd, ed, period, hh, mm,xx, yy text, dlg.workingDaysOnlyCB.isSelected());
+        
+        
+        
+        
+        EventsManager.createRepeatableEvent(rtype, sd, ed, period, hh, mm, xx, yy, text, dlg.workingDaysOnlyCB.isSelected());
     }
 
     void removeEventB_actionPerformed(ActionEvent e) {
