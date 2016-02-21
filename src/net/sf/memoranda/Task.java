@@ -41,11 +41,7 @@ public interface Task {
     public static final int PRIORITY_HIGH = 3;
     
     public static final int PRIORITY_HIGHEST = 4;
-<<<<<<< HEAD
-        
-=======
     
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     public static final int CATEGORY_HOME = 0;
     
     public static final int CATEGORY_WORK= 1;

@@ -11,10 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.util.Vector;
-<<<<<<< HEAD
-=======
 import java.util.*;
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -36,10 +33,7 @@ import net.sf.memoranda.ProjectListener;
 import net.sf.memoranda.ResourcesList;
 import net.sf.memoranda.Task;
 import net.sf.memoranda.TaskList;
-<<<<<<< HEAD
-=======
 import net.sf.memoranda.TaskListImpl;
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 import net.sf.memoranda.date.CalendarDate;
 import net.sf.memoranda.date.CurrentDate;
 import net.sf.memoranda.date.DateListener;
@@ -52,43 +46,28 @@ import net.sf.memoranda.util.Util;
 public class TaskPanel extends JPanel {
     BorderLayout borderLayout1 = new BorderLayout();
     JButton historyBackB = new JButton();
-<<<<<<< HEAD
-    JToolBar tasksToolBar = new JToolBar();
-=======
     static JToolBar tasksToolBar = new JToolBar();
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     JButton historyForwardB = new JButton();
     JButton newTaskB = new JButton();
     JButton subTaskB = new JButton();
     JButton editTaskB = new JButton();
-<<<<<<< HEAD
-    JButton removeTaskB = new JButton();
-=======
     ///Added in 
     JButton recoverTaskB = new JButton();
     /// end 
     JButton removeTaskB = new JButton();
     //Adding remove all tasks button: David Scott
     JButton removeAllTasksB = new JButton();
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     JButton completeTaskB = new JButton();
     
 	JCheckBoxMenuItem ppShowActiveOnlyChB = new JCheckBoxMenuItem();
 		
-<<<<<<< HEAD
-    JScrollPane scrollPane = new JScrollPane();
-=======
     static JScrollPane scrollPane = new JScrollPane();
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     TaskTable taskTable = new TaskTable();
 	JMenuItem ppEditTask = new JMenuItem();
 	JPopupMenu taskPPMenu = new JPopupMenu();
 	JMenuItem ppRemoveTask = new JMenuItem();
-<<<<<<< HEAD
-=======
 	JMenuItem ppRemoveAllTasks = new JMenuItem();
 	JMenuItem ppRecoverTask = new JMenuItem(); 
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 	JMenuItem ppNewTask = new JMenuItem();
 	JMenuItem ppCompleteTask = new JMenuItem();
 	//JMenuItem ppSubTasks = new JMenuItem();
@@ -192,8 +171,6 @@ public class TaskPanel extends JPanel {
         removeTaskB.setIcon(
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_remove.png")));
         
-<<<<<<< HEAD
-=======
         //Creating a identical button for now will change it later.
         removeAllTasksB.setBorderPainted(false);
         removeAllTasksB.setFocusable(false);
@@ -228,7 +205,6 @@ public class TaskPanel extends JPanel {
         recoverTaskB.setBorderPainted(false);
         ///// End 
         
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
         completeTaskB.setBorderPainted(false);
         completeTaskB.setFocusable(false);
         completeTaskB.addActionListener(new java.awt.event.ActionListener() {
@@ -310,10 +286,7 @@ public class TaskPanel extends JPanel {
     ppEditTask.setEnabled(false);
     ppEditTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_edit.png")));
     taskPPMenu.setFont(new java.awt.Font("Dialog", 1, 10));
-<<<<<<< HEAD
-=======
     
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     ppRemoveTask.setFont(new java.awt.Font("Dialog", 1, 11));
     ppRemoveTask.setText(Local.getString("Remove task"));
     ppRemoveTask.addActionListener(new java.awt.event.ActionListener() {
@@ -323,8 +296,6 @@ public class TaskPanel extends JPanel {
         });
     ppRemoveTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_remove.png")));
     ppRemoveTask.setEnabled(false);
-<<<<<<< HEAD
-=======
     
     //Recreated the above for new remove all tasks
     ppRemoveAllTasks.setFont(new java.awt.Font("Dialog", 1, 11));
@@ -337,7 +308,6 @@ public class TaskPanel extends JPanel {
     ppRemoveAllTasks.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_remove_all.png")));
     ppRemoveAllTasks.setEnabled(false);
     
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     ppNewTask.setFont(new java.awt.Font("Dialog", 1, 11));
     ppNewTask.setText(Local.getString("New task")+"...");
     ppNewTask.addActionListener(new java.awt.event.ActionListener() {
@@ -346,9 +316,6 @@ public class TaskPanel extends JPanel {
             }
         });
     ppNewTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new.png")));
-<<<<<<< HEAD
-
-=======
     
     ///// Added In 
     ppRecoverTask.setFont(new java.awt.Font("Dialog", 1, 11));
@@ -361,7 +328,6 @@ public class TaskPanel extends JPanel {
     ppRecoverTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new.png")));
     ////// End 
     
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     ppAddSubTask.setFont(new java.awt.Font("Dialog", 1, 11));
     ppAddSubTask.setText(Local.getString("Add subtask"));
     ppAddSubTask.addActionListener(new java.awt.event.ActionListener() {
@@ -420,11 +386,6 @@ public class TaskPanel extends JPanel {
         tasksToolBar.add(newTaskB, null);
         tasksToolBar.add(subTaskB, null);
         tasksToolBar.add(removeTaskB, null);
-<<<<<<< HEAD
-        tasksToolBar.addSeparator(new Dimension(8, 24));
-        tasksToolBar.add(editTaskB, null);
-        tasksToolBar.add(completeTaskB, null);
-=======
         tasksToolBar.add(removeAllTasksB, null);
         tasksToolBar.addSeparator(new Dimension(8, 24));
         tasksToolBar.add(editTaskB, null);
@@ -432,7 +393,6 @@ public class TaskPanel extends JPanel {
         /// Added in
         tasksToolBar.add(recoverTaskB, null);
         /// End 
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 
 		//tasksToolBar.add(showActiveOnly, null);
         
@@ -446,28 +406,19 @@ public class TaskPanel extends JPanel {
 
 
         CurrentDate.addDateListener(new DateListener() {
-<<<<<<< HEAD
-            public void dateChange(CalendarDate d) {
-                newTaskB.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), CurrentProject.get().getEndDate()));
-            }
-=======
         	public void dateChange(CalendarDate d) {
 
         		//B.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), CurrentProject.get().getEndDate()));
         	}
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
         });
         CurrentProject.addProjectListener(new ProjectListener() {
             public void projectChange(Project p, NoteList nl, TaskList tl, ResourcesList rl) {
                 newTaskB.setEnabled(
                     CurrentDate.get().inPeriod(p.getStartDate(), p.getEndDate()));
-<<<<<<< HEAD
-=======
                 ////Added in
                 recoverTaskB.setEnabled(
                         CurrentDate.get().inPeriod(p.getStartDate(), p.getEndDate()));
                 //// End 
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
             }
             public void projectWasChanged() {
             	//taskTable.setCurrentRootTask(null); //XXX
@@ -478,10 +429,7 @@ public class TaskPanel extends JPanel {
                 boolean enbl = (taskTable.getRowCount() > 0)&&(taskTable.getSelectedRow() > -1);
                 editTaskB.setEnabled(enbl);ppEditTask.setEnabled(enbl);
                 removeTaskB.setEnabled(enbl);ppRemoveTask.setEnabled(enbl);
-<<<<<<< HEAD
-=======
                 removeAllTasksB.setEnabled(enbl);
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 				
 				ppCompleteTask.setEnabled(enbl);
 				completeTaskB.setEnabled(enbl);
@@ -514,10 +462,7 @@ public class TaskPanel extends JPanel {
         });
         editTaskB.setEnabled(false);
         removeTaskB.setEnabled(false);
-<<<<<<< HEAD
-=======
         removeAllTasksB.setEnabled(false);
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 		completeTaskB.setEnabled(false);
 		ppAddSubTask.setEnabled(false);
 		//ppSubTasks.setEnabled(false);
@@ -528,20 +473,14 @@ public class TaskPanel extends JPanel {
     taskPPMenu.add(ppNewTask);
     taskPPMenu.add(ppAddSubTask);
     taskPPMenu.add(ppRemoveTask);
-<<<<<<< HEAD
-=======
     taskPPMenu.add(ppRemoveAllTasks);
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     
     taskPPMenu.addSeparator();
 	taskPPMenu.add(ppCompleteTask);
 	taskPPMenu.add(ppCalcTask);
-<<<<<<< HEAD
-=======
 	///Added in
 	taskPPMenu.add(ppRecoverTask);
 	/// End 
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 	
     //taskPPMenu.addSeparator();
     
@@ -661,11 +600,7 @@ public class TaskPanel extends JPanel {
 		//XXX Task newTask = CurrentProject.getTaskList().createTask(sd, ed, dlg.todoField.getText(), dlg.priorityCB.getSelectedIndex(),effort, dlg.descriptionField.getText(),parentTaskId);
         
        
-<<<<<<< HEAD
-		Task newTask = CurrentProject.getTaskList().createTask(sd, ed, dlg.todoField.getText(), dlg.categoryCB.getSelectedIndex(), dlg.priorityCB.getSelectedIndex(),effort, dlg.descriptionField.getText(),null);
-=======
 		Task newTask = CurrentProject.getTaskList().createTask(sd, ed, dlg.todoField.getText(), dlg.categoryCB.getSelectedIndex(), dlg.priorityCB.getSelectedIndex(),effort, dlg.descriptionField.getText(), null);
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 //		CurrentProject.getTaskList().adjustParentTasks(newTask);
 		newTask.setProgress(((Integer)dlg.progress.getValue()).intValue());
         CurrentStorage.get().storeTaskList(CurrentProject.getTaskList(), CurrentProject.get());
@@ -791,11 +726,8 @@ public class TaskPanel extends JPanel {
 //      //taskTable.updateUI();
   }
 
-<<<<<<< HEAD
-=======
     public TaskListImpl stored = new TaskListImpl(CurrentProject.get()); 
     
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     void removeTaskB_actionPerformed(ActionEvent e) {
         String msg;
         String thisTaskId = taskTable.getModel().getValueAt(taskTable.getSelectedRow(), TaskTable.TASK_ID).toString();
@@ -822,44 +754,31 @@ public class TaskPanel extends JPanel {
         if (n != JOptionPane.YES_OPTION)
             return;
         Vector toremove = new Vector();
-<<<<<<< HEAD
-=======
         /// Added in
         //TaskListImpl stored = new TaskListImpl(CurrentProject.get()); 
         stored.flushTasksVector(); 
         /// End 
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
         for (int i = 0; i < taskTable.getSelectedRows().length; i++) {
             Task t =
             CurrentProject.getTaskList().getTask(
                 taskTable.getModel().getValueAt(taskTable.getSelectedRows()[i], TaskTable.TASK_ID).toString());
-<<<<<<< HEAD
-            if (t != null)
-                toremove.add(t);
-=======
             if (t != null) {
                 toremove.add(t);
             	/// Added in
                 stored.storeDeletedTasks(t);
                 /// End 
             }
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
         }
         for (int i = 0; i < toremove.size(); i++) {
             CurrentProject.getTaskList().removeTask((Task)toremove.get(i));
         }
-<<<<<<< HEAD
-=======
         
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
         taskTable.tableChanged();
         CurrentStorage.get().storeTaskList(CurrentProject.getTaskList(), CurrentProject.get());
         parentPanel.updateIndicators();
         //taskTable.updateUI();
 
     }
-<<<<<<< HEAD
-=======
     
     
     //Adding a remove all tasks method
@@ -927,7 +846,6 @@ public class TaskPanel extends JPanel {
     }
     ///// End 
 
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 
 	void ppCompleteTask_actionPerformed(ActionEvent e) {
 		String msg;
@@ -956,9 +874,6 @@ public class TaskPanel extends JPanel {
 			new Boolean(ppShowActiveOnlyChB.isSelected()));
 		taskTable.tableChanged();
 	}
-<<<<<<< HEAD
-
-=======
 	public static void setTheme(Color f, Color b)
 	{
 		tasksToolBar.setForeground(f);
@@ -966,7 +881,6 @@ public class TaskPanel extends JPanel {
 		scrollPane.getViewport().setForeground(f);
 		scrollPane.getViewport().setBackground(b);
 	}
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     class PopupListener extends MouseAdapter {
 
         public void mouseClicked(MouseEvent e) {
@@ -1000,8 +914,6 @@ public class TaskPanel extends JPanel {
   void ppRemoveTask_actionPerformed(ActionEvent e) {
     removeTaskB_actionPerformed(e);
   }
-<<<<<<< HEAD
-=======
   
   void ppRemoveAllTasks_actionPerformed(ActionEvent e) {
 	removeAllTasksB_actionPerformed(e);
@@ -1012,7 +924,6 @@ public class TaskPanel extends JPanel {
 	recoverTaskB_actionPerformed(e);
   }
   /// End 
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
   void ppNewTask_actionPerformed(ActionEvent e) {
     newTaskB_actionPerformed(e);
   }

@@ -49,8 +49,6 @@ public class EventImpl implements Event, Comparable {
     public String getTimeString() {
         return Local.getTimeString(getHour(), getMinute());
     }
-<<<<<<< HEAD
-=======
     
     //New stuff through 71
    
@@ -72,7 +70,6 @@ public class EventImpl implements Event, Comparable {
         return Local.getEndTimeString(getEndHour(), getEndMinute());
     }
     
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
         
   
     /**

@@ -50,17 +50,10 @@ import net.sf.memoranda.util.*;
 /*$Id: ProjectsPanel.java,v 1.14 2005/01/04 09:59:22 pbielen Exp $*/
 public class ProjectsPanel extends JPanel implements ExpandablePanel {
 	BorderLayout borderLayout1 = new BorderLayout();
-<<<<<<< HEAD
-	JToolBar topBar = new JToolBar();
-	JPanel toolbarPanel = new JPanel();
-	BorderLayout borderLayout2 = new BorderLayout();
-	JPanel buttonsPanel = new JPanel();
-=======
 	static JToolBar topBar = new JToolBar();
 	static JPanel toolbarPanel = new JPanel();
 	BorderLayout borderLayout2 = new BorderLayout();
 	static JPanel buttonsPanel = new JPanel();
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 	JButton toggleButton = new JButton();
 	FlowLayout flowLayout1 = new FlowLayout();
 	Vector expListeners = new Vector();
@@ -295,9 +288,6 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 				public void keyTyped(KeyEvent e){} 
 			});
 	}
-<<<<<<< HEAD
-
-=======
 	public static void setTheme(Color f, Color b)
 	{
 		topBar.setForeground(f);
@@ -307,7 +297,6 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 		buttonsPanel.setForeground(f);
 		buttonsPanel.setBackground(b);
 	}
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 	class PopupListener extends MouseAdapter {
 
 		public void mouseClicked(MouseEvent e) {
