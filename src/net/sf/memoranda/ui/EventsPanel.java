@@ -425,7 +425,7 @@ public class EventsPanel extends JPanel {
 		
 		//int zz = calendar.get(Calendar.DAY_OF_MONTH);//We need to subtract the days
 		
-    	Date date1 = new Date();
+       Date date1 = new Date();
  	   long time1 = date1.getTime();
  	   
  	   
@@ -456,7 +456,6 @@ public class EventsPanel extends JPanel {
     }
 
     public static void setTheme(Color f, Color b)
-
     {
     	eventsToolBar.setForeground(f);
     	eventsToolBar.setBackground(b);
