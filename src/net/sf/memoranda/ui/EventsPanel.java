@@ -27,10 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-<<<<<<< HEAD
-=======
 import net.sf.memoranda.Event;
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 import net.sf.memoranda.EventsManager;
 import net.sf.memoranda.EventsScheduler;
 import net.sf.memoranda.History;
@@ -46,28 +43,17 @@ import net.sf.memoranda.util.Util;
 public class EventsPanel extends JPanel {
     BorderLayout borderLayout1 = new BorderLayout();
     JButton historyBackB = new JButton();
-<<<<<<< HEAD
-    JToolBar eventsToolBar = new JToolBar();
-=======
     static JToolBar eventsToolBar = new JToolBar();
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     JButton historyForwardB = new JButton();
     JButton newEventB = new JButton();
     JButton editEventB = new JButton();
     JButton removeEventB = new JButton();
-<<<<<<< HEAD
-    JScrollPane scrollPane = new JScrollPane();
-    EventsTable eventsTable = new EventsTable();
-    JPopupMenu eventPPMenu = new JPopupMenu();
-    JMenuItem ppEditEvent = new JMenuItem();
-    JMenuItem ppRemoveEvent = new JMenuItem();
-    JMenuItem ppNewEvent = new JMenuItem();
-    DailyItemsPanel parentPanel = null;
-=======
     static JScrollPane scrollPane = new JScrollPane();
     static EventsTable eventsTable = new EventsTable();
 
-
+    //New Stuff for US-22
+    JButton reportEventB = new JButton();
+    
     ///////Added In 
     JButton recoverEventB = new JButton();
     /////////End 
@@ -82,7 +68,9 @@ public class EventsPanel extends JPanel {
     /////// End 
     JMenuItem ppNewEvent = new JMenuItem();
     static DailyItemsPanel parentPanel = null;
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
+    
+    //New Stuff for US-22
+    JMenuItem ppReportEvent = new JMenuItem();
 
     public EventsPanel(DailyItemsPanel _parentPanel) {
         try {
@@ -157,10 +145,7 @@ public class EventsPanel extends JPanel {
                 removeEventB_actionPerformed(e);
             }
         });
-<<<<<<< HEAD
-=======
         
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
         removeEventB.setPreferredSize(new Dimension(24, 24));
         removeEventB.setRequestFocusEnabled(false);
         removeEventB.setToolTipText(Local.getString("Remove event"));
@@ -168,9 +153,6 @@ public class EventsPanel extends JPanel {
         removeEventB.setMaximumSize(new Dimension(24, 24));
         removeEventB.setIcon(
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/event_remove.png")));
-<<<<<<< HEAD
-
-=======
          
         //// Added In 
         recoverEventB.setBorderPainted(false);
@@ -191,7 +173,25 @@ public class EventsPanel extends JPanel {
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/event_recover.png")));
         ////// End 
         
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
+   //// Added In 
+        reportEventB.setBorderPainted(false);
+        reportEventB.setFocusable(false);
+        reportEventB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                reportEventB_actionPerformed(e);
+            }
+        });
+        
+        reportEventB.setPreferredSize(new Dimension(24, 24));
+        reportEventB.setRequestFocusEnabled(false);
+        reportEventB.setToolTipText(Local.getString("Report Event"));
+        reportEventB.setMinimumSize(new Dimension(24, 24));
+        reportEventB.setMaximumSize(new Dimension(24, 24));
+        reportEventB.setEnabled(true);
+        reportEventB.setIcon(
+            new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/report-icon.png")));
+        ////// End 
+        
         this.setLayout(borderLayout1);
         scrollPane.getViewport().setBackground(Color.white);
         eventsTable.setMaximumSize(new Dimension(32767, 32767));
@@ -217,8 +217,6 @@ public class EventsPanel extends JPanel {
         ppRemoveEvent.setIcon(
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/event_remove.png")));
         ppRemoveEvent.setEnabled(false);
-<<<<<<< HEAD
-=======
         //////////Added in 
         ppRecoverEvent.setFont(new java.awt.Font("Dialog", 1, 11));
         ppRecoverEvent.setText(Local.getString("Recover Event"));
@@ -230,7 +228,18 @@ public class EventsPanel extends JPanel {
         ppRecoverEvent.setIcon(
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/event_recover.png")));
         ////////////////////// End
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
+        
+        //US-22 
+      ppReportEvent.setFont(new java.awt.Font("Dialog", 1, 11));
+      ppReportEvent.setText(Local.getString("Report Event"));
+      ppReportEvent.addActionListener(new java.awt.event.ActionListener() {
+          public void actionPerformed(ActionEvent e) {
+              ppReportEvent_actionPerformed(e);
+          }
+      });
+      ppReportEvent.setIcon(
+          new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/report-icon.png")));
+      // End
         ppNewEvent.setFont(new java.awt.Font("Dialog", 1, 11));
         ppNewEvent.setText(Local.getString("New event") + "...");
         ppNewEvent.addActionListener(new java.awt.event.ActionListener() {
@@ -250,12 +259,11 @@ public class EventsPanel extends JPanel {
         eventsToolBar.add(removeEventB, null);
         eventsToolBar.addSeparator(new Dimension(8, 24));
         eventsToolBar.add(editEventB, null);
-<<<<<<< HEAD
-=======
         /////Added In 
         eventsToolBar.add(recoverEventB, null);
         /////////////
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
+        //US-22
+        eventsToolBar.add(reportEventB, null);
 
         this.add(eventsToolBar, BorderLayout.NORTH);
 
@@ -273,13 +281,10 @@ public class EventsPanel extends JPanel {
                 ppEditEvent.setEnabled(false);
                 removeEventB.setEnabled(false);
                 ppRemoveEvent.setEnabled(false);
-<<<<<<< HEAD
-=======
                 ////Added In 
                 recoverEventB.setEnabled(enbl);
                 ppRecoverEvent.setEnabled(enbl);
                 //// End 
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
             }
         });
 
@@ -298,13 +303,10 @@ public class EventsPanel extends JPanel {
         eventPPMenu.addSeparator();
         eventPPMenu.add(ppNewEvent);
         eventPPMenu.add(ppRemoveEvent);
-<<<<<<< HEAD
-=======
         //// Added In 
         eventPPMenu.add(ppRecoverEvent);
         //// End 
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
-		
+        eventPPMenu.add(ppReportEvent);
 		// remove events using the DEL key
 		eventsTable.addKeyListener(new KeyListener() {
 			public void keyPressed(KeyEvent e){
@@ -318,61 +320,58 @@ public class EventsPanel extends JPanel {
     }
 
     void editEventB_actionPerformed(ActionEvent e) {
-        EventDialog dlg = new EventDialog(App.getFrame(), Local.getString("Event"));
-        net.sf.memoranda.Event ev =
-            (net.sf.memoranda.Event) eventsTable.getModel().getValueAt(
-                eventsTable.getSelectedRow(),
-                EventsTable.EVENT);
-        
-        dlg.timeSpin.getModel().setValue(ev.getTime());
-<<<<<<< HEAD
-=======
-        dlg.clockSpin.getModel().setValue(ev.getTime());
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
-        /*if (new CalendarDate(ev.getTime()).equals(CalendarDate.today())) 
+    	EventDialog dlg = new EventDialog(App.getFrame(), Local.getString("Event"));
+    	net.sf.memoranda.Event ev =
+    			(net.sf.memoranda.Event) eventsTable.getModel().getValueAt(
+    					eventsTable.getSelectedRow(),
+    					EventsTable.EVENT);
+
+    	dlg.timeSpin.getModel().setValue(ev.getTime());
+    	dlg.clockSpin.getModel().setValue(ev.getTime());
+    	/*if (new CalendarDate(ev.getTime()).equals(CalendarDate.today())) 
             ((SpinnerDateModel)dlg.timeSpin.getModel()).setStart(new Date());
         else
         ((SpinnerDateModel)dlg.timeSpin.getModel()).setStart(CalendarDate.today().getDate());
         ((SpinnerDateModel)dlg.timeSpin.getModel()).setEnd(CalendarDate.tomorrow().getDate());*/    
-        dlg.textField.setText(ev.getText());
-        int rep = ev.getRepeat();
-        if (rep > 0) {
-            dlg.startDate.getModel().setValue(ev.getStartDate().getDate());
-            if (rep == EventsManager.REPEAT_DAILY) {
-                dlg.dailyRepeatRB.setSelected(true);
-                dlg.dailyRepeatRB_actionPerformed(null);
-                dlg.daySpin.setValue(new Integer(ev.getPeriod()));
-            }
-            else if (rep == EventsManager.REPEAT_WEEKLY) {
-                dlg.weeklyRepeatRB.setSelected(true);
-                dlg.weeklyRepeatRB_actionPerformed(null);
-		int d = ev.getPeriod() - 1;
-		if(Configuration.get("FIRST_DAY_OF_WEEK").equals("mon")) {
-		    d--;
-		    if(d<0) d=6;
-		}
-                dlg.weekdaysCB.setSelectedIndex(d);
-            }
-            else if (rep == EventsManager.REPEAT_MONTHLY) {
-                dlg.monthlyRepeatRB.setSelected(true);
-                dlg.monthlyRepeatRB_actionPerformed(null);
-                dlg.dayOfMonthSpin.setValue(new Integer(ev.getPeriod()));
-            }
-	    else if (rep == EventsManager.REPEAT_YEARLY) {
-		dlg.yearlyRepeatRB.setSelected(true);
-		dlg.yearlyRepeatRB_actionPerformed(null);
-		dlg.dayOfMonthSpin.setValue(new Integer(ev.getPeriod()));
-	    }
-        if (ev.getEndDate() != null) {
-           dlg.endDate.getModel().setValue(ev.getEndDate().getDate());
-           dlg.enableEndDateCB.setSelected(true);
-           dlg.enableEndDateCB_actionPerformed(null);
-        }
-		if(ev.getWorkingDays()) {
-			dlg.workingDaysOnlyCB.setSelected(true);
-		}
-		
-        }
+    	dlg.textField.setText(ev.getText());
+    	int rep = ev.getRepeat();
+    	if (rep > 0) {
+    		dlg.startDate.getModel().setValue(ev.getStartDate().getDate());
+    		if (rep == EventsManager.REPEAT_DAILY) {
+    			dlg.dailyRepeatRB.setSelected(true);
+    			dlg.dailyRepeatRB_actionPerformed(null);
+    			dlg.daySpin.setValue(new Integer(ev.getPeriod()));
+    		}
+    		else if (rep == EventsManager.REPEAT_WEEKLY) {
+    			dlg.weeklyRepeatRB.setSelected(true);
+    			dlg.weeklyRepeatRB_actionPerformed(null);
+    			int d = ev.getPeriod() - 1;
+    			if(Configuration.get("FIRST_DAY_OF_WEEK").equals("mon")) {
+    				d--;
+    				if(d<0) d=6;
+    			}
+    			dlg.weekdaysCB.setSelectedIndex(d);
+    		}
+    		else if (rep == EventsManager.REPEAT_MONTHLY) {
+    			dlg.monthlyRepeatRB.setSelected(true);
+    			dlg.monthlyRepeatRB_actionPerformed(null);
+    			dlg.dayOfMonthSpin.setValue(new Integer(ev.getPeriod()));
+    		}
+    		else if (rep == EventsManager.REPEAT_YEARLY) {
+    			dlg.yearlyRepeatRB.setSelected(true);
+    			dlg.yearlyRepeatRB_actionPerformed(null);
+    			dlg.dayOfMonthSpin.setValue(new Integer(ev.getPeriod()));
+    		}
+    		if (ev.getEndDate() != null) {
+    			dlg.endDate.getModel().setValue(ev.getEndDate().getDate());
+    			dlg.enableEndDateCB.setSelected(true);
+    			dlg.enableEndDateCB_actionPerformed(null);
+    		}
+    		if(ev.getWorkingDays()) {
+    			dlg.workingDaysOnlyCB.setSelected(true);
+    		}
+
+    	}
 
         Dimension frmSize = App.getFrame().getSize();
         Point loc = App.getFrame().getLocation();
@@ -390,31 +389,22 @@ public class EventsPanel extends JPanel {
 		//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
 		int mm = calendar.get(Calendar.MINUTE);//Fix deprecated methods to get hours
 		//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
-<<<<<<< HEAD
-=======
-		
+
 		calendar.setTime(((Date)dlg.clockSpin.getModel().getValue()));//Fix deprecated methods to get hours
-    	//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
-    	int xx = calendar.get(Calendar.HOUR_OF_DAY);//Fix deprecated methods to get hours
-    	//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
-    	int yy = calendar.get(Calendar.MINUTE);//Fix deprecated m
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
-        
-        //int hh = ((Date) dlg.timeSpin.getModel().getValue()).getHours();
-        //int mm = ((Date) dlg.timeSpin.getModel().getValue()).getMinutes();
-        String text = dlg.textField.getText();
-        if (dlg.noRepeatRB.isSelected())
-<<<<<<< HEAD
-   	    EventsManager.createEvent(CurrentDate.get(), hh, mm, text);
-        else {
-	    updateEvents(dlg,hh,mm,text);
-=======
-   	    EventsManager.createEvent(CurrentDate.get(), hh, mm, xx, yy, text);
-        else {
-	    updateEvents(dlg,hh,mm,xx,yy,text);
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
-	}    
-	saveEvents();
+		//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
+		int xx = calendar.get(Calendar.HOUR_OF_DAY);//Fix deprecated methods to get hours
+		//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
+		int yy = calendar.get(Calendar.MINUTE);//Fix deprecated m
+
+		//int hh = ((Date) dlg.timeSpin.getModel().getValue()).getHours();
+		//int mm = ((Date) dlg.timeSpin.getModel().getValue()).getMinutes();
+		String text = dlg.textField.getText();
+		if (dlg.noRepeatRB.isSelected()) 
+			EventsManager.createEvent(CurrentDate.get(), hh, mm, xx, yy, text);
+		else {
+			updateEvents(dlg,hh,mm, xx, yy, text);
+		}    
+		saveEvents();
     }
 
     void newEventB_actionPerformed(ActionEvent e) {
@@ -436,10 +426,7 @@ public class EventsPanel extends JPanel {
 		dlg.startDate.getModel().setValue(startDate);
 		dlg.endDate.getModel().setValue(endDate);
 		dlg.timeSpin.getModel().setValue(startDate);
-<<<<<<< HEAD
-=======
 		dlg.clockSpin.getModel().setValue(startDate);
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 
     	dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
     	dlg.setEventDate(startDate);
@@ -455,8 +442,6 @@ public class EventsPanel extends JPanel {
     	int mm = calendar.get(Calendar.MINUTE);//Fix deprecated methods to get hours
     	//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
     	
-<<<<<<< HEAD
-=======
     	//new stuff 346-352
     	calendar.setTime(((Date)dlg.clockSpin.getModel().getValue()));//Fix deprecated methods to get hours
     	//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
@@ -464,14 +449,11 @@ public class EventsPanel extends JPanel {
     	//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
     	int yy = calendar.get(Calendar.MINUTE);//Fix deprecated m
     	
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     	//int hh = ((Date) dlg.timeSpin.getModel().getValue()).getHours();
     	//int mm = ((Date) dlg.timeSpin.getModel().getValue()).getMinutes();
     	String text = dlg.textField.getText();
 		
 		CalendarDate eventCalendarDate = new CalendarDate(dlg.getEventDate());
-		
-<<<<<<< HEAD
 		
     	// Added changes below 
 		
@@ -481,7 +463,7 @@ public class EventsPanel extends JPanel {
 		
 		//int zz = calendar.get(Calendar.DAY_OF_MONTH);//We need to subtract the days
 		
-    	Date date1 = new Date();
+       Date date1 = new Date();
  	   long time1 = date1.getTime();
  	   
  	   
@@ -500,19 +482,8 @@ public class EventsPanel extends JPanel {
 	 	 
 	 	  int minutes = (int) Math.floor(time4/(60 * 1000));//Number of minutes
 		
-		//end of changes
-		
-    	if (dlg.noRepeatRB.isSelected())
-    		EventsManager.createEvent(eventCalendarDate, hh, mm, text);
-    	else {
-    		updateEvents(dlg,hh,mm,text);
-    	}
-    	
-    	
-    	saveEvents();
-    }
-
-=======
+		//end of changes	  	  
+	 	
     	if (dlg.noRepeatRB.isSelected())
     		EventsManager.createEvent(eventCalendarDate, hh, mm, xx, yy, text);
     	else {
@@ -523,14 +494,12 @@ public class EventsPanel extends JPanel {
     }
 
     public static void setTheme(Color f, Color b)
-
     {
     	eventsToolBar.setForeground(f);
     	eventsToolBar.setBackground(b);
     	scrollPane.getViewport().setForeground(f);
     	scrollPane.getViewport().setBackground(b);
     }
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     private void saveEvents() {
 	CurrentStorage.get().storeEventsManager();
         eventsTable.refresh();
@@ -539,11 +508,7 @@ public class EventsPanel extends JPanel {
         parentPanel.updateIndicators();
     }
 
-<<<<<<< HEAD
-    private void updateEvents(EventDialog dlg, int hh, int mm, String text) {
-=======
     private void updateEvents(EventDialog dlg, int hh, int mm, int xx, int yy, String text) {
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 	int rtype;
         int period;
         CalendarDate sd = new CalendarDate((Date) dlg.startDate.getModel().getValue());
@@ -571,11 +536,7 @@ public class EventsPanel extends JPanel {
             rtype = EventsManager.REPEAT_MONTHLY;
             period = ((Integer) dlg.dayOfMonthSpin.getModel().getValue()).intValue();
         }
-<<<<<<< HEAD
-        EventsManager.createRepeatableEvent(rtype, sd, ed, period, hh, mm, text, dlg.workingDaysOnlyCB.isSelected());
-=======
         EventsManager.createRepeatableEvent(rtype, sd, ed, period, hh, mm, xx, yy, text, dlg.workingDaysOnlyCB.isSelected());
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     }
 
     void removeEventB_actionPerformed(ActionEvent e) {
@@ -600,13 +561,6 @@ public class EventsPanel extends JPanel {
                 Local.getString("Remove event"),
                 JOptionPane.YES_NO_OPTION);
         if (n != JOptionPane.YES_OPTION) return;
-<<<<<<< HEAD
-
-        for(int i=0; i< eventsTable.getSelectedRows().length;i++) {
-			ev = (net.sf.memoranda.Event) eventsTable.getModel().getValueAt(
-                  eventsTable.getSelectedRows()[i], EventsTable.EVENT);
-        EventsManager.removeEvent(ev);
-=======
         ///Added In
         EventsManager.flushEventsVector(); 
         CalendarDate eventCalendarDate = CurrentDate.get();
@@ -622,7 +576,6 @@ public class EventsPanel extends JPanel {
 			}
 			/// End 
 			EventsManager.removeEvent(ev);
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 		}
         eventsTable.getSelectionModel().clearSelection();
 /*        CurrentStorage.get().storeEventsManager();
@@ -632,8 +585,6 @@ public class EventsPanel extends JPanel {
         parentPanel.updateIndicators();
 */ saveEvents();  
   }
-<<<<<<< HEAD
-=======
     
     ////Added In 
     void recoverEventB_actionPerformed(ActionEvent e) {
@@ -660,8 +611,11 @@ public class EventsPanel extends JPanel {
         EventsManager.recoverDeletedEvents(); 
         saveEvents(); 
   }
-  //// End   
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
+  //// End  
+    
+    void reportEventB_actionPerformed(ActionEvent e) {
+
+  }
 
     class PopupListener extends MouseAdapter {
 
@@ -691,13 +645,14 @@ public class EventsPanel extends JPanel {
     void ppRemoveEvent_actionPerformed(ActionEvent e) {
         removeEventB_actionPerformed(e);
     }
-<<<<<<< HEAD
-=======
     void ppRecoverEvent_actionPerformed(ActionEvent e) {
         recoverEventB_actionPerformed(e);
     }
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
+    void ppReportEvent_actionPerformed(ActionEvent e) {
+        reportEventB_actionPerformed(e);
+    }
     void ppNewEvent_actionPerformed(ActionEvent e) {
         newEventB_actionPerformed(e);
     }
 }
+

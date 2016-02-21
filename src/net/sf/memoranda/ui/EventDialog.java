@@ -108,11 +108,7 @@ public class EventDialog extends JDialog implements WindowListener {
         headerPanel.add(header);
         
         // Build eventPanel
-<<<<<<< HEAD
-        lblClock.setText(Local.getString("CountDown"));
-=======
         lblClock.setText(Local.getString("EndTime"));
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
         lblTime.setText(Local.getString("Time"));
         lblClock.setMinimumSize(new Dimension(60, 24));
         lblTime.setMinimumSize(new Dimension(60, 24));
@@ -421,8 +417,6 @@ public class EventDialog extends JDialog implements WindowListener {
                 startDate.getModel().setValue(startCalFrame.cal.get().getCalendar().getTime());
             }
         });
-<<<<<<< HEAD
-=======
      // New stuff 420 - 426
         /*startCalFrame.cal.addSelectionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -430,7 +424,6 @@ public class EventDialog extends JDialog implements WindowListener {
                 startDate.getModel().setValue(startCalFrame.cal.get().getTime());
             }
         });*/
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
         endCalFrame.cal.addSelectionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (ignoreEndChanged)

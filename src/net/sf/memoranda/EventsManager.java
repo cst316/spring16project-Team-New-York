@@ -25,10 +25,7 @@ import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Elements;
 import nu.xom.ParentNode;
-<<<<<<< HEAD
-=======
 import nu.xom.Node;
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 
 /**
  *  
@@ -114,30 +111,20 @@ public class EventsManager {
 		Collections.sort(v);
 		return v;
 	}
-<<<<<<< HEAD
-
-=======
 		
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 	public static Event createEvent(
 		CalendarDate date,
 		int hh,
 		int mm,
-<<<<<<< HEAD
-=======
 		int xx,
 		int yy,
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 		String text) {
 		Element el = new Element("event");
 		el.addAttribute(new Attribute("id", Util.generateId()));
 		el.addAttribute(new Attribute("hour", String.valueOf(hh)));
 		el.addAttribute(new Attribute("min", String.valueOf(mm)));
-<<<<<<< HEAD
-=======
 		el.addAttribute(new Attribute("endhour", String.valueOf(xx)));
 		el.addAttribute(new Attribute("endmin", String.valueOf(yy)));
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 		el.appendChild(text);
 		Day d = getDay(date);
 		if (d == null)
@@ -153,11 +140,8 @@ public class EventsManager {
 		int period,
 		int hh,
 		int mm,
-<<<<<<< HEAD
-=======
 		int xx,
 		int yy,
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 		String text,
 		boolean workDays) {
 		Element el = new Element("event");
@@ -170,11 +154,8 @@ public class EventsManager {
 		el.addAttribute(new Attribute("id", Util.generateId()));
 		el.addAttribute(new Attribute("hour", String.valueOf(hh)));
 		el.addAttribute(new Attribute("min", String.valueOf(mm)));
-<<<<<<< HEAD
-=======
 		el.addAttribute(new Attribute("endhour", String.valueOf(xx)));
 		el.addAttribute(new Attribute("endmin", String.valueOf(yy)));
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 		el.addAttribute(new Attribute("startDate", startDate.toString()));
 		if (endDate != null)
 			el.addAttribute(new Attribute("endDate", endDate.toString()));
@@ -251,11 +232,7 @@ public class EventsManager {
 		return getEventsForDate(CalendarDate.today());
 	}
 
-<<<<<<< HEAD
-	public static Event getEvent(CalendarDate date, int hh, int mm) {
-=======
 	public static Event getEvent(CalendarDate date, int hh, int mm,int xx, int yy) {
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 		Day d = getDay(date);
 		if (d == null)
 			return null;
@@ -265,40 +242,26 @@ public class EventsManager {
 			if ((new Integer(el.getAttribute("hour").getValue()).intValue()
 				== hh)
 				&& (new Integer(el.getAttribute("min").getValue()).intValue()
-<<<<<<< HEAD
-					== mm))
-=======
 					== mm)
 					&& (new Integer(el.getAttribute("endhour").getValue()).intValue()
 							== xx)
 							&& (new Integer(el.getAttribute("endmin").getValue()).intValue()
 									== yy))
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 				return new EventImpl(el);
 		}
 		return null;
 	}
 
-<<<<<<< HEAD
-	public static void removeEvent(CalendarDate date, int hh, int mm) {
-		Day d = getDay(date);
-		if (d == null)
-			d.getElement().removeChild(getEvent(date, hh, mm).getContent());
-=======
 	public static void removeEvent(CalendarDate date, int hh, int mm, int xx, int yy) {
 		Day d = getDay(date);
 		if (d == null)
 			d.getElement().removeChild(getEvent(date, hh, mm, xx, yy).getContent());
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 	}
 
 	public static void removeEvent(Event ev) {
 		ParentNode parent = ev.getContent().getParent();
 		parent.removeChild(ev.getContent());
 	}
-<<<<<<< HEAD
-
-=======
 	
 	///////////////////////////   Added In 
 	public static Vector<Event> storage = new Vector<Event>(); 
@@ -373,7 +336,6 @@ public class EventsManager {
 	}
 	////////////////////////////////////////////////////////////
 	
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 	private static Day createDay(CalendarDate date) {
 		Year y = getYear(date.getYear());
 		if (y == null)
@@ -403,11 +365,7 @@ public class EventsManager {
 		//return createYear(y);
 		return null;
 	}
-<<<<<<< HEAD
-
-=======
 	
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 	private static Day getDay(CalendarDate date) {
 		Year y = getYear(date.getYear());
 		if (y == null)

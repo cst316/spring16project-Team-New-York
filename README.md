@@ -1,9 +1,5 @@
 #Team changes
-<<<<<<< HEAD
-Julian Morales
-=======
 Julian Morales - Added from US-3
->>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 David Scott 
 Pedram Sharif 
 
