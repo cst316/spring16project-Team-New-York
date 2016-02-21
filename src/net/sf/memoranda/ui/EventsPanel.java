@@ -54,8 +54,9 @@ public class EventsPanel extends JPanel {
     ///////Added In 
     JButton recoverEventB = new JButton();
     /////////End 
-    JScrollPane scrollPane = new JScrollPane();
-    EventsTable eventsTable = new EventsTable();
+    //JScrollPane scrollPane = new JScrollPane();
+    //EventsTable eventsTable = new EventsTable();
+
     JPopupMenu eventPPMenu = new JPopupMenu();
     JMenuItem ppEditEvent = new JMenuItem();
     JMenuItem ppRemoveEvent = new JMenuItem();
@@ -63,7 +64,7 @@ public class EventsPanel extends JPanel {
     JMenuItem ppRecoverEvent = new JMenuItem();
     /////// End 
     JMenuItem ppNewEvent = new JMenuItem();
-    DailyItemsPanel parentPanel = null;
+    static DailyItemsPanel parentPanel = null;
 
     public EventsPanel(DailyItemsPanel _parentPanel) {
         try {
@@ -423,7 +424,9 @@ public class EventsPanel extends JPanel {
   
     	saveEvents();
     }
-    public void setTheme(Color f, Color b)
+
+    public static void setTheme(Color f, Color b)
+
     {
     	eventsToolBar.setForeground(f);
     	eventsToolBar.setBackground(b);
