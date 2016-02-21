@@ -416,8 +416,8 @@ public class TaskPanel extends JPanel {
                 newTaskB.setEnabled(
                     CurrentDate.get().inPeriod(p.getStartDate(), p.getEndDate()));
                 ////Added in
-                recoverTaskB.setEnabled(
-                        CurrentDate.get().inPeriod(p.getStartDate(), p.getEndDate()));
+                //recoverTaskB.setEnabled(
+                  //      CurrentDate.get().inPeriod(p.getStartDate(), p.getEndDate()));
                 //// End 
             }
             public void projectWasChanged() {
@@ -430,6 +430,9 @@ public class TaskPanel extends JPanel {
                 editTaskB.setEnabled(enbl);ppEditTask.setEnabled(enbl);
                 removeTaskB.setEnabled(enbl);ppRemoveTask.setEnabled(enbl);
                 removeAllTasksB.setEnabled(enbl);
+                ///Added in 
+                recoverTaskB.setEnabled(enbl);
+                ///////////
 				
 				ppCompleteTask.setEnabled(enbl);
 				completeTaskB.setEnabled(enbl);
@@ -726,7 +729,6 @@ public class TaskPanel extends JPanel {
 //      //taskTable.updateUI();
   }
 
-    public TaskListImpl stored = new TaskListImpl(CurrentProject.get()); 
     
     void removeTaskB_actionPerformed(ActionEvent e) {
         String msg;
@@ -756,7 +758,8 @@ public class TaskPanel extends JPanel {
         Vector toremove = new Vector();
         /// Added in
         //TaskListImpl stored = new TaskListImpl(CurrentProject.get()); 
-        stored.flushTasksVector(); 
+        flushTasks();
+        System.out.println("The number of stored after flush tasks is: "+ getNumberOfStoredItems());
         /// End 
         for (int i = 0; i < taskTable.getSelectedRows().length; i++) {
             Task t =
@@ -765,7 +768,8 @@ public class TaskPanel extends JPanel {
             if (t != null) {
                 toremove.add(t);
             	/// Added in
-                stored.storeDeletedTasks(t);
+                storeDeleted(t);
+                System.out.println("The number of stored tasks is: "+ getNumberOfStoredItems());
                 /// End 
             }
         }
@@ -779,7 +783,6 @@ public class TaskPanel extends JPanel {
         //taskTable.updateUI();
 
     }
-    
     
     //Adding a remove all tasks method
     void removeAllTasksB_actionPerformed(ActionEvent e) {
@@ -796,6 +799,55 @@ public class TaskPanel extends JPanel {
         parentPanel.updateIndicators();
     }
     
+	///////////////////////////   Added In 
+	public static Vector<Task> storage = new Vector<Task>(); 
+	
+	//// Returns the number of items in the vector
+	public static int getNumberOfStoredItems()
+	{
+		return storage.size(); 
+	}
+	
+	////Clears the stored tasks in the vector
+	public static void flushTasks() 
+	{
+		storage.removeAllElements(); 
+	}
+	
+	/////// Stores the deleted items in a vector 
+	public static void storeDeleted(Task t)
+	{
+		storage.add(t); 
+	}
+	
+	//// Returns a vector containing the tasks that were stored
+	public static Vector<Task> getStoredTasks()
+	{
+		return storage; 
+	}
+	
+	///// Recreates task by recreating the stored tasks in storage vector
+	public static void recoverDeletedTasks()
+	{
+		System.out.println("The number of stored items is: " + getNumberOfStoredItems());
+		for(int i = 0; i < getNumberOfStoredItems(); i++) {	
+			CalendarDate startDate = storage.get(i).getStartDate(); 
+			CalendarDate endDate = storage.get(i).getEndDate();
+			String id = storage.get(i).getID();
+			int progress = storage.get(i).getProgress();
+			String text = storage.get(i).getText(); 
+		    int category = storage.get(i).getCategory(); 
+		    int priority = storage.get(i).getPriority(); 
+		    long effort = storage.get(i).getEffort(); 
+		    String description = storage.get(i).getDescription(); 
+		    String parentTaskId = storage.get(i).getParentId();
+		    TaskListImpl stored = new TaskListImpl(CurrentProject.get()); 
+		    stored.Re_createTask(startDate, endDate, id, progress, text, category, priority, effort, description, parentTaskId);
+		}	
+		flushTasks(); 
+	}
+	////////////////////////////////////////////////////////////
+    
     
     ///// Adding a recover tasks
     void recoverTaskB_actionPerformed(ActionEvent e) {
@@ -805,18 +857,18 @@ public class TaskPanel extends JPanel {
     	String thisTaskId = taskTable.getModel().getValueAt(taskTable.getSelectedRow(), TaskTable.TASK_ID).toString();
     	  /// Added in
       //  TaskListImpl stored = new TaskListImpl(CurrentProject.get());
-    	if (stored.getNumberOfStoredItems() >= 1)
+    	if (getNumberOfStoredItems() >= 1)
     		System.out.println("Something is stored in the vector");
     	
-    	if (stored.getNumberOfStoredItems() == 0)
+    	if (getNumberOfStoredItems() == 0)
     		System.out.println("Nothing is stored in the vector");
     	
     	
-    	if (stored.getNumberOfStoredItems()  > 1)
-    		msg = Local.getString("Recover")+" "+ stored.getNumberOfStoredItems() + " "+ Local.getString("tasks")+"?"
+    	if (getNumberOfStoredItems()  > 1)
+    		msg = Local.getString("Recover")+" "+ getNumberOfStoredItems() + " "+ Local.getString("tasks")+"?"
     				+ "\n"+Local.getString("Are you sure?");
     	else {        	
-    		Task t = stored.getStoredTasks().get(0); 
+    		Task t = getStoredTasks().get(0); 
     		
     				//CurrentProject.getTaskList().getTask(thisTaskId);
     		
@@ -837,11 +889,11 @@ public class TaskPanel extends JPanel {
     	if (n != JOptionPane.YES_OPTION)
     		return;
     	
-    	stored.recoverDeletedTasks(); 
+    	recoverDeletedTasks(); 
     	taskTable.tableChanged();
         CurrentStorage.get().storeTaskList(CurrentProject.getTaskList(), CurrentProject.get());
         parentPanel.updateIndicators();
-      //taskTable.updateUI();
+        taskTable.updateUI();
     	
     }
     ///// End 
