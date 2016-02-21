@@ -36,11 +36,19 @@ import java.io.*;
 /*$Id: ResourcesPanel.java,v 1.13 2007/03/20 08:22:41 alexeya Exp $*/
 public class ResourcesPanel extends JPanel {
     BorderLayout borderLayout1 = new BorderLayout();
+<<<<<<< HEAD
+    JToolBar toolBar = new JToolBar();
+    JButton newResB = new JButton();
+    ResourcesTable resourcesTable = new ResourcesTable();
+    JButton removeResB = new JButton();
+    JScrollPane scrollPane = new JScrollPane();
+=======
     static JToolBar toolBar = new JToolBar();
     JButton newResB = new JButton();
     ResourcesTable resourcesTable = new ResourcesTable();
     JButton removeResB = new JButton();
     static JScrollPane scrollPane = new JScrollPane();
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     JButton refreshB = new JButton();
   JPopupMenu resPPMenu = new JPopupMenu();
   JMenuItem ppRun = new JMenuItem();
@@ -186,6 +194,9 @@ public class ResourcesPanel extends JPanel {
 			public void keyTyped(KeyEvent e){} 
 		});
     }
+<<<<<<< HEAD
+
+=======
     public static void setTheme(Color f, Color b)
     {
     	toolBar.setForeground(f);
@@ -193,6 +204,7 @@ public class ResourcesPanel extends JPanel {
     	scrollPane.getViewport().setForeground(f);
     	scrollPane.getViewport().setBackground(b);
     }
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     void newResB_actionPerformed(ActionEvent e) {
         AddResourceDialog dlg = new AddResourceDialog(App.getFrame(), Local.getString("New resource"));
         Dimension frmSize = App.getFrame().getSize();

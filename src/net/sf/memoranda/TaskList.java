@@ -38,7 +38,10 @@ public interface TaskList {
     public CalendarDate getLatestEndDateFromSubTasks(Task t);
     public CalendarDate getEarliestStartDateFromSubTasks(Task t);
     public long[] calculateCompletionFromSubTasks(Task t);
+<<<<<<< HEAD
+=======
     public Collection getAllRootTasks();
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 
     nu.xom.Document getXMLContent();
 

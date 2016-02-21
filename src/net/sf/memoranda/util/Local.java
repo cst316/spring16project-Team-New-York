@@ -217,6 +217,8 @@ public class Local {
         cal.set(Calendar.MINUTE, mm);
         return getTimeString(cal.getTime());
     }
+<<<<<<< HEAD
+=======
     //new stuff 220-235
     public static String getEndTimeString(Date d) {
         DateFormat dateFormat =
@@ -244,6 +246,7 @@ public class Local {
         cal.set(Calendar.MINUTE, yy);
         return getEndTimeString(cal.getTime());
     }
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 
     public static int[] parseTimeString(String s) {
         s = s.trim();

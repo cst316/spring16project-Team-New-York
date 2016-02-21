@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
+<project name="memoranda" default="package" basedir=".">
+=======
 <project name="Memoranda" default="package" basedir="." xmlns:jacoco="antlib:org.jacoco.ant" xmlns:cs="antlib:com.puppycrawl.tools.checkstyle.ant">
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 	<!-- Build.xml file initially created by Kenneth J. Pouncey              -->
 	<!-- on 5 september 2003.                                                -->
 	<!-- Kenneth is the project-leader of the tn5250j-project on SourceForge -->
@@ -8,6 +12,22 @@
 	<!--=====================================================================-->
 	<!--$Id: build.xml,v 1.18 2007/04/06 21:12:24 alexeya Exp $-->
 	<!-- set global properties for this build -->
+<<<<<<< HEAD
+	<property name="name" value="memoranda"/>
+	<property name="version" value="1.0-rc3.1"/>
+	<property name="source.dir" value="${basedir}/src"/>
+	<property name="lib.dir" value="${basedir}/lib"/>
+	<property name="build.dir" value="${basedir}/build"/>
+	<property name="build.classes.dir" value="${build.dir}"/>
+	<property name="main.class" value="net.sf.memoranda.Start"/>
+	<property name="jarname" value="${name}.jar"/>
+	<property name="dist.dir" value="${basedir}/dist"/>
+	<!-- compile options -->
+	<property name="debug" value="off"/>
+	<property name="debuglevel" value="lines,vars,source"/>
+	<property name="optimize" value="off"/>
+	<property name="deprecation" value="off"/>
+=======
 	<property name="name"                  value="memoranda"/>
 	<property name="version"               value="1.0-rc3.1"/>
 	<property name="source.dir"            value="${basedir}/src"/>
@@ -38,6 +58,7 @@
 	
 	<taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties"
 	         classpath="lib/checkstyle-6.15-all.jar"/>
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 
 	<target name="init">
 		<!-- Create the time stamp -->
@@ -79,7 +100,11 @@
 		<copy file="${source.dir}/net/sf/memoranda/ui/~~App.java" tofile="${source.dir}/net/sf/memoranda/ui/App.java"/>
 		<replace file="${source.dir}/net/sf/memoranda/ui/App.java" token="@VERSION@" value="${version}"/>
 		<replace file="${source.dir}/net/sf/memoranda/ui/App.java" token="@BUILD@" value="${DSTAMP}.${build.number}"/>
+<<<<<<< HEAD
+		<javac srcdir="${source.dir}" destdir="${build.classes.dir}" excludes="**/Cvs/**,**/*.ini,**/~*" debug="${debug}" debuglevel="${debuglevel}" optimize="${optimize}" deprecation="${deprecation}" failonerror="false" source="1.8" target="1.8" encoding="utf-8">
+=======
 		<javac srcdir="${source.dir}" destdir="${build.classes.dir}" excludes="**/Cvs/**,**/*.ini,**/~*" debug="${debug}" debuglevel="${debuglevel}" optimize="${optimize}" deprecation="${deprecation}" failonerror="false" source="1.8" target="1.8" encoding="utf-8" includeantruntime="false">
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 			<!-- <compilerarg value="-Xlint:unchecked"/> -->
 			<classpath>
 				<path refid="classpath"/>
@@ -190,6 +215,8 @@
 			<classpath refid="classpath"/>
 		</java> -->
 	</target>
+<<<<<<< HEAD
+=======
 	
 	<!-- =================================================================== -->
 	<!-- Runs the JUnit Test                                                 -->
@@ -269,4 +296,5 @@
 		</checkstyle>
 	</target>
 	
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 </project>

@@ -102,7 +102,11 @@ public class TaskListImpl implements TaskList {
         Collection allTasks = getAllSubTasks(taskId);        
         return filterActiveTasks(allTasks,date);
     }
+<<<<<<< HEAD
+
+=======
     
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     public Task createTask (CalendarDate startDate, CalendarDate endDate, String text, int category, int priority, long effort, String description, String parentTaskId) {
         Element el = new Element("task");
         el.addAttribute(new Attribute("startDate", startDate.toString()));
@@ -138,6 +142,9 @@ public class TaskListImpl implements TaskList {
         
         return new TaskImpl(el, this);
     }
+<<<<<<< HEAD
+	
+=======
     ////// Added in /////////////////////////////////////////////////////
     ///// Recreate the task using this method 
     public Task Re_createTask (CalendarDate startDate, CalendarDate endDate, 
@@ -175,6 +182,7 @@ public class TaskListImpl implements TaskList {
     }
     ///// End ///////////////////////////////////////////////////////////
     
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
 	/**
      * @see net.sf.memoranda.TaskList#removeTask(import net.sf.memoranda.Task)
      */
@@ -190,6 +198,9 @@ public class TaskListImpl implements TaskList {
         }
 		elements.remove(task.getID());
     }
+<<<<<<< HEAD
+
+=======
     
 	
 	///////////////////////////   Added In 
@@ -252,6 +263,7 @@ public class TaskListImpl implements TaskList {
 	////////////////////////////////////////////////////////////
     
     
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
     public boolean hasSubTasks(String id) {
         Element task = getTaskElement(id);
         if (task == null) return false;
@@ -430,7 +442,11 @@ public class TaskListImpl implements TaskList {
 		return el;
     }
     
+<<<<<<< HEAD
+    private Collection getAllRootTasks() {
+=======
     public Collection getAllRootTasks() {
+>>>>>>> 022a3ba6200f5f4e664866576a874aa409f7d596
         Elements tasks = _root.getChildElements("task");
         return convertToTaskObjects(tasks);    	    		
     }
