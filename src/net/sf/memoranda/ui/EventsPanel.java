@@ -55,8 +55,8 @@ public class EventsPanel extends JPanel {
     ///////Added In 
     JButton recoverEventB = new JButton();
     /////////End 
-    JScrollPane scrollPane = new JScrollPane();
-    EventsTable eventsTable = new EventsTable();
+    //JScrollPane scrollPane = new JScrollPane();
+    //EventsTable eventsTable = new EventsTable();
 
     JPopupMenu eventPPMenu = new JPopupMenu();
     JMenuItem ppEditEvent = new JMenuItem();
@@ -427,8 +427,6 @@ public class EventsPanel extends JPanel {
     }
 
     public static void setTheme(Color f, Color b)
-
-    public void setTheme(Color f, Color b)
 
     {
     	eventsToolBar.setForeground(f);
