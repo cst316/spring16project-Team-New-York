@@ -13,6 +13,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.math.*;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import javax.swing.BoxLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -38,6 +41,7 @@ import net.sf.memoranda.util.Configuration;
 import net.sf.memoranda.util.CurrentStorage;
 import net.sf.memoranda.util.Local;
 import net.sf.memoranda.util.Util;
+
 
 /*$Id: EventsPanel.java,v 1.25 2005/02/19 10:06:25 rawsushi Exp $*/
 public class EventsPanel extends JPanel {
@@ -614,7 +618,11 @@ public class EventsPanel extends JPanel {
   //// End  
     
     void reportEventB_actionPerformed(ActionEvent e) {
-
+    	JFrame dialog = new JFrame("Tips and Tricks");//I should set the attributes elsewhere...
+    	JPanel dialPanel = new JPanel();
+    	dialog.setVisible(true);
+    	dialog.setSize(300,175);
+    	dialog.setLocation(800,400);
   }
 
     class PopupListener extends MouseAdapter {
