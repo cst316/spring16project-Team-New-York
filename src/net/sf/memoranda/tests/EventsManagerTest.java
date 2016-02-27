@@ -103,11 +103,11 @@ public class EventsManagerTest {
 		/// Check to see if there are 0 items in vector
 		//assertEquals(0,EventsManager.getNumberOfStoredItems());	
 		/// Recovers deleted Events 
-		/*EventsManager.recoverDeletedEvents();
+		EventsManager.recoverDeletedEvents();
 		/// Check to see if event was recovered. 
 		assertNotNull(EventsManager.getEvent(cd2, 10, 30, 11, 00));
 		/// Check to see if there are 0 items in vector after recovering the lost ones 
-		assertEquals(0,EventsManager.getNumberOfStoredItems());	*/
+		//assertEquals(0,EventsManager.getNumberOfStoredItems());
 		
 	}
 	
