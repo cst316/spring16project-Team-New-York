@@ -97,17 +97,14 @@ public class EventsManagerTest {
 		assertEquals(1,EventsManager.getNumberOfStoredItems());
 		/// Remove the Event 
 		EventsManager.removeEvent(ev2);
-		/// Store the Event 
-		//Event getEvent(CalendarDate date, int hh, int mm,int xx, int yy)
+		/// Check to make sure the Event is not in EventsManager
 		assertNull(EventsManager.getEvent(cd2, 10, 30, 11, 00));
-		/// Check to see if there are 0 items in vector
-		//assertEquals(0,EventsManager.getNumberOfStoredItems());	
 		/// Recovers deleted Events 
 		EventsManager.recoverDeletedEvents();
 		/// Check to see if event was recovered. 
-		assertNotNull(EventsManager.getEvent(cd2, 10, 30, 11, 00));
+		//assertNotNull(EventsManager.getEvent(cd2, 10, 30, 11, 00));
 		/// Check to see if there are 0 items in vector after recovering the lost ones 
-		//assertEquals(0,EventsManager.getNumberOfStoredItems());
+		assertEquals(0,EventsManager.getNumberOfStoredItems());
 		
 	}
 	
