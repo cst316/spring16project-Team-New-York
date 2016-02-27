@@ -92,7 +92,7 @@ public class EventsManagerTest {
 		/// Make sure it's empty 
 		assertEquals(0,EventsManager.getNumberOfStoredItems());
 		/// Create New Event because vector flushEventsVector() makes vector empty 
-		ev2 = EventsManager.createEvent(cd2, 10,30, 11, 00, "Doctor Visit");
+		ev2 = EventsManager.createEvent(cd2, 10, 30, 11, 00, "Doctor Visit");
 		///Make sure Event isn't null
 		assertNotNull(EventsManager.getEvent(cd2, 10, 30, 11, 00));
 		/// Store the Event 
@@ -110,7 +110,7 @@ public class EventsManagerTest {
 		/// Check to see if there are 0 items in vector after recovering the lost ones 
 		assertEquals(0,EventsManager.getNumberOfStoredItems()); /// Was working up to this point 
 		/// Check to see if event was recovered. 
-		assertNotNull(EventsManager.getEvent(EventsManager.getCalendarDate(), 10, 30, 11, 00));		
+		assertNotNull(EventsManager.getEvent(cd2, 10, 30, 11, 00));		
 	}
 	
 }
