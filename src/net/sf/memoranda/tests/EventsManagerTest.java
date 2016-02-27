@@ -29,6 +29,7 @@ public class EventsManagerTest {
 	public static void setUpBeforeClass() throws Exception {
 		eventDate = new CalendarDate(7,5,2016);
 		cd1 = new CalendarDate(11,2,2016);
+		cd2 = new CalendarDate(12,3, 2016);
 		
 	}
 
@@ -89,23 +90,24 @@ public class EventsManagerTest {
 		/// Make sure the Vector is empty 
 		EventsManager.flushEventsVector();
 		/// Create New Event because vector flushEventsVector() makes vector empty 
-		ev2 = EventsManager.createEvent(eventDate, 10,30, 11, 00, "Doctor Visit");
+		ev2 = EventsManager.createEvent(cd2, 10,30, 11, 00, "Doctor Visit");
 		/// Store the Event 
 		EventsManager.storeDeletedEvents(ev2);
 		/// Makes sure the vector isn't empty 
 		assertEquals(1,EventsManager.getNumberOfStoredItems());
 		/// Remove the Event 
-		/*EventsManager.removeEvent(ev2);
+		EventsManager.removeEvent(ev2);
+		/// Store the Event 
+		//Event getEvent(CalendarDate date, int hh, int mm,int xx, int yy)
+		assertNull(EventsManager.getEvent(cd2, 10, 30, 11, 00));
 		/// Check to see if there are 0 items in vector
-		assertNull(ev);
-		/// Check to see if there are 0 items in vector
-		assertEquals(0,EventsManager.getNumberOfStoredItems());	
+		//assertEquals(0,EventsManager.getNumberOfStoredItems());	
 		/// Recovers deleted Events 
-		EventsManager.recoverDeletedEvents();
-		/// Check to see if there are 0 items in vector
-		//assertNotNull(ev2);
-		/// Check to see if there are 0 items in vector
-		assertEquals(1,EventsManager.getNumberOfStoredItems());	*/
+		/*EventsManager.recoverDeletedEvents();
+		/// Check to see if event was recovered. 
+		assertNotNull(EventsManager.getEvent(cd2, 10, 30, 11, 00));
+		/// Check to see if there are 0 items in vector after recovering the lost ones 
+		assertEquals(0,EventsManager.getNumberOfStoredItems());	*/
 		
 	}
 	
