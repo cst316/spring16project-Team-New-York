@@ -29,8 +29,7 @@ public class EventsManagerTest {
 	public static void setUpBeforeClass() throws Exception {
 		eventDate = new CalendarDate(7,5,2016);
 		cd1 = new CalendarDate(11,2,2016);
-		cd2 = new CalendarDate(12,3, 2016);
-		
+		cd2 = new CalendarDate(12,3, 2016);		
 	}
 
 	@AfterClass
@@ -108,7 +107,7 @@ public class EventsManagerTest {
 		/// Recovers deleted Events 
 		EventsManager.recoverDeletedEvents();
 		/// Check to see if there are 0 items in vector after recovering the lost ones 
-		assertEquals(0,EventsManager.getNumberOfStoredItems()); /// Was working up to this point 
+		assertEquals(0,EventsManager.getNumberOfStoredItems()); 
 		/// Check to see if event was recovered. 
 		assertNotNull(EventsManager.getEvent(cd2, 10, 30, 11, 00));		
 	}
