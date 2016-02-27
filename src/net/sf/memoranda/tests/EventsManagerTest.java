@@ -68,6 +68,7 @@ public class EventsManagerTest {
 	public void  getStoredEventsTest() {
 		 /// Checks to make sure that a vector is being returned
 		// assertNotNull(EventsManager.getStoredEvents());
+		assertNotNull( EventsManager.getStoredEvents());
 		assertEquals(1,EventsManager.getNumberOfStoredItems());
 		 /// Checks to see if the event (ev) was stored in the vector
 		 assertEquals(ev, EventsManager.getStoredEvents().get(0));
