@@ -20,13 +20,16 @@ public class EventsManagerTest {
 	/// Holds the CalendarDate of the Events
 	private static CalendarDate eventDate;
 	private static CalendarDate cd1;
-	///
-	private static Event ev; 
+	private static CalendarDate cd2; 
+	/// Create Events to test 
+	private static Event ev;
+	private static Event ev2; 
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		eventDate = new CalendarDate(7,5,2016);
 		cd1 = new CalendarDate(11,2,2016);
+		
 	}
 
 	@AfterClass
@@ -49,10 +52,9 @@ public class EventsManagerTest {
 		ev = EventsManager.createEvent(eventDate, 8, 23, 9, 30, "School Play");
 		/// Let's store a new event to see if Number of Stored Items has changed.  
 		EventsManager.storeDeletedEvents(ev);
+		/// Makes sure the vector isn't empty 
 		assertEquals(1,EventsManager.getNumberOfStoredItems());
 	}
-	
-	//EventsManager.storeCalendarDate(cd1);
 	
 	@Test
 	public void getCalendarDateTest()
@@ -67,11 +69,42 @@ public class EventsManagerTest {
 	@Test
 	public void  getStoredEventsTest() {
 		 /// Checks to make sure that a vector is being returned
-		// assertNotNull(EventsManager.getStoredEvents());
 		assertNotNull( EventsManager.getStoredEvents());
+		/// Checks to make sure the vector isn't empty
 		assertEquals(1,EventsManager.getNumberOfStoredItems());
 		 /// Checks to see if the event (ev) was stored in the vector
 		 assertEquals(ev, EventsManager.getStoredEvents().get(0));
 	}
-
+	
+	@Test
+	public void  flushEventsVector()  {
+		/// Should make Vector empty (); 
+		EventsManager.flushEventsVector();
+		/// Check to see if there are 0 items in vector
+		assertEquals(0,EventsManager.getNumberOfStoredItems());	
+	}
+	
+	@Test
+	public void recoverDeletedEvents()  {
+		/// Create New Event because vector flushEventsVector() makes vector empty 
+		ev2 = EventsManager.createEvent(eventDate, 10,30, 11, 00, "Doctor Visit");
+		/// Store the Event 
+		EventsManager.storeDeletedEvents(ev2);
+		/// Makes sure the vector isn't empty 
+		assertEquals(1,EventsManager.getNumberOfStoredItems());
+		/// Remove the Event 
+		EventsManager.removeEvent(ev2);
+		/// Check to see if there are 0 items in vector
+		assertNull(ev);
+		/// Check to see if there are 0 items in vector
+		assertEquals(0,EventsManager.getNumberOfStoredItems());	
+		/// Recovers deleted Events 
+		EventsManager.recoverDeletedEvents();
+		/// Check to see if there are 0 items in vector
+		//assertNotNull(ev2);
+		/// Check to see if there are 0 items in vector
+		assertEquals(1,EventsManager.getNumberOfStoredItems());	
+		
+	}
+	
 }
