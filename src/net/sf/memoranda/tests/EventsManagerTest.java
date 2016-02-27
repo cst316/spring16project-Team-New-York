@@ -84,7 +84,7 @@ public class EventsManagerTest {
 		assertEquals(0,EventsManager.getNumberOfStoredItems());	
 	}
 	
-	/*@Test
+	@Test
 	public void recoverDeletedEvents()  {
 		/// Create New Event because vector flushEventsVector() makes vector empty 
 		ev2 = EventsManager.createEvent(eventDate, 10,30, 11, 00, "Doctor Visit");
@@ -93,7 +93,7 @@ public class EventsManagerTest {
 		/// Makes sure the vector isn't empty 
 		assertEquals(1,EventsManager.getNumberOfStoredItems());
 		/// Remove the Event 
-		EventsManager.removeEvent(ev2);
+		/*EventsManager.removeEvent(ev2);
 		/// Check to see if there are 0 items in vector
 		assertNull(ev);
 		/// Check to see if there are 0 items in vector
@@ -103,8 +103,8 @@ public class EventsManagerTest {
 		/// Check to see if there are 0 items in vector
 		//assertNotNull(ev2);
 		/// Check to see if there are 0 items in vector
-		assertEquals(1,EventsManager.getNumberOfStoredItems());	
+		assertEquals(1,EventsManager.getNumberOfStoredItems());	*/
 		
-	}*/
+	}
 	
 }
