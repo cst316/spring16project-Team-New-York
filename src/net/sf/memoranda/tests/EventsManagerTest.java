@@ -86,6 +86,8 @@ public class EventsManagerTest {
 	
 	@Test
 	public void recoverDeletedEvents()  {
+		/// Make sure the Vector is empty 
+		EventsManager.flushEventsVector();
 		/// Create New Event because vector flushEventsVector() makes vector empty 
 		ev2 = EventsManager.createEvent(eventDate, 10,30, 11, 00, "Doctor Visit");
 		/// Store the Event 
