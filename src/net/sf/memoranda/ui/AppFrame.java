@@ -1155,7 +1155,7 @@ public class AppFrame extends JFrame {
             jMenuHelp.setForeground(f);
             jMenuTheme.setForeground(f);
         }
-        protected void setAppTheme(String name)
+        public void setAppTheme(String name)
         {
         	String t = name;
         	if(t.equalsIgnoreCase("day"))
