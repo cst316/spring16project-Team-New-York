@@ -844,17 +844,17 @@ public class TaskPanel extends JPanel {
     
     ///// Adding a recover tasks
     void recoverTaskB_actionPerformed(ActionEvent e) {
-    	if (stored.getNumberOfStoredItems() == 0)
+    	if (getNumberOfStoredItems() == 0)
     		return; 
     	
     	String msg;
-    	String thisTaskId = getStoreTasks.get(0).getID(); 
+    	String thisTaskId = getStoredTasks().get(0).getID(); 
     	
-    	if (stored.getNumberOfStoredItems()  > 1)
-    		msg = Local.getString("Recover")+" "+ stored.getNumberOfStoredItems() + " "+ Local.getString("tasks")+"?"
+    	if (getNumberOfStoredItems()  > 1)
+    		msg = Local.getString("Recover")+" "+ getNumberOfStoredItems() + " "+ Local.getString("tasks")+"?"
     				+ "\n"+Local.getString("Are you sure?");
     	else {        	
-    		Task t = stored.getStoredTasks().get(0); 
+    		Task t = getStoredTasks().get(0); 
     		
     		// check if there are subtasks
     		if(CurrentProject.getTaskList().hasSubTasks(thisTaskId)) {
