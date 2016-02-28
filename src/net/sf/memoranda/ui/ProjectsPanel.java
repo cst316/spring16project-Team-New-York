@@ -76,7 +76,9 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 	JCheckBoxMenuItem ppShowActiveOnlyChB = new JCheckBoxMenuItem();
 	JButton ppOpenB = new JButton();
 	ProjectsTablePanel prjTablePanel = new ProjectsTablePanel();
-
+	public static String foregroundColorIndicator = Color.black.toString();
+	public static String backgroundColorIndicator = Color.white.toString();
+	
 	public Action newProjectAction =
 		new AbstractAction(
 			Local.getString("New project") + "...",
@@ -290,12 +292,22 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 	}
 	public static void setTheme(Color f, Color b)
 	{
-		topBar.setForeground(f);
-		topBar.setBackground(b);
-		toolbarPanel.setForeground(f);
-		toolbarPanel.setBackground(b);
-		buttonsPanel.setForeground(f);
-		buttonsPanel.setBackground(b);
+		try
+		{
+			topBar.setForeground(f);
+			topBar.setBackground(b);
+			toolbarPanel.setForeground(f);
+			toolbarPanel.setBackground(b);
+			buttonsPanel.setForeground(f);
+			buttonsPanel.setBackground(b);
+			//if no errors by this point, flags for JUnit reference are set:
+ 			backgroundColorIndicator = b.toString();
+ 			foregroundColorIndicator = f.toString();
+ 		}
+ 		catch(Exception themeerr)
+ 		{
+ 			//theme remains the same
+ 		}
 	}
 	class PopupListener extends MouseAdapter {
 

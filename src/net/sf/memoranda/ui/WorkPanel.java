@@ -51,7 +51,8 @@ public class WorkPanel extends JPanel {
 	JButton currentB = null;
 	JPanel dialPanel = new JPanel();
 	Border border1;
-	
+	public static String foregroundColorIndicator = Color.black.toString();
+	public static String backgroundColorIndicator = Color.white.toString();
 
     JLabel dialogLabelEvent = new JLabel("<html><p><div style=\"text-align: center;\">On the Events page you will be able to add events to the Event Manager! <br> <br> You can add a new event by clicking the new event button the event toolbar.<br><br></p></html>", JLabel.CENTER);
     JLabel dialogLabelAgenda = new JLabel("<html><p><div style=\"text-align: center;\">Welcome to Memoranda! <br><br>On the Agenda page you will be able view all your upcoming events, tasks, and notes!<br><br></p></html>", JLabel.CENTER);
@@ -258,16 +259,26 @@ public class WorkPanel extends JPanel {
 
 	public static void setTheme(Color f, Color b)
 	{
-		toolBar.setForeground(f);
-		toolBar.setBackground(b);
-		agendaB.setForeground(f);
-		eventsB.setForeground(f);
-		tasksB.setForeground(f);
-		notesB.setForeground(f);
-		filesPanel.setForeground(f);
-		filesPanel.setBackground(b);
-		filesB.setForeground(f);
-		filesB.setBackground(b);
+		try
+		{
+			toolBar.setForeground(f);
+			toolBar.setBackground(b);
+			agendaB.setForeground(f);
+			eventsB.setForeground(f);
+			tasksB.setForeground(f);
+			notesB.setForeground(f);
+			filesPanel.setForeground(f);
+			filesPanel.setBackground(b);
+			filesB.setForeground(f);
+			filesB.setBackground(b);
+			//if no errors by this point, flags for JUnit reference are set:
+ 			backgroundColorIndicator = b.toString();
+ 			foregroundColorIndicator = f.toString();
+ 		}
+ 		catch(Exception themeerr)
+ 		{
+ 			//theme remains the same
+ 		}
 	}
 	public void selectPanel(String pan) {
 		if (pan != null) {

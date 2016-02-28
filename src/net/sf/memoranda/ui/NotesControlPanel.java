@@ -55,7 +55,8 @@ public class NotesControlPanel extends JPanel {
     JPopupMenu notesPPMenu = new JPopupMenu();
     JMenuItem ppOpenNote = new JMenuItem();
     JMenuItem ppRemoveBkmrk = new JMenuItem();
-    
+    public static String foregroundColorIndicator = Color.black.toString();
+    public static String backgroundColorIndicator = Color.white.toString();
 	
     public NotesControlPanel() {
         try {
@@ -198,23 +199,33 @@ public class NotesControlPanel extends JPanel {
     }
     public static void setTheme(Color f, Color b)
     {
-    	buttonsPanel.setBackground(b);
-    	buttonsPanel.setForeground(f);
-    	
-    	searchPanel.setBackground(b);
-    	searchPanel.setForeground(f);
-    	
-    	notesListPanel.setBackground(b);
-    	notesListPanel.setForeground(f);
-    	
-    	bookmarksListPanel.setBackground(b);
-    	bookmarksListPanel.setForeground(f);
-    	
-    	tabbedPane.setForeground(f);
-    	tabbedPane.setBackground(b);
-    	
-    	toolBar.setBackground(b);
-    	toolBar.setForeground(f);
+    	try
+    	{
+	    	buttonsPanel.setBackground(b);
+	    	buttonsPanel.setForeground(f);
+	    	
+	    	searchPanel.setBackground(b);
+	    	searchPanel.setForeground(f);
+	    	
+	    	notesListPanel.setBackground(b);
+	    	notesListPanel.setForeground(f);
+	    	
+	    	bookmarksListPanel.setBackground(b);
+	    	bookmarksListPanel.setForeground(f);
+	    	
+	    	tabbedPane.setForeground(f);
+	    	tabbedPane.setBackground(b);
+	    	
+	    	toolBar.setBackground(b);
+	    	toolBar.setForeground(f);
+	    	//if no errors by this point, flags for JUnit reference are set:
+ 			backgroundColorIndicator = b.toString();
+ 			foregroundColorIndicator = f.toString();
+ 		}
+ 		catch(Exception themeerr)
+ 		{
+ 			//theme remains the same
+ 		}
     }
     public void refresh() {
         notesListPanel.notesList.update();
