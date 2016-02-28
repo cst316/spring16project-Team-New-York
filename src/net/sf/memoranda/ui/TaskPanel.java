@@ -75,7 +75,9 @@ public class TaskPanel extends JPanel {
 	JMenuItem ppAddSubTask = new JMenuItem();
 	JMenuItem ppCalcTask = new JMenuItem();
 	DailyItemsPanel parentPanel = null;
-
+	public static String foregroundColorIndicator = Color.black.toString();
+	public static String backgroundColorIndicator = Color.white.toString();
+	
     public TaskPanel(DailyItemsPanel _parentPanel) {
         try {
             parentPanel = _parentPanel;
@@ -919,10 +921,20 @@ public class TaskPanel extends JPanel {
 	}
 	public static void setTheme(Color f, Color b)
 	{
-		tasksToolBar.setForeground(f);
-		tasksToolBar.setBackground(b);
-		scrollPane.getViewport().setForeground(f);
-		scrollPane.getViewport().setBackground(b);
+		try
+		{
+			tasksToolBar.setForeground(f);
+			tasksToolBar.setBackground(b);
+			scrollPane.getViewport().setForeground(f);
+			scrollPane.getViewport().setBackground(b);
+			//if no errors by this point, flags for JUnit reference are set:
+			backgroundColorIndicator = b.toString();
+			foregroundColorIndicator = f.toString();
+		}
+		catch(Exception themeErr)
+		{
+			//theme remains the same
+		}
 	}
     class PopupListener extends MouseAdapter {
 

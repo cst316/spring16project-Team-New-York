@@ -36,7 +36,7 @@ import net.sf.memoranda.util.Util;
 public class WorkPanel extends JPanel {
 	BorderLayout borderLayout1 = new BorderLayout();
 	static JToolBar toolBar = new JToolBar();
-	JPanel panel = new JPanel();
+	static JPanel panel = new JPanel();
 	CardLayout cardLayout1 = new CardLayout();
 	boolean active = true;
 	static int themeStyle = 0;
@@ -47,6 +47,8 @@ public class WorkPanel extends JPanel {
 	public static JButton tasksB = new JButton();
 	public static JButton eventsB = new JButton();
 	public static JButton filesB = new JButton();
+	public static String foregroundColorIndicator = Color.black.toString();
+	public static String backgroundColorIndicator = Color.white.toString();
     JFrame dialog = new JFrame("Tips and Tricks");
 	JButton currentB = null;
 	JPanel dialPanel = new JPanel();
@@ -258,16 +260,28 @@ public class WorkPanel extends JPanel {
 
 	public static void setTheme(Color f, Color b)
 	{
-		toolBar.setForeground(f);
-		toolBar.setBackground(b);
-		agendaB.setForeground(f);
-		eventsB.setForeground(f);
-		tasksB.setForeground(f);
-		notesB.setForeground(f);
-		filesPanel.setForeground(f);
-		filesPanel.setBackground(b);
-		filesB.setForeground(f);
-		filesB.setBackground(b);
+		try
+		{
+			panel.setForeground(f);
+			panel.setBackground(b);
+			toolBar.setForeground(f);
+			toolBar.setBackground(b);
+			agendaB.setForeground(f);
+			eventsB.setForeground(f);
+			tasksB.setForeground(f);
+			notesB.setForeground(f);
+			filesPanel.setForeground(f);
+			filesPanel.setBackground(b);
+			filesB.setForeground(f);
+			filesB.setBackground(b);
+			//if no errors by this point, flags for JUnit reference are set:
+			backgroundColorIndicator = b.toString();
+			foregroundColorIndicator = f.toString();
+		}
+		catch(Exception themeerr)
+		{
+			//theme remains the same
+		}
 	}
 	public void selectPanel(String pan) {
 		if (pan != null) {
