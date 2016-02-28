@@ -848,13 +848,13 @@ public class TaskPanel extends JPanel {
     		return; 
     	
     	String msg;
-    	String thisTaskId = getStoredTasks.get(0).getID(); 
+    	String thisTaskId = getStoreTasks.get(0).getID(); 
     	
-    	if (getNumberOfStoredItems()  > 1)
-    		msg = Local.getString("Recover")+" "+ getNumberOfStoredItems() + " "+ Local.getString("tasks")+"?"
+    	if (stored.getNumberOfStoredItems()  > 1)
+    		msg = Local.getString("Recover")+" "+ stored.getNumberOfStoredItems() + " "+ Local.getString("tasks")+"?"
     				+ "\n"+Local.getString("Are you sure?");
     	else {        	
-    		Task t = getStoredTasks().get(0); 
+    		Task t = stored.getStoredTasks().get(0); 
     		
     		// check if there are subtasks
     		if(CurrentProject.getTaskList().hasSubTasks(thisTaskId)) {
