@@ -189,7 +189,7 @@ public class TaskPanel extends JPanel {
         
         ////Added in 
         recoverTaskB.setIcon(
-        		new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new.png")));
+        		new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_recover.png")));
         recoverTaskB.setEnabled(true);
         recoverTaskB.setMaximumSize(new Dimension(24, 24));
         recoverTaskB.setMinimumSize(new Dimension(24, 24));
@@ -599,7 +599,14 @@ public class TaskPanel extends JPanel {
         long effort = Util.getMillisFromHours(dlg.effortField.getText());
 		//XXX Task newTask = CurrentProject.getTaskList().createTask(sd, ed, dlg.todoField.getText(), dlg.priorityCB.getSelectedIndex(),effort, dlg.descriptionField.getText(),parentTaskId);
         
-       
+        //David Scott 2/28/2016
+        //Changed the code so that if someone chooses "School" for their type of task
+        //It will automatically set it as the highest priority!
+        //User Story #2 Sprint 3
+        if(dlg.categoryCB.getSelectedItem() == Local.getString("School"))
+        {
+        	dlg.priorityCB.setSelectedIndex(4);
+        }
 		Task newTask = CurrentProject.getTaskList().createTask(sd, ed, dlg.todoField.getText(), dlg.categoryCB.getSelectedIndex(), dlg.priorityCB.getSelectedIndex(),effort, dlg.descriptionField.getText(), null);
 //		CurrentProject.getTaskList().adjustParentTasks(newTask);
 		newTask.setProgress(((Integer)dlg.progress.getValue()).intValue());
