@@ -755,8 +755,7 @@ public class TaskPanel extends JPanel {
             return;
         Vector toremove = new Vector();
         /// Added in
-        //TaskListImpl stored = new TaskListImpl(CurrentProject.get()); 
-        stored.flushTasksVector(); 
+        flushTasksVector(); 
         /// End 
         for (int i = 0; i < taskTable.getSelectedRows().length; i++) {
             Task t =
@@ -765,7 +764,7 @@ public class TaskPanel extends JPanel {
             if (t != null) {
                 toremove.add(t);
             	/// Added in
-                stored.storeDeletedTasks(t);
+                storeDeletedTasks(t);
                 /// End 
             }
         }
@@ -779,6 +778,52 @@ public class TaskPanel extends JPanel {
         //taskTable.updateUI();
 
     }
+   
+	///////////////////////////   Added In 
+	private Vector<Task> storage = new Vector<Task>(); 
+	
+	//// Returns the number of items in the vector
+	public int getNumberOfStoredItems()
+	{
+		return storage.size(); 
+	}
+	
+	////Clears the stored tasks in the vector
+	public void flushTasksVector() 
+	{
+		storage.removeAllElements(); 
+	}
+	
+	/////// Stores the deleted items in a vector 
+	public void storeDeletedTasks(Task t)
+	{
+		storage.add(t); 
+	}
+	
+	//// Returns a vector containing the tasks that were stored
+	public Vector<Task> getStoredTasks()
+	{
+		return storage; 
+	}
+	 
+	public void recoverDeletedTasks()
+	{
+		for(int i = 0; i < getNumberOfStoredItems(); i++) {	
+			CalendarDate startDate = storage.get(i).getStartDate(); 
+			CalendarDate endDate = storage.get(i).getEndDate();
+			String id = storage.get(i).getID();
+			int progress = storage.get(i).getProgress();
+			String text = storage.get(i).getText(); 
+		    int category = storage.get(i).getCategory(); 
+		    int priority = storage.get(i).getPriority(); 
+		    long effort = storage.get(i).getEffort(); 
+		    String description = storage.get(i).getDescription(); 
+		    String parentTaskId = storage.get(i).getParentId();
+		    CurrentProject.getTaskList().Re_createTask(startDate, endDate, id, progress, text, category, priority, effort, description, parentTaskId);
+		}	
+		flushTasksVector(); 
+	}
+	////////////////////////////////////////////////////////////
     
     
     //Adding a remove all tasks method
@@ -799,26 +844,17 @@ public class TaskPanel extends JPanel {
     
     ///// Adding a recover tasks
     void recoverTaskB_actionPerformed(ActionEvent e) {
-    	System.out.println("Tasks List"); 
+    	if (stored.getNumberOfStoredItems() == 0)
+    		return; 
     	
     	String msg;
-    	String thisTaskId = taskTable.getModel().getValueAt(taskTable.getSelectedRow(), TaskTable.TASK_ID).toString();
-    	  /// Added in
-      //  TaskListImpl stored = new TaskListImpl(CurrentProject.get());
-    	if (stored.getNumberOfStoredItems() >= 1)
-    		System.out.println("Something is stored in the vector");
+    	String thisTaskId = getStoredTasks.get(0).getID(); 
     	
-    	if (stored.getNumberOfStoredItems() == 0)
-    		System.out.println("Nothing is stored in the vector");
-    	
-    	
-    	if (stored.getNumberOfStoredItems()  > 1)
-    		msg = Local.getString("Recover")+" "+ stored.getNumberOfStoredItems() + " "+ Local.getString("tasks")+"?"
+    	if (getNumberOfStoredItems()  > 1)
+    		msg = Local.getString("Recover")+" "+ getNumberOfStoredItems() + " "+ Local.getString("tasks")+"?"
     				+ "\n"+Local.getString("Are you sure?");
     	else {        	
-    		Task t = stored.getStoredTasks().get(0); 
-    		
-    				//CurrentProject.getTaskList().getTask(thisTaskId);
+    		Task t = getStoredTasks().get(0); 
     		
     		// check if there are subtasks
     		if(CurrentProject.getTaskList().hasSubTasks(thisTaskId)) {
@@ -837,7 +873,7 @@ public class TaskPanel extends JPanel {
     	if (n != JOptionPane.YES_OPTION)
     		return;
     	
-    	stored.recoverDeletedTasks(); 
+    	recoverDeletedTasks(); 
     	taskTable.tableChanged();
         CurrentStorage.get().storeTaskList(CurrentProject.getTaskList(), CurrentProject.get());
         parentPanel.updateIndicators();
