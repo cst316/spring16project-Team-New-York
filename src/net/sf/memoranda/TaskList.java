@@ -20,7 +20,14 @@ public interface TaskList {
     Task getTask(String id);
     
     Task createTask(CalendarDate startDate, CalendarDate endDate, String text, int category, int priority, long effort, String description, String parentTaskId);
-
+    
+    ////// Added In 
+    public Task Re_createTask (CalendarDate startDate, CalendarDate endDate, 
+			String id, int progress, String text, 
+			int category, int priority, long effort, 
+			String description, String parentTaskId); 
+    ////// End 
+    
     void removeTask(Task task);
 
     public boolean hasSubTasks(String id);
