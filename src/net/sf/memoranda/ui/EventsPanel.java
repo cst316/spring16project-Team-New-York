@@ -618,11 +618,19 @@ public class EventsPanel extends JPanel {
   //// End  
     
     void reportEventB_actionPerformed(ActionEvent e) {
-    	JFrame dialog = new JFrame("Tips and Tricks");//I should set the attributes elsewhere...
+    	JFrame dialog = new JFrame("Events Report");//I should set the attributes elsewhere...
     	JPanel dialPanel = new JPanel();
     	dialog.setVisible(true);
     	dialog.setSize(300,175);
     	dialog.setLocation(800,400);
+    	//JLabel label = new JLabel(String.valueOf(EventsManager.getNumberOfStoredItems()));
+    	//JLabel label = new JLabel(String.valueOf(EventsManager.getActiveEvents().size()));
+    	//JLabel label = new JLabel(String.valueOf(EventsManager.getRepeatableEvents().size()));
+    	JLabel label = new JLabel(String.valueOf(EventsManager.getNumberOfEventsForTheYear()));
+    	
+    	//use get id
+    	//getActiveEvents()
+    	dialog.add(label);
   }
 
     class PopupListener extends MouseAdapter {

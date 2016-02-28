@@ -231,6 +231,32 @@ public class EventsManager {
 	public static Collection getActiveEvents() {
 		return getEventsForDate(CalendarDate.today());
 	}
+	
+	public static int getNumberOfEventsForTheYear() {
+		int x = 0;
+		int count = 1;
+		Calendar cal = Calendar.getInstance();
+		//Element el = new Element("year");
+		//days.CalendarDate(cal);
+		 
+		x = getEventsForDate(CalendarDate.today()).size();
+		
+		do{
+		
+        cal.roll(Calendar.DATE, true);
+		CalendarDate days = new CalendarDate(cal);
+		x += getEventsForDate(days).size();
+		count++;
+		}while(count <= 372);//31 * 12
+		
+		/*do{
+			x += getEventsForDate(CalendarDate.tomorrow()).size();
+			//x += getEventsForDate(CalendarDate.tomorrow()).size();
+			count++;
+		}while(count < 365);*/
+		
+		return x;
+	}
 
 	public static Event getEvent(CalendarDate date, int hh, int mm,int xx, int yy) {
 		Day d = getDay(date);
