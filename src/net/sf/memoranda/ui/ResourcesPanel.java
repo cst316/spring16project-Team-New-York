@@ -47,6 +47,8 @@ public class ResourcesPanel extends JPanel {
   JMenuItem ppRemoveRes = new JMenuItem();
   JMenuItem ppNewRes = new JMenuItem();
   JMenuItem ppRefresh = new JMenuItem();
+  public static String foregroundColorIndicator = Color.black.toString();
+  public static String backgroundColorIndicator = Color.white.toString();
 
     public ResourcesPanel() {
         try {
@@ -188,10 +190,20 @@ public class ResourcesPanel extends JPanel {
     }
     public static void setTheme(Color f, Color b)
     {
-    	toolBar.setForeground(f);
-    	toolBar.setBackground(b);
-    	scrollPane.getViewport().setForeground(f);
-    	scrollPane.getViewport().setBackground(b);
+    	try
+    	{
+	    	toolBar.setForeground(f);
+	    	toolBar.setBackground(b);
+	    	scrollPane.getViewport().setForeground(f);
+	    	scrollPane.getViewport().setBackground(b);
+	    	//if no errors by this point, flags for JUnit reference are set:
+ 			backgroundColorIndicator = b.toString();
+ 			foregroundColorIndicator = f.toString();
+ 		}
+ 		catch(Exception themeerr)
+ 		{
+ 			//theme remains the same
+ 		}
     }
     void newResB_actionPerformed(ActionEvent e) {
         AddResourceDialog dlg = new AddResourceDialog(App.getFrame(), Local.getString("New resource"));

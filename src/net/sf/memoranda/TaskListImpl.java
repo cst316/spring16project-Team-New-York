@@ -192,7 +192,7 @@ public class TaskListImpl implements TaskList {
     }
     
 	
-	///////////////////////////   Added In 
+	/*///////////////////////////   Added In 
 	public Vector<Task> storage = new Vector<Task>(); 
 	
 	//// Returns the number of items in the vector
@@ -218,18 +218,6 @@ public class TaskListImpl implements TaskList {
 	{
 		return storage; 
 	}
-	  /*CalendarDate startDate, 
-    CalendarDate endDate, 
-    String text, 
-    int category, 
-    int priority, 
-    long effort, 
-    String description, 
-    String parentTaskId
-	Re_createTask (CalendarDate startDate, CalendarDate endDate, 
-			String id, int progress, String text, 
-			int category, int priority, long effort, 
-			String description, String parentTaskId)*/
 	
 	///// Recreates task by recreating the stored tasks in storage vector
 	public void recoverDeletedTasks()
@@ -249,7 +237,7 @@ public class TaskListImpl implements TaskList {
 		}	
 		flushTasksVector(); 
 	}
-	////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////*/
     
     
     public boolean hasSubTasks(String id) {
