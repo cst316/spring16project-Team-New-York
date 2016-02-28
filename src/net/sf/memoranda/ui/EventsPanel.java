@@ -623,14 +623,14 @@ public class EventsPanel extends JPanel {
     	dialog.setVisible(true);
     	dialog.setSize(300,175);
     	dialog.setLocation(800,400);
-    	//JLabel label = new JLabel(String.valueOf(EventsManager.getNumberOfStoredItems()));
-    	//JLabel label = new JLabel(String.valueOf(EventsManager.getActiveEvents().size()));
-    	//JLabel label = new JLabel(String.valueOf(EventsManager.getRepeatableEvents().size()));
-    	JLabel label = new JLabel(String.valueOf(EventsManager.getNumberOfEventsForTheYear()));
     	
-    	//use get id
-    	//getActiveEvents()
-    	dialog.add(label);
+    	JLabel label1 = new JLabel("Number of events for today: " + String.valueOf(EventsManager.getNumberOfEventsForToday()));
+    	JLabel label2 = new JLabel("Number of events for this month: " + String.valueOf(EventsManager.getNumberOfEventsForTheMonth()));
+    	JLabel label3 = new JLabel("Number of events for this year: " + String.valueOf(EventsManager.getNumberOfEventsForTheYear()));
+
+    	dialog.add(label1, BorderLayout.NORTH);
+    	dialog.add(label2, BorderLayout.CENTER);
+    	dialog.add(label3, BorderLayout.SOUTH);
   }
 
     class PopupListener extends MouseAdapter {

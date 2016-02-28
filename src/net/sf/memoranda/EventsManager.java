@@ -234,27 +234,45 @@ public class EventsManager {
 	
 	public static int getNumberOfEventsForTheYear() {
 		int x = 0;
-		int count = 1;
+		int count2 = 1;
 		Calendar cal = Calendar.getInstance();
-		//Element el = new Element("year");
-		//days.CalendarDate(cal);
 		 
 		x = getEventsForDate(CalendarDate.today()).size();
 		
 		do{
-		
-        cal.roll(Calendar.DATE, true);
+		int count1 = 1;
+		do{
+		cal.roll(Calendar.DATE, true);
 		CalendarDate days = new CalendarDate(cal);
 		x += getEventsForDate(days).size();
-		count++;
-		}while(count <= 372);//31 * 12
+		count1++;
+		}while((count1 + 1) <= cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+		cal.roll(Calendar.MONTH, true);
+		count2++;
+		}while(count2 <= 12);
 		
-		/*do{
-			x += getEventsForDate(CalendarDate.tomorrow()).size();
-			//x += getEventsForDate(CalendarDate.tomorrow()).size();
-			count++;
-		}while(count < 365);*/
+		return x;
+	}
+	
+	public static int getNumberOfEventsForTheMonth() {
+		int x = 0;
+		int count1 = 1;
+		Calendar cal = Calendar.getInstance();
 		
+		do{
+		cal.roll(Calendar.DATE, true);
+		CalendarDate days = new CalendarDate(cal);
+		x += getEventsForDate(days).size();
+		count1++;
+		}while((count1) <= cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+		
+		return x;
+	}
+	
+	public static int getNumberOfEventsForToday() {
+		int x = 0;
+		 
+		x = getEventsForDate(CalendarDate.today()).size();
 		return x;
 	}
 
