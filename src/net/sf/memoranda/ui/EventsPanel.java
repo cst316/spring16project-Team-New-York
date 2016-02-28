@@ -50,8 +50,7 @@ public class EventsPanel extends JPanel {
     JButton removeEventB = new JButton();
     static JScrollPane scrollPane = new JScrollPane();
     static EventsTable eventsTable = new EventsTable();
-    public static String foregroundColorIndicator = Color.black.toString();
-    public static String backgroundColorIndicator = Color.white.toString();
+
 
     ///////Added In 
     JButton recoverEventB = new JButton();
@@ -428,22 +427,12 @@ public class EventsPanel extends JPanel {
     }
 
     public static void setTheme(Color f, Color b)
+
     {
-    	try
-    	{
-    		eventsToolBar.setForeground(f);
-        	eventsToolBar.setBackground(b);
-        	scrollPane.getViewport().setForeground(f);
-        	scrollPane.getViewport().setBackground(b);
-        	//if no errors by this point, flags for JUnit reference are set:
-			backgroundColorIndicator = b.toString();
-			foregroundColorIndicator = f.toString();
-		}
-		catch(Exception themeErr)
-		{
-			//theme remains the same
-		}
-    	
+    	eventsToolBar.setForeground(f);
+    	eventsToolBar.setBackground(b);
+    	scrollPane.getViewport().setForeground(f);
+    	scrollPane.getViewport().setBackground(b);
     }
     private void saveEvents() {
 	CurrentStorage.get().storeEventsManager();
