@@ -57,7 +57,7 @@ public class EventsPanel extends JPanel {
 
     //New Stuff for US-22
     JButton reportEventB = new JButton();
-    
+
     public static String foregroundColorIndicator = Color.black.toString();
     public static String backgroundColorIndicator = Color.white.toString();
 
