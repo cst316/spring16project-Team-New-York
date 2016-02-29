@@ -49,7 +49,7 @@ public class ResourcesPanel extends JPanel {
   JMenuItem ppRefresh = new JMenuItem();
   public static String foregroundColorIndicator = Color.black.toString();
   public static String backgroundColorIndicator = Color.white.toString();
-  
+
     public ResourcesPanel() {
         try {
             jbInit();
@@ -197,13 +197,13 @@ public class ResourcesPanel extends JPanel {
 	    	scrollPane.getViewport().setForeground(f);
 	    	scrollPane.getViewport().setBackground(b);
 	    	//if no errors by this point, flags for JUnit reference are set:
-			backgroundColorIndicator = b.toString();
-			foregroundColorIndicator = f.toString();
-		}
-		catch(Exception themeErr)
-		{
-			//theme remains the same
-		}
+ 			backgroundColorIndicator = b.toString();
+ 			foregroundColorIndicator = f.toString();
+ 		}
+ 		catch(Exception themeerr)
+ 		{
+ 			//theme remains the same
+ 		}
     }
     void newResB_actionPerformed(ActionEvent e) {
         AddResourceDialog dlg = new AddResourceDialog(App.getFrame(), Local.getString("New resource"));

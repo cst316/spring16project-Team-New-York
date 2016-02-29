@@ -35,11 +35,11 @@ public class NotesListPanel extends JPanel {
 		  scrollPane.getViewport().setForeground(f);
 		  notesList.setBackground(b);
 		  notesList.setForeground(f);
-		  //if no errors by this point, flags for JUnit reference are set:
-		  backgroundColorIndicator = b.toString();
-		  foregroundColorIndicator = f.toString();
+		//if no errors by this point, flags for JUnit reference are set:
+			backgroundColorIndicator = b.toString();
+			foregroundColorIndicator = f.toString();
 		}
-		catch(Exception themeErr)
+		catch(Exception themeerr)
 		{
 			//theme remains the same
 		}

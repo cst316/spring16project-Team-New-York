@@ -203,24 +203,29 @@ public class NotesControlPanel extends JPanel {
     	{
 	    	buttonsPanel.setBackground(b);
 	    	buttonsPanel.setForeground(f);
+	    	
 	    	searchPanel.setBackground(b);
 	    	searchPanel.setForeground(f);
+	    	
 	    	notesListPanel.setBackground(b);
 	    	notesListPanel.setForeground(f);
+	    	
 	    	bookmarksListPanel.setBackground(b);
 	    	bookmarksListPanel.setForeground(f);
+	    	
 	    	tabbedPane.setForeground(f);
 	    	tabbedPane.setBackground(b);
+	    	
 	    	toolBar.setBackground(b);
 	    	toolBar.setForeground(f);
 	    	//if no errors by this point, flags for JUnit reference are set:
-			backgroundColorIndicator = b.toString();
-			foregroundColorIndicator = f.toString();
-		}
-		catch(Exception themeErr)
-		{
-			//theme remains the same
-		}
+ 			backgroundColorIndicator = b.toString();
+ 			foregroundColorIndicator = f.toString();
+ 		}
+ 		catch(Exception themeerr)
+ 		{
+ 			//theme remains the same
+ 		}
     }
     public void refresh() {
         notesListPanel.notesList.update();
