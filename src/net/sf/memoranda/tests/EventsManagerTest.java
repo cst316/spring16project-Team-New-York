@@ -67,7 +67,7 @@ public class EventsManagerTest {
 		assertEquals(0, EventsManager.getNumberOfEventsForToday());//one event today
 	}
 
-	@Test
+	/*@Test
 	public void getNumberOfStoredItemsTest()
 	{
 		assertEquals(0,EventsManager.getNumberOfStoredItems());
@@ -107,7 +107,7 @@ public class EventsManagerTest {
 		assertEquals(0,EventsManager.getNumberOfStoredItems());	
 	}
 	
-	/*@Test
+	@Test
 	public void recoverDeletedEvents()  {
 		/// Make sure the Vector is empty 
 		EventsManager.flushEventsVector();
