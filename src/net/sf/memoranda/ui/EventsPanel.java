@@ -52,7 +52,7 @@ public class EventsPanel extends JPanel {
     static EventsTable eventsTable = new EventsTable();
     public static String foregroundColorIndicator = Color.black.toString();
     public static String backgroundColorIndicator = Color.white.toString();
-
+ 
     ///////Added In 
     JButton recoverEventB = new JButton();
     /////////End 
