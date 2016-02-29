@@ -17,16 +17,7 @@ import net.sf.memoranda.ui.WorkPanel;
  
 public class ThemeChangeObserverTest 
 {
-	private AppFrame testFrame = new AppFrame();
-	private WorkPanel testWorkPanel = new WorkPanel();
-	private DailyItemsPanel dip = new DailyItemsPanel(testWorkPanel);
-	private EventsPanel testEventsPanel = new EventsPanel(dip);
-	private AgendaPanel testAgendaPanel = new AgendaPanel(dip);
-	private TaskPanel testTaskPanel = new TaskPanel(dip);
-	private NotesControlPanel testNotesControlPanel = new NotesControlPanel();
-	private NotesListPanel testNotesListPanel = new NotesListPanel();
-	private ProjectsPanel testProjectsPanel = new ProjectsPanel();
-	private ResourcesPanel testResourcesPanel = new ResourcesPanel();
+	private static AppFrame testFrame = new AppFrame();
 	
 	static String workPanelBackground = null;
 	static String workPanelForeground = null;
@@ -75,24 +66,24 @@ public class ThemeChangeObserverTest
 
 
 	@Test
-	public void test() 
+	public void testTheme() 
 	{
-		workPanelBackground = testWorkPanel.backgroundColorIndicator;
-		workPanelForeground = testWorkPanel.foregroundColorIndicator;
-		eventsPanelBackground = testEventsPanel.backgroundColorIndicator;
-		eventsPanelForeground = testEventsPanel.foregroundColorIndicator;
-		agendaPanelBackground = testAgendaPanel.backgroundColorIndicator;
-		agendaPanelForeground = testAgendaPanel.foregroundColorIndicator;
-		taskPanelBackground = testTaskPanel.backgroundColorIndicator;
-		taskPanelForeground = testTaskPanel.foregroundColorIndicator;
-		notesControlPanelBackground = testNotesControlPanel.backgroundColorIndicator;
-		notesControlPanelForeground = testNotesControlPanel.foregroundColorIndicator;
-		notesListPanelBackground = testNotesListPanel.backgroundColorIndicator;
-		notesListPanelForeground = testNotesListPanel.foregroundColorIndicator;
-		projectsPanelBackground = testProjectsPanel.backgroundColorIndicator;
-		projectsPanelForeground = testProjectsPanel.foregroundColorIndicator;
-		resourcesPanelBackground = testResourcesPanel.backgroundColorIndicator;
-		resourcesPanelForeground = testResourcesPanel.foregroundColorIndicator;
+		workPanelBackground = WorkPanel.backgroundColorIndicator;
+		workPanelForeground = WorkPanel.foregroundColorIndicator;
+		eventsPanelBackground = EventsPanel.backgroundColorIndicator;
+		eventsPanelForeground = EventsPanel.foregroundColorIndicator;
+		agendaPanelBackground = AgendaPanel.backgroundColorIndicator;
+		agendaPanelForeground = AgendaPanel.foregroundColorIndicator;
+		taskPanelBackground = TaskPanel.backgroundColorIndicator;
+		taskPanelForeground = TaskPanel.foregroundColorIndicator;
+		notesControlPanelBackground = NotesControlPanel.backgroundColorIndicator;
+		notesControlPanelForeground = NotesControlPanel.foregroundColorIndicator;
+		notesListPanelBackground = NotesListPanel.backgroundColorIndicator;
+		notesListPanelForeground = NotesListPanel.foregroundColorIndicator;
+		projectsPanelBackground = ProjectsPanel.backgroundColorIndicator;
+		projectsPanelForeground = ProjectsPanel.foregroundColorIndicator;
+		resourcesPanelBackground = ResourcesPanel.backgroundColorIndicator;
+		resourcesPanelForeground = ResourcesPanel.foregroundColorIndicator;
 		
 		//test initial state
 		assertTrue(workPanelBackground.equalsIgnoreCase(white));
@@ -111,27 +102,27 @@ public class ThemeChangeObserverTest
 		assertTrue(projectsPanelForeground.equalsIgnoreCase(black));
 		assertTrue(resourcesPanelBackground.equalsIgnoreCase(white));
 		assertTrue(resourcesPanelForeground.equalsIgnoreCase(black));
-		
-		/////////////////////////////////////////////////////////////////////
+
+	    /////////////////////////////////////////////////////////////////////
 		testFrame.setAppTheme("night");
 		/////////////////////////////////////////////////////////////////////
 		
-		workPanelBackground2 = testWorkPanel.backgroundColorIndicator;
-		workPanelForeground2 = testWorkPanel.foregroundColorIndicator;
-		eventsPanelBackground2 = testEventsPanel.backgroundColorIndicator;
-		eventsPanelForeground2 = testEventsPanel.foregroundColorIndicator;
-		agendaPanelBackground2 = testAgendaPanel.backgroundColorIndicator;
-		agendaPanelForeground2 = testAgendaPanel.foregroundColorIndicator;
-		taskPanelBackground2 = testTaskPanel.backgroundColorIndicator;
-		taskPanelForeground2 = testTaskPanel.foregroundColorIndicator;
-		notesControlPanelBackground2 = testNotesControlPanel.backgroundColorIndicator;
-		notesControlPanelForeground2 = testNotesControlPanel.foregroundColorIndicator;
-		notesListPanelBackground2 = testNotesListPanel.backgroundColorIndicator;
-		notesListPanelForeground2 = testNotesListPanel.foregroundColorIndicator;
-		projectsPanelBackground2 = testProjectsPanel.backgroundColorIndicator;
-		projectsPanelForeground2 = testProjectsPanel.foregroundColorIndicator;
-		resourcesPanelBackground2 = testResourcesPanel.backgroundColorIndicator;
-		resourcesPanelForeground2 = testResourcesPanel.foregroundColorIndicator;
+		workPanelBackground2 = WorkPanel.backgroundColorIndicator;
+		workPanelForeground2 = WorkPanel.foregroundColorIndicator;
+		eventsPanelBackground2 = EventsPanel.backgroundColorIndicator;
+		eventsPanelForeground2 = EventsPanel.foregroundColorIndicator;
+		agendaPanelBackground2 = AgendaPanel.backgroundColorIndicator;
+		agendaPanelForeground2 = AgendaPanel.foregroundColorIndicator;
+		taskPanelBackground2 = TaskPanel.backgroundColorIndicator;
+		taskPanelForeground2 = TaskPanel.foregroundColorIndicator;
+		notesControlPanelBackground2 = NotesControlPanel.backgroundColorIndicator;
+		notesControlPanelForeground2 = NotesControlPanel.foregroundColorIndicator;
+		notesListPanelBackground2 = NotesListPanel.backgroundColorIndicator;
+		notesListPanelForeground2 = NotesListPanel.foregroundColorIndicator;
+		projectsPanelBackground2 = ProjectsPanel.backgroundColorIndicator;
+		projectsPanelForeground2 = ProjectsPanel.foregroundColorIndicator;
+		resourcesPanelBackground2 = ResourcesPanel.backgroundColorIndicator;
+		resourcesPanelForeground2 = ResourcesPanel.foregroundColorIndicator;
 		
 		assertTrue(workPanelBackground2.equalsIgnoreCase(darkGrey));
 		assertTrue(workPanelForeground2.equalsIgnoreCase(white));
