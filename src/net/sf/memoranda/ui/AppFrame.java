@@ -1169,7 +1169,6 @@ public class AppFrame extends JFrame {
         		NotesListPanel.setTheme(Color.BLACK, Color.white);
         		ProjectsPanel.setTheme(Color.BLACK, Color.white);
         		ResourcesPanel.setTheme(Color.BLACK, Color.white);
-        		
         	}
         	else if(t.equalsIgnoreCase("night"))
         	{
@@ -1186,7 +1185,6 @@ public class AppFrame extends JFrame {
         	else
         	{
         		//error
-        		
         	}
         }
 }

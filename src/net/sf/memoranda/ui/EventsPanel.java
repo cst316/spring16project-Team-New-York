@@ -54,16 +54,13 @@ public class EventsPanel extends JPanel {
     JButton removeEventB = new JButton();
     static JScrollPane scrollPane = new JScrollPane();
     static EventsTable eventsTable = new EventsTable();
-<<<<<<< HEAD
 
     //New Stuff for US-22
     JButton reportEventB = new JButton();
     
-=======
     public static String foregroundColorIndicator = Color.black.toString();
     public static String backgroundColorIndicator = Color.white.toString();
 
->>>>>>> af74a8b9ccc2cd6feb3a9148fec3e6cd42021a7c
     ///////Added In 
     JButton recoverEventB = new JButton();
     /////////End 
@@ -480,20 +477,19 @@ public class EventsPanel extends JPanel {
     {
     	try
     	{
-    		eventsToolBar.setForeground(f);
-        	eventsToolBar.setBackground(b);
-        	scrollPane.getViewport().setForeground(f);
-        	scrollPane.getViewport().setBackground(b);
-        	//if no errors by this point, flags for JUnit reference are set:
-			backgroundColorIndicator = b.toString();
-			foregroundColorIndicator = f.toString();
-		}
-		catch(Exception themeErr)
-		{
-			//theme remains the same
-		}
-    	
-    }
+	    	eventsToolBar.setForeground(f);
+	    	eventsToolBar.setBackground(b);
+	    	scrollPane.getViewport().setForeground(f);
+	    	scrollPane.getViewport().setBackground(b);
+	    	//if no errors by this point, flags for JUnit reference are set:
+ 			backgroundColorIndicator = b.toString();
+ 			foregroundColorIndicator = f.toString();
+ 		}
+ 		catch(Exception themeerr)
+ 		{
+ 			//theme remains the same
+ 		}
+	}
     private void saveEvents() {
 	CurrentStorage.get().storeEventsManager();
         eventsTable.refresh();
