@@ -37,7 +37,7 @@ public class EventsManagerTest {
 		/*cd3 = new CalendarDate(10,4, 2017);
 		cd4 = new CalendarDate(29,2, 2016);*/
 	}
-
+/*
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
@@ -56,8 +56,8 @@ public class EventsManagerTest {
 	 * aren't accounted for but I could added it in by adding an additional layer
 	 * to the getNumberOfEventsForTheYear() method but IDK it's just to messy.
 	 */
-	/*
-	@Test
+	
+	/*@Test
 	public void  getValuesForNumberOfEventsTest() {
 		ev3 = EventsManager.createEvent(cd3, 6, 15, 11, 45, "Homework");
 		ev4 = EventsManager.createEvent(cd4, 4, 5, 10, 30, "Work");
@@ -105,7 +105,7 @@ public class EventsManagerTest {
 		EventsManager.flushEventsVector();
 		/// Check to see if there are 0 items in vector
 		assertEquals(0,EventsManager.getNumberOfStoredItems());	
-	}*/
+	}
 	
 	@Test
 	public void recoverDeletedEvents()  {
@@ -133,6 +133,6 @@ public class EventsManagerTest {
 		assertEquals(0,EventsManager.getNumberOfStoredItems()); 
 		/// Check to see if event was recovered. 
 		assertNotNull(EventsManager.getEvent(cd2, 10, 30, 11, 00));		
-	}
+	}*/
 	
 }
