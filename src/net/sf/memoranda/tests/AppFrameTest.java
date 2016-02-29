@@ -1,6 +1,6 @@
 package net.sf.memoranda.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -15,11 +15,11 @@ import net.sf.memoranda.ui.TaskPanel;
 import net.sf.memoranda.ui.WorkPanel;
 
  
-public class ThemeChangeObserverTest 
+public class AppFrameTest 
 {
 	private AppFrame testFrame;
 	
-    String workPanelBackground = null;
+      String workPanelBackground = null;
 	  String workPanelForeground = null;
 	  String workPanelBackground2 = null;
 	  String workPanelForeground2 = null;
