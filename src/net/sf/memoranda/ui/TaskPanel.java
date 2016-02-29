@@ -75,7 +75,9 @@ public class TaskPanel extends JPanel {
 	JMenuItem ppAddSubTask = new JMenuItem();
 	JMenuItem ppCalcTask = new JMenuItem();
 	DailyItemsPanel parentPanel = null;
-
+	public static String foregroundColorIndicator = Color.black.toString();
+	public static String backgroundColorIndicator = Color.white.toString();
+	
     public TaskPanel(DailyItemsPanel _parentPanel) {
         try {
             parentPanel = _parentPanel;
@@ -189,7 +191,7 @@ public class TaskPanel extends JPanel {
         
         ////Added in 
         recoverTaskB.setIcon(
-        		new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new.png")));
+        		new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_recover.png")));
         recoverTaskB.setEnabled(true);
         recoverTaskB.setMaximumSize(new Dimension(24, 24));
         recoverTaskB.setMinimumSize(new Dimension(24, 24));
@@ -416,8 +418,8 @@ public class TaskPanel extends JPanel {
                 newTaskB.setEnabled(
                     CurrentDate.get().inPeriod(p.getStartDate(), p.getEndDate()));
                 ////Added in
-                //recoverTaskB.setEnabled(
-                  //      CurrentDate.get().inPeriod(p.getStartDate(), p.getEndDate()));
+                recoverTaskB.setEnabled(
+                        CurrentDate.get().inPeriod(p.getStartDate(), p.getEndDate()));
                 //// End 
             }
             public void projectWasChanged() {
@@ -430,9 +432,6 @@ public class TaskPanel extends JPanel {
                 editTaskB.setEnabled(enbl);ppEditTask.setEnabled(enbl);
                 removeTaskB.setEnabled(enbl);ppRemoveTask.setEnabled(enbl);
                 removeAllTasksB.setEnabled(enbl);
-                ///Added in 
-                recoverTaskB.setEnabled(enbl);
-                ///////////
 				
 				ppCompleteTask.setEnabled(enbl);
 				completeTaskB.setEnabled(enbl);
@@ -602,7 +601,14 @@ public class TaskPanel extends JPanel {
         long effort = Util.getMillisFromHours(dlg.effortField.getText());
 		//XXX Task newTask = CurrentProject.getTaskList().createTask(sd, ed, dlg.todoField.getText(), dlg.priorityCB.getSelectedIndex(),effort, dlg.descriptionField.getText(),parentTaskId);
         
-       
+        //David Scott 2/28/2016
+        //Changed the code so that if someone chooses "School" for their type of task
+        //It will automatically set it as the highest priority!
+        //User Story #2 Sprint 3
+        if(dlg.categoryCB.getSelectedItem() == Local.getString("School"))
+        {
+        	dlg.priorityCB.setSelectedIndex(4);
+        }
 		Task newTask = CurrentProject.getTaskList().createTask(sd, ed, dlg.todoField.getText(), dlg.categoryCB.getSelectedIndex(), dlg.priorityCB.getSelectedIndex(),effort, dlg.descriptionField.getText(), null);
 //		CurrentProject.getTaskList().adjustParentTasks(newTask);
 		newTask.setProgress(((Integer)dlg.progress.getValue()).intValue());
@@ -729,6 +735,7 @@ public class TaskPanel extends JPanel {
 //      //taskTable.updateUI();
   }
 
+    public TaskListImpl stored = new TaskListImpl(CurrentProject.get()); 
     
     void removeTaskB_actionPerformed(ActionEvent e) {
         String msg;
@@ -757,9 +764,7 @@ public class TaskPanel extends JPanel {
             return;
         Vector toremove = new Vector();
         /// Added in
-        //TaskListImpl stored = new TaskListImpl(CurrentProject.get()); 
-        flushTasks();
-        System.out.println("The number of stored after flush tasks is: "+ getNumberOfStoredItems());
+        flushTasksVector(); 
         /// End 
         for (int i = 0; i < taskTable.getSelectedRows().length; i++) {
             Task t =
@@ -768,8 +773,7 @@ public class TaskPanel extends JPanel {
             if (t != null) {
                 toremove.add(t);
             	/// Added in
-                storeDeleted(t);
-                System.out.println("The number of stored tasks is: "+ getNumberOfStoredItems());
+                storeDeletedTasks(t);
                 /// End 
             }
         }
@@ -783,6 +787,53 @@ public class TaskPanel extends JPanel {
         //taskTable.updateUI();
 
     }
+   
+	///////////////////////////   Added In 
+	private Vector<Task> storage = new Vector<Task>(); 
+	
+	//// Returns the number of items in the vector
+	public int getNumberOfStoredItems()
+	{
+		return storage.size(); 
+	}
+	
+	////Clears the stored tasks in the vector
+	public void flushTasksVector() 
+	{
+		storage.removeAllElements(); 
+	}
+	
+	/////// Stores the deleted items in a vector 
+	public void storeDeletedTasks(Task t)
+	{
+		storage.add(t); 
+	}
+	
+	//// Returns a vector containing the tasks that were stored
+	public Vector<Task> getStoredTasks()
+	{
+		return storage; 
+	}
+	 
+	public void recoverDeletedTasks()
+	{
+		for(int i = 0; i < getNumberOfStoredItems(); i++) {	
+			CalendarDate startDate = storage.get(i).getStartDate(); 
+			CalendarDate endDate = storage.get(i).getEndDate();
+			String id = storage.get(i).getID();
+			int progress = storage.get(i).getProgress();
+			String text = storage.get(i).getText(); 
+		    int category = storage.get(i).getCategory(); 
+		    int priority = storage.get(i).getPriority(); 
+		    long effort = storage.get(i).getEffort(); 
+		    String description = storage.get(i).getDescription(); 
+		    String parentTaskId = storage.get(i).getParentId();
+		    CurrentProject.getTaskList().Re_createTask(startDate, endDate, id, progress, text, category, priority, effort, description, parentTaskId);
+		}	
+		flushTasksVector(); 
+	}
+	////////////////////////////////////////////////////////////
+    
     
     //Adding a remove all tasks method
     void removeAllTasksB_actionPerformed(ActionEvent e) {
@@ -799,78 +850,20 @@ public class TaskPanel extends JPanel {
         parentPanel.updateIndicators();
     }
     
-	///////////////////////////   Added In 
-	public static Vector<Task> storage = new Vector<Task>(); 
-	
-	//// Returns the number of items in the vector
-	public static int getNumberOfStoredItems()
-	{
-		return storage.size(); 
-	}
-	
-	////Clears the stored tasks in the vector
-	public static void flushTasks() 
-	{
-		storage.removeAllElements(); 
-	}
-	
-	/////// Stores the deleted items in a vector 
-	public static void storeDeleted(Task t)
-	{
-		storage.add(t); 
-	}
-	
-	//// Returns a vector containing the tasks that were stored
-	public static Vector<Task> getStoredTasks()
-	{
-		return storage; 
-	}
-	
-	///// Recreates task by recreating the stored tasks in storage vector
-	public static void recoverDeletedTasks()
-	{
-		System.out.println("The number of stored items is: " + getNumberOfStoredItems());
-		for(int i = 0; i < getNumberOfStoredItems(); i++) {	
-			CalendarDate startDate = storage.get(i).getStartDate(); 
-			CalendarDate endDate = storage.get(i).getEndDate();
-			String id = storage.get(i).getID();
-			int progress = storage.get(i).getProgress();
-			String text = storage.get(i).getText(); 
-		    int category = storage.get(i).getCategory(); 
-		    int priority = storage.get(i).getPriority(); 
-		    long effort = storage.get(i).getEffort(); 
-		    String description = storage.get(i).getDescription(); 
-		    String parentTaskId = storage.get(i).getParentId();
-		    TaskListImpl stored = new TaskListImpl(CurrentProject.get()); 
-		    stored.Re_createTask(startDate, endDate, id, progress, text, category, priority, effort, description, parentTaskId);
-		}	
-		flushTasks(); 
-	}
-	////////////////////////////////////////////////////////////
-    
     
     ///// Adding a recover tasks
     void recoverTaskB_actionPerformed(ActionEvent e) {
-    	System.out.println("Tasks List"); 
+    	if (getNumberOfStoredItems() == 0)
+    		return; 
     	
     	String msg;
-    	String thisTaskId = taskTable.getModel().getValueAt(taskTable.getSelectedRow(), TaskTable.TASK_ID).toString();
-    	  /// Added in
-      //  TaskListImpl stored = new TaskListImpl(CurrentProject.get());
-    	if (getNumberOfStoredItems() >= 1)
-    		System.out.println("Something is stored in the vector");
-    	
-    	if (getNumberOfStoredItems() == 0)
-    		System.out.println("Nothing is stored in the vector");
-    	
+    	String thisTaskId = getStoredTasks().get(0).getID(); 
     	
     	if (getNumberOfStoredItems()  > 1)
     		msg = Local.getString("Recover")+" "+ getNumberOfStoredItems() + " "+ Local.getString("tasks")+"?"
     				+ "\n"+Local.getString("Are you sure?");
     	else {        	
     		Task t = getStoredTasks().get(0); 
-    		
-    				//CurrentProject.getTaskList().getTask(thisTaskId);
     		
     		// check if there are subtasks
     		if(CurrentProject.getTaskList().hasSubTasks(thisTaskId)) {
@@ -893,7 +886,7 @@ public class TaskPanel extends JPanel {
     	taskTable.tableChanged();
         CurrentStorage.get().storeTaskList(CurrentProject.getTaskList(), CurrentProject.get());
         parentPanel.updateIndicators();
-        taskTable.updateUI();
+      //taskTable.updateUI();
     	
     }
     ///// End 
@@ -928,10 +921,20 @@ public class TaskPanel extends JPanel {
 	}
 	public static void setTheme(Color f, Color b)
 	{
-		tasksToolBar.setForeground(f);
-		tasksToolBar.setBackground(b);
-		scrollPane.getViewport().setForeground(f);
-		scrollPane.getViewport().setBackground(b);
+		try
+		{
+			tasksToolBar.setForeground(f);
+			tasksToolBar.setBackground(b);
+			scrollPane.getViewport().setForeground(f);
+			scrollPane.getViewport().setBackground(b);
+			//if no errors by this point, flags for JUnit reference are set:
+			backgroundColorIndicator = b.toString();
+			foregroundColorIndicator = f.toString();
+		}
+		catch(Exception themeErr)
+		{
+			//theme remains the same
+		}
 	}
     class PopupListener extends MouseAdapter {
 

@@ -50,7 +50,9 @@ public class AgendaPanel extends JPanel {
 	JEditorPane viewer = new JEditorPane("text/html", "");
 	String[] priorities = {"Muy Alta","Alta","Media","Baja","Muy Baja"};
 	static JScrollPane scrollPane = new JScrollPane();
-
+	public static String foregroundColorIndicator = Color.black.toString();
+	public static String backgroundColorIndicator = Color.white.toString();
+	
 	DailyItemsPanel parentPanel = null;
 
 	//	JPopupMenu agendaPPMenu = new JPopupMenu();
@@ -292,10 +294,20 @@ public class AgendaPanel extends JPanel {
 	}
 	public static void setTheme(Color f, Color b)
 	{
-		toolBar.setForeground(f);
-		toolBar.setBackground(b);
-		scrollPane.getViewport().setForeground(f);
-		scrollPane.getViewport().setBackground(b);
+		try
+		{	
+			toolBar.setForeground(f);
+			toolBar.setBackground(b);
+			scrollPane.getViewport().setForeground(f);
+			scrollPane.getViewport().setBackground(b);
+			//if no errors by this point, flags for JUnit reference are set:
+			backgroundColorIndicator = b.toString();
+			foregroundColorIndicator = f.toString();
+		}
+		catch(Exception themeErr)
+		{
+			//theme remains the same
+		}
 	}
 	public void refresh(CalendarDate date) {
 		viewer.setText(AgendaGenerator.getAgenda(date,expandedTasks));

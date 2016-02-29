@@ -36,7 +36,7 @@ import net.sf.memoranda.util.Util;
 public class WorkPanel extends JPanel {
 	BorderLayout borderLayout1 = new BorderLayout();
 	static JToolBar toolBar = new JToolBar();
-	JPanel panel = new JPanel();
+	static JPanel panel = new JPanel();
 	CardLayout cardLayout1 = new CardLayout();
 	boolean active = true;
 	static int themeStyle = 0;
@@ -47,6 +47,8 @@ public class WorkPanel extends JPanel {
 	public static JButton tasksB = new JButton();
 	public static JButton eventsB = new JButton();
 	public static JButton filesB = new JButton();
+	public static String foregroundColorIndicator = Color.black.toString();
+	public static String backgroundColorIndicator = Color.white.toString();
     JFrame dialog = new JFrame("Tips and Tricks");
 	JButton currentB = null;
 	JPanel dialPanel = new JPanel();
@@ -55,7 +57,7 @@ public class WorkPanel extends JPanel {
 
     JLabel dialogLabelEvent = new JLabel("<html><p><div style=\"text-align: center;\">On the Events page you will be able to add events to the Event Manager! <br> <br> You can add a new event by clicking the new event button the event toolbar.<br><br></p></html>", JLabel.CENTER);
     JLabel dialogLabelAgenda = new JLabel("<html><p><div style=\"text-align: center;\">Welcome to Memoranda! <br><br>On the Agenda page you will be able view all your upcoming events, tasks, and notes!<br><br></p></html>", JLabel.CENTER);
-    JLabel dialogLabelTasks = new JLabel("<html><p><div style=\"text-align: center;\">On the Tasks page you will be able to add tasks. <br><br> You can add a new task by hitting the new task button. <br><br> You can also create a subtask under an already created task. <br><br> Here you can view your created tasks as well.<br><br></p></html>", JLabel.CENTER);
+    JLabel dialogLabelTasks = new JLabel("<html><p><div style=\"text-align: center;\">On the Tasks page you will be able to add tasks. <br><br> You can add a new task by hitting the new task button. <br><br> You can also create a subtask under an already created task. <br><br> Here you can view your created tasks as well.<br><br> All school tasks will take the highest priority since this is a school planner.<br<br></p></html>", JLabel.CENTER);
     JLabel dialogLabelNotes = new JLabel("<html><p><div style=\"text-align: center;\">This is Notes page <br><br> You can add a note simply by typing in the text box below and click on new note to save it! <br><br> The new note will be saved off to the left. <br><br> You can also import and export note files.<br><br></p></html>", JLabel.CENTER);
     JCheckBox ignore = new JCheckBox("Do not show tips anymore");
     ItemListener select = new ItemListener(){
@@ -258,16 +260,28 @@ public class WorkPanel extends JPanel {
 
 	public static void setTheme(Color f, Color b)
 	{
-		toolBar.setForeground(f);
-		toolBar.setBackground(b);
-		agendaB.setForeground(f);
-		eventsB.setForeground(f);
-		tasksB.setForeground(f);
-		notesB.setForeground(f);
-		filesPanel.setForeground(f);
-		filesPanel.setBackground(b);
-		filesB.setForeground(f);
-		filesB.setBackground(b);
+		try
+		{
+			panel.setForeground(f);
+			panel.setBackground(b);
+			toolBar.setForeground(f);
+			toolBar.setBackground(b);
+			agendaB.setForeground(f);
+			eventsB.setForeground(f);
+			tasksB.setForeground(f);
+			notesB.setForeground(f);
+			filesPanel.setForeground(f);
+			filesPanel.setBackground(b);
+			filesB.setForeground(f);
+			filesB.setBackground(b);
+			//if no errors by this point, flags for JUnit reference are set:
+			backgroundColorIndicator = b.toString();
+			foregroundColorIndicator = f.toString();
+		}
+		catch(Exception themeerr)
+		{
+			//theme remains the same
+		}
 	}
 	public void selectPanel(String pan) {
 		if (pan != null) {
@@ -283,8 +297,7 @@ public class WorkPanel extends JPanel {
 	}
 
 	public void agendaB_actionPerformed(ActionEvent e) {
-		//String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
-		String soundFile = "src/net/sf/memoranda/util/click.wav";
+		String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
 		Util.playSound(soundFile);
 		cardLayout1.show(panel, "DAILYITEMS");
 		dailyItemsPanel.selectPanel("AGENDA");
@@ -297,8 +310,7 @@ public class WorkPanel extends JPanel {
 	}
 
 	public void notesB_actionPerformed(ActionEvent e) {
-		//String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
-		String soundFile = "src/net/sf/memoranda/util/click.wav";
+		String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
 		Util.playSound(soundFile);
 		cardLayout1.show(panel, "DAILYITEMS");
 		dailyItemsPanel.selectPanel("NOTES");
@@ -311,8 +323,7 @@ public class WorkPanel extends JPanel {
 	}
 
 	public void tasksB_actionPerformed(ActionEvent e) {
-		//String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
-		String soundFile = "src/net/sf/memoranda/util/click.wav";
+		String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
 		Util.playSound(soundFile);
 		cardLayout1.show(panel, "DAILYITEMS");
 		dailyItemsPanel.selectPanel("TASKS");
@@ -325,8 +336,7 @@ public class WorkPanel extends JPanel {
 	}
 
 	public void eventsB_actionPerformed(ActionEvent e) {
-		//String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
-		String soundFile = "src/net/sf/memoranda/util/click.wav";
+		String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
 		Util.playSound(soundFile);
 		cardLayout1.show(panel, "DAILYITEMS");
 		dailyItemsPanel.selectPanel("EVENTS");
@@ -339,8 +349,7 @@ public class WorkPanel extends JPanel {
 	}
 
 	public void filesB_actionPerformed(ActionEvent e) {
-		//String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
-		String soundFile = "src/net/sf/memoranda/util/click.wav";
+		String soundFile = "src\\net\\sf\\memoranda\\util\\click.wav";
 		Util.playSound(soundFile);
 		cardLayout1.show(panel, "FILES");
 		setCurrentButton(filesB);
@@ -398,7 +407,7 @@ public class WorkPanel extends JPanel {
         dialPanel.add(dialogLabelTasks);
         dialPanel.add(ignore);
         dialog.getContentPane().add(dialPanel, BorderLayout.CENTER);
-        dialog.setSize(300,240);
+        dialog.setSize(300,300);
         dialog.setLocation(800,400);
         dialPanel.revalidate();
         dialPanel.repaint();
