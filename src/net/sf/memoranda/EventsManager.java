@@ -1,5 +1,5 @@
 /**
- * EventsManager.java Created on 08.03.2003, 12:35:19 Alex Package:
+F * EventsManager.java Created on 08.03.2003, 12:35:19 Alex Package:
  * net.sf.memoranda
  * 
  * @author Alex V. Alishevskikh, alex@openmechanics.net Copyright (c) 2003

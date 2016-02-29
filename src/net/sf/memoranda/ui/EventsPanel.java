@@ -54,16 +54,13 @@ public class EventsPanel extends JPanel {
     JButton removeEventB = new JButton();
     static JScrollPane scrollPane = new JScrollPane();
     static EventsTable eventsTable = new EventsTable();
-<<<<<<< HEAD
 
     //New Stuff for US-22
     JButton reportEventB = new JButton();
     
-=======
     public static String foregroundColorIndicator = Color.black.toString();
     public static String backgroundColorIndicator = Color.white.toString();
 
->>>>>>> af74a8b9ccc2cd6feb3a9148fec3e6cd42021a7c
     ///////Added In 
     JButton recoverEventB = new JButton();
     /////////End 
