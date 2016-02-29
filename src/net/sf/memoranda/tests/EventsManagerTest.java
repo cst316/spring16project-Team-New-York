@@ -56,7 +56,7 @@ public class EventsManagerTest {
 	 * aren't accounted for but I could added it in by adding an additional layer
 	 * to the getNumberOfEventsForTheYear() method but IDK it's just to messy.
 	 */
-	
+	/*
 	@Test
 	public void  getValuesForNumberOfEventsTest() {
 		ev3 = EventsManager.createEvent(cd3, 6, 15, 11, 45, "Homework");
@@ -65,7 +65,7 @@ public class EventsManagerTest {
 		assertEquals(2, EventsManager.getNumberOfEventsForTheYear());//two events in the next 365 days
 		assertEquals(1, EventsManager.getNumberOfEventsForTheMonth());//one event this month
 		assertEquals(0, EventsManager.getNumberOfEventsForToday());//one event today
-	}
+	}*/
 
 	@Test
 	public void getNumberOfStoredItemsTest()
@@ -106,7 +106,7 @@ public class EventsManagerTest {
 		/// Check to see if there are 0 items in vector
 		assertEquals(0,EventsManager.getNumberOfStoredItems());	
 	}
-	/*
+	
 	@Test
 	public void recoverDeletedEvents()  {
 		/// Make sure the Vector is empty 
@@ -133,6 +133,6 @@ public class EventsManagerTest {
 		assertEquals(0,EventsManager.getNumberOfStoredItems()); 
 		/// Check to see if event was recovered. 
 		assertNotNull(EventsManager.getEvent(cd2, 10, 30, 11, 00));		
-	}*/
+	}
 	
 }
