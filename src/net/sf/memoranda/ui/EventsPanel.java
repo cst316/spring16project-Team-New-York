@@ -78,12 +78,9 @@ public class EventsPanel extends JPanel {
     /////// End 
     JMenuItem ppNewEvent = new JMenuItem();
     static DailyItemsPanel parentPanel = null;
-<<<<<<< HEAD
     
     //New Stuff for US-22
     JMenuItem ppReportEvent = new JMenuItem();
-=======
->>>>>>> master
 
     public EventsPanel(DailyItemsPanel _parentPanel) {
         try {
@@ -186,7 +183,6 @@ public class EventsPanel extends JPanel {
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/event_recover.png")));
         ////// End 
         
-<<<<<<< HEAD
    //// Added In 
         reportEventB.setBorderPainted(false);
         reportEventB.setFocusable(false);
@@ -206,8 +202,6 @@ public class EventsPanel extends JPanel {
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/report-icon.png")));
         ////// End 
         
-=======
->>>>>>> master
         this.setLayout(borderLayout1);
         scrollPane.getViewport().setBackground(Color.white);
         eventsTable.setMaximumSize(new Dimension(32767, 32767));
@@ -244,7 +238,6 @@ public class EventsPanel extends JPanel {
         ppRecoverEvent.setIcon(
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/event_recover.png")));
         ////////////////////// End
-<<<<<<< HEAD
         
         //US-22 
       ppReportEvent.setFont(new java.awt.Font("Dialog", 1, 11));
@@ -257,8 +250,6 @@ public class EventsPanel extends JPanel {
       ppReportEvent.setIcon(
           new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/report-icon.png")));
       // End
-=======
->>>>>>> master
         ppNewEvent.setFont(new java.awt.Font("Dialog", 1, 11));
         ppNewEvent.setText(Local.getString("New event") + "...");
         ppNewEvent.addActionListener(new java.awt.event.ActionListener() {
@@ -281,11 +272,9 @@ public class EventsPanel extends JPanel {
         /////Added In 
         eventsToolBar.add(recoverEventB, null);
         /////////////
-<<<<<<< HEAD
+
         //US-22
         eventsToolBar.add(reportEventB, null);
-=======
->>>>>>> master
 
         this.add(eventsToolBar, BorderLayout.NORTH);
 
@@ -328,11 +317,8 @@ public class EventsPanel extends JPanel {
         //// Added In 
         eventPPMenu.add(ppRecoverEvent);
         //// End 
-<<<<<<< HEAD
         eventPPMenu.add(ppReportEvent);
-=======
-		
->>>>>>> master
+
 		// remove events using the DEL key
 		eventsTable.addKeyListener(new KeyListener() {
 			public void keyPressed(KeyEvent e){
@@ -619,7 +605,6 @@ public class EventsPanel extends JPanel {
         EventsManager.recoverDeletedEvents(); 
         saveEvents(); 
   }
-<<<<<<< HEAD
   //// End  
     
     void reportEventB_actionPerformed(ActionEvent e) {
@@ -637,9 +622,6 @@ public class EventsPanel extends JPanel {
     	dialog.add(label2, BorderLayout.CENTER);
     	dialog.add(label3, BorderLayout.SOUTH);
   }
-=======
-  //// End   
->>>>>>> master
 
     class PopupListener extends MouseAdapter {
 
@@ -672,12 +654,9 @@ public class EventsPanel extends JPanel {
     void ppRecoverEvent_actionPerformed(ActionEvent e) {
         recoverEventB_actionPerformed(e);
     }
-<<<<<<< HEAD
     void ppReportEvent_actionPerformed(ActionEvent e) {
         reportEventB_actionPerformed(e);
     }
-=======
->>>>>>> master
     void ppNewEvent_actionPerformed(ActionEvent e) {
         newEventB_actionPerformed(e);
     }
