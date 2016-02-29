@@ -231,6 +231,50 @@ public class EventsManager {
 	public static Collection getActiveEvents() {
 		return getEventsForDate(CalendarDate.today());
 	}
+	
+	public static int getNumberOfEventsForTheYear() {
+		int x = 0;
+		int count2 = 1;
+		Calendar cal = Calendar.getInstance();
+		 
+		x = getEventsForDate(CalendarDate.today()).size();
+		
+		do{
+		int count1 = 1;
+		do{
+		cal.roll(Calendar.DATE, true);
+		CalendarDate days = new CalendarDate(cal);
+		x += getEventsForDate(days).size();
+		count1++;
+		}while((count1 + 1) <= cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+		cal.roll(Calendar.MONTH, true);
+		count2++;
+		}while(count2 <= 12);
+		
+		return x;
+	}
+	
+	public static int getNumberOfEventsForTheMonth() {
+		int x = 0;
+		int count1 = 1;
+		Calendar cal = Calendar.getInstance();
+		
+		do{
+		cal.roll(Calendar.DATE, true);
+		CalendarDate days = new CalendarDate(cal);
+		x += getEventsForDate(days).size();
+		count1++;
+		}while((count1) <= cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+		
+		return x;
+	}
+	
+	public static int getNumberOfEventsForToday() {
+		int x = 0;
+		 
+		x = getEventsForDate(CalendarDate.today()).size();
+		return x;
+	}
 
 	public static Event getEvent(CalendarDate date, int hh, int mm,int xx, int yy) {
 		Day d = getDay(date);

@@ -13,6 +13,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.math.*;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import javax.swing.BoxLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -39,6 +42,7 @@ import net.sf.memoranda.util.CurrentStorage;
 import net.sf.memoranda.util.Local;
 import net.sf.memoranda.util.Util;
 
+
 /*$Id: EventsPanel.java,v 1.25 2005/02/19 10:06:25 rawsushi Exp $*/
 public class EventsPanel extends JPanel {
     BorderLayout borderLayout1 = new BorderLayout();
@@ -51,7 +55,9 @@ public class EventsPanel extends JPanel {
     static JScrollPane scrollPane = new JScrollPane();
     static EventsTable eventsTable = new EventsTable();
 
-
+    //New Stuff for US-22
+    JButton reportEventB = new JButton();
+    
     ///////Added In 
     JButton recoverEventB = new JButton();
     /////////End 
@@ -66,6 +72,12 @@ public class EventsPanel extends JPanel {
     /////// End 
     JMenuItem ppNewEvent = new JMenuItem();
     static DailyItemsPanel parentPanel = null;
+<<<<<<< HEAD
+    
+    //New Stuff for US-22
+    JMenuItem ppReportEvent = new JMenuItem();
+=======
+>>>>>>> master
 
     public EventsPanel(DailyItemsPanel _parentPanel) {
         try {
@@ -168,6 +180,28 @@ public class EventsPanel extends JPanel {
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/event_recover.png")));
         ////// End 
         
+<<<<<<< HEAD
+   //// Added In 
+        reportEventB.setBorderPainted(false);
+        reportEventB.setFocusable(false);
+        reportEventB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                reportEventB_actionPerformed(e);
+            }
+        });
+        
+        reportEventB.setPreferredSize(new Dimension(24, 24));
+        reportEventB.setRequestFocusEnabled(false);
+        reportEventB.setToolTipText(Local.getString("Report Event"));
+        reportEventB.setMinimumSize(new Dimension(24, 24));
+        reportEventB.setMaximumSize(new Dimension(24, 24));
+        reportEventB.setEnabled(true);
+        reportEventB.setIcon(
+            new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/report-icon.png")));
+        ////// End 
+        
+=======
+>>>>>>> master
         this.setLayout(borderLayout1);
         scrollPane.getViewport().setBackground(Color.white);
         eventsTable.setMaximumSize(new Dimension(32767, 32767));
@@ -204,6 +238,21 @@ public class EventsPanel extends JPanel {
         ppRecoverEvent.setIcon(
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/event_recover.png")));
         ////////////////////// End
+<<<<<<< HEAD
+        
+        //US-22 
+      ppReportEvent.setFont(new java.awt.Font("Dialog", 1, 11));
+      ppReportEvent.setText(Local.getString("Report Event"));
+      ppReportEvent.addActionListener(new java.awt.event.ActionListener() {
+          public void actionPerformed(ActionEvent e) {
+              ppReportEvent_actionPerformed(e);
+          }
+      });
+      ppReportEvent.setIcon(
+          new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/report-icon.png")));
+      // End
+=======
+>>>>>>> master
         ppNewEvent.setFont(new java.awt.Font("Dialog", 1, 11));
         ppNewEvent.setText(Local.getString("New event") + "...");
         ppNewEvent.addActionListener(new java.awt.event.ActionListener() {
@@ -226,6 +275,11 @@ public class EventsPanel extends JPanel {
         /////Added In 
         eventsToolBar.add(recoverEventB, null);
         /////////////
+<<<<<<< HEAD
+        //US-22
+        eventsToolBar.add(reportEventB, null);
+=======
+>>>>>>> master
 
         this.add(eventsToolBar, BorderLayout.NORTH);
 
@@ -268,7 +322,11 @@ public class EventsPanel extends JPanel {
         //// Added In 
         eventPPMenu.add(ppRecoverEvent);
         //// End 
+<<<<<<< HEAD
+        eventPPMenu.add(ppReportEvent);
+=======
 		
+>>>>>>> master
 		// remove events using the DEL key
 		eventsTable.addKeyListener(new KeyListener() {
 			public void keyPressed(KeyEvent e){
@@ -573,7 +631,27 @@ public class EventsPanel extends JPanel {
         EventsManager.recoverDeletedEvents(); 
         saveEvents(); 
   }
+<<<<<<< HEAD
+  //// End  
+    
+    void reportEventB_actionPerformed(ActionEvent e) {
+    	JFrame dialog = new JFrame("Events Report");//I should set the attributes elsewhere...
+    	JPanel dialPanel = new JPanel();
+    	dialog.setVisible(true);
+    	dialog.setSize(300,175);
+    	dialog.setLocation(800,400);
+    	
+    	JLabel label1 = new JLabel("Number of events for today: " + String.valueOf(EventsManager.getNumberOfEventsForToday()));
+    	JLabel label2 = new JLabel("Number of events for this month: " + String.valueOf(EventsManager.getNumberOfEventsForTheMonth()));
+    	JLabel label3 = new JLabel("Number of events for this year: " + String.valueOf(EventsManager.getNumberOfEventsForTheYear()));
+
+    	dialog.add(label1, BorderLayout.NORTH);
+    	dialog.add(label2, BorderLayout.CENTER);
+    	dialog.add(label3, BorderLayout.SOUTH);
+  }
+=======
   //// End   
+>>>>>>> master
 
     class PopupListener extends MouseAdapter {
 
@@ -606,6 +684,12 @@ public class EventsPanel extends JPanel {
     void ppRecoverEvent_actionPerformed(ActionEvent e) {
         recoverEventB_actionPerformed(e);
     }
+<<<<<<< HEAD
+    void ppReportEvent_actionPerformed(ActionEvent e) {
+        reportEventB_actionPerformed(e);
+    }
+=======
+>>>>>>> master
     void ppNewEvent_actionPerformed(ActionEvent e) {
         newEventB_actionPerformed(e);
     }
