@@ -24,7 +24,7 @@ public class EventsManagerTest {
 	/// Create Events to test 
 	private static Event ev;
 	private static Event ev2; 
-	
+	 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		eventDate = new CalendarDate(7,5,2016);

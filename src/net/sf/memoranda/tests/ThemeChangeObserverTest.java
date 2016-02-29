@@ -1,11 +1,11 @@
 package net.sf.memoranda.tests;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 import net.sf.memoranda.ui.AgendaPanel;
 import net.sf.memoranda.ui.AppFrame;
-import net.sf.memoranda.ui.DailyItemsPanel;
 import net.sf.memoranda.ui.EventsPanel;
 import net.sf.memoranda.ui.NotesControlPanel;
 import net.sf.memoranda.ui.NotesListPanel;
@@ -17,57 +17,58 @@ import net.sf.memoranda.ui.WorkPanel;
  
 public class ThemeChangeObserverTest 
 {
-	private static AppFrame testFrame = new AppFrame();
+	private AppFrame testFrame;
 	
-	static String workPanelBackground = null;
-	static String workPanelForeground = null;
-	static String workPanelBackground2 = null;
-	static String workPanelForeground2 = null;
+    String workPanelBackground = null;
+	  String workPanelForeground = null;
+	  String workPanelBackground2 = null;
+	  String workPanelForeground2 = null;
 	
-	static String eventsPanelBackground = null;
-	static String eventsPanelForeground = null;
-	static String eventsPanelBackground2 = null;
-	static String eventsPanelForeground2 = null;
+	  String eventsPanelBackground = null;
+	  String eventsPanelForeground = null;
+	  String eventsPanelBackground2 = null;
+	  String eventsPanelForeground2 = null;
 	
-	static String agendaPanelBackground = null;
-	static String agendaPanelForeground = null;
-	static String agendaPanelBackground2 = null;
-	static String agendaPanelForeground2 = null;
+	  String agendaPanelBackground = null;
+	  String agendaPanelForeground = null;
+	  String agendaPanelBackground2 = null;
+	  String agendaPanelForeground2 = null;
 	
-	static String taskPanelBackground = null;
-	static String taskPanelForeground = null;
-	static String taskPanelBackground2 = null;
-	static String taskPanelForeground2 = null;
+	  String taskPanelBackground = null;
+	  String taskPanelForeground = null;
+	  String taskPanelBackground2 = null;
+	  String taskPanelForeground2 = null;
 	
-	static String notesControlPanelBackground = null;
-	static String notesControlPanelForeground = null;
-	static String notesControlPanelBackground2 = null;
-	static String notesControlPanelForeground2 = null;
+	  String notesControlPanelBackground = null;
+	  String notesControlPanelForeground = null;
+	  String notesControlPanelBackground2 = null;
+	  String notesControlPanelForeground2 = null;
 	
-	static String notesListPanelBackground = null;
-	static String notesListPanelForeground = null;
-	static String notesListPanelBackground2 = null;
-	static String notesListPanelForeground2 = null;
+	  String notesListPanelBackground = null;
+	  String notesListPanelForeground = null;
+	  String notesListPanelBackground2 = null;
+	  String notesListPanelForeground2 = null;
 	
-	static String projectsPanelBackground = null;
-	static String projectsPanelForeground = null;
-	static String projectsPanelBackground2 = null;
-	static String projectsPanelForeground2 = null;
+	  String projectsPanelBackground = null;
+	  String projectsPanelForeground = null;
+	  String projectsPanelBackground2 = null;
+	  String projectsPanelForeground2 = null;
 	
-	static String resourcesPanelBackground = null;
-	static String resourcesPanelForeground = null;
-	static String resourcesPanelBackground2 = null;
-	static String resourcesPanelForeground2 = null;
+	  String resourcesPanelBackground = null;
+	  String resourcesPanelForeground = null;
+	  String resourcesPanelBackground2 = null;
+	  String resourcesPanelForeground2 = null;
 	
-	static String black = "java.awt.Color[r=0,g=0,b=0]";
-	static String white = "java.awt.Color[r=255,g=255,b=255]";
-	static String darkGrey = "java.awt.Color[r=64,g=64,b=64]";
+	  String black = "java.awt.Color[r=0,g=0,b=0]";
+	  String white = "java.awt.Color[r=255,g=255,b=255]";
+	  String darkGrey = "java.awt.Color[r=64,g=64,b=64]";
 
 
 
 	@Test
 	public void testTheme() 
 	{
+		testFrame = new AppFrame();
 		workPanelBackground = WorkPanel.backgroundColorIndicator;
 		workPanelForeground = WorkPanel.foregroundColorIndicator;
 		eventsPanelBackground = EventsPanel.backgroundColorIndicator;
