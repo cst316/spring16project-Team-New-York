@@ -21,21 +21,21 @@ public class EventsManagerTest {
 	private static CalendarDate eventDate;
 	private static CalendarDate cd1;
 	private static CalendarDate cd2;
-	private static CalendarDate cd3; 
-	private static CalendarDate cd4; 
+	/*private static CalendarDate cd3; 
+	private static CalendarDate cd4;*/ 
 	/// Create Events to test 
 	private static Event ev;
 	private static Event ev2;
-	private static Event ev3;
-	private static Event ev4;
+	/*private static Event ev3;
+	private static Event ev4;*/
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		eventDate = new CalendarDate(7,5,2016);
 		cd1 = new CalendarDate(11,2,2016);
 		cd2 = new CalendarDate(12,3, 2016);
-		cd3 = new CalendarDate(10,4, 2017);
-		cd4 = new CalendarDate(29,2, 2016);
+		/*cd3 = new CalendarDate(10,4, 2017);
+		cd4 = new CalendarDate(29,2, 2016);*/
 	}
 
 	@AfterClass
@@ -67,7 +67,7 @@ public class EventsManagerTest {
 		assertEquals(0, EventsManager.getNumberOfEventsForToday());//one event today
 	}*/
 
-	@Test
+	/*@Test
 	public void getNumberOfStoredItemsTest()
 	{
 		assertEquals(0,EventsManager.getNumberOfStoredItems());
@@ -105,7 +105,7 @@ public class EventsManagerTest {
 		EventsManager.flushEventsVector();
 		/// Check to see if there are 0 items in vector
 		assertEquals(0,EventsManager.getNumberOfStoredItems());	
-	}
+	}*/
 	
 	@Test
 	public void recoverDeletedEvents()  {
