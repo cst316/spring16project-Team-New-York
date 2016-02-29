@@ -69,8 +69,6 @@ public class EventImpl implements Event, Comparable {
     public String getEndTimeString() {
         return Local.getEndTimeString(getEndHour(), getEndMinute());
     }
-    
-        
   
     /**
      * @see net.sf.memoranda.Event#getText()

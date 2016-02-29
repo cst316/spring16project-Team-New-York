@@ -1,12 +1,6 @@
 package net.sf.memoranda.tests;
 
 import static org.junit.Assert.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import org.junit.Before;
 import org.junit.Test;
 
 import net.sf.memoranda.ui.AgendaPanel;
@@ -79,19 +73,10 @@ public class ThemeChangeObserverTest
 	static String darkGrey = "java.awt.Color[r=64,g=64,b=64]";
 
 
+
 	@Test
 	public void test() 
 	{
-		/*
-		testFrame = new AppFrame();		
-		testEventsPanel = new EventsPanel(null);
-		testAgendaPanel = new AgendaPanel(null);
-		testTaskPanel = new TaskPanel(null);
-		testNotesControlPanel = new NotesControlPanel();
-		testNotesListPanel = new NotesListPanel();
-		testProjectsPanel = new ProjectsPanel();
-		testResourcesPanel = new ResourcesPanel();
-		*/
 		workPanelBackground = testWorkPanel.backgroundColorIndicator;
 		workPanelForeground = testWorkPanel.foregroundColorIndicator;
 		eventsPanelBackground = testEventsPanel.backgroundColorIndicator;
