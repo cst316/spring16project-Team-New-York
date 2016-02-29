@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import net.sf.memoranda.ui.AgendaPanel;
 import net.sf.memoranda.ui.AppFrame;
+import net.sf.memoranda.ui.DailyItemsPanel;
 import net.sf.memoranda.ui.EventsPanel;
 import net.sf.memoranda.ui.NotesControlPanel;
 import net.sf.memoranda.ui.NotesListPanel;
@@ -22,15 +23,16 @@ import net.sf.memoranda.ui.WorkPanel;
  
 public class ThemeChangeObserverTest 
 {
-	private static AppFrame testFrame;
-	private static WorkPanel testWorkPanel;
-	private static EventsPanel testEventsPanel;
-	private static AgendaPanel testAgendaPanel;
-	private static TaskPanel testTaskPanel;
-	private static NotesControlPanel testNotesControlPanel;
-	private static NotesListPanel testNotesListPanel;
-	private static ProjectsPanel testProjectsPanel;
-	private static ResourcesPanel testResourcesPanel;
+	private AppFrame testFrame = new AppFrame();
+	private WorkPanel testWorkPanel = new WorkPanel();
+	private DailyItemsPanel dip = new DailyItemsPanel(testWorkPanel);
+	private EventsPanel testEventsPanel = new EventsPanel(dip);
+	private AgendaPanel testAgendaPanel = new AgendaPanel(dip);
+	private TaskPanel testTaskPanel = new TaskPanel(dip);
+	private NotesControlPanel testNotesControlPanel = new NotesControlPanel();
+	private NotesListPanel testNotesListPanel = new NotesListPanel();
+	private ProjectsPanel testProjectsPanel = new ProjectsPanel();
+	private ResourcesPanel testResourcesPanel = new ResourcesPanel();
 	
 	static String workPanelBackground = null;
 	static String workPanelForeground = null;
@@ -80,8 +82,8 @@ public class ThemeChangeObserverTest
 	@Test
 	public void test() 
 	{
-		testFrame = new AppFrame();
-		testWorkPanel = new WorkPanel();
+		/*
+		testFrame = new AppFrame();		
 		testEventsPanel = new EventsPanel(null);
 		testAgendaPanel = new AgendaPanel(null);
 		testTaskPanel = new TaskPanel(null);
@@ -89,7 +91,7 @@ public class ThemeChangeObserverTest
 		testNotesListPanel = new NotesListPanel();
 		testProjectsPanel = new ProjectsPanel();
 		testResourcesPanel = new ResourcesPanel();
-		
+		*/
 		workPanelBackground = testWorkPanel.backgroundColorIndicator;
 		workPanelForeground = testWorkPanel.foregroundColorIndicator;
 		eventsPanelBackground = testEventsPanel.backgroundColorIndicator;
