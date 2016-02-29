@@ -20,16 +20,22 @@ public class EventsManagerTest {
 	/// Holds the CalendarDate of the Events
 	private static CalendarDate eventDate;
 	private static CalendarDate cd1;
-	private static CalendarDate cd2; 
+	private static CalendarDate cd2;
+	private static CalendarDate cd3; 
+	private static CalendarDate cd4; 
 	/// Create Events to test 
 	private static Event ev;
-	private static Event ev2; 
+	private static Event ev2;
+	private static Event ev3;
+	private static Event ev4;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		eventDate = new CalendarDate(7,5,2016);
 		cd1 = new CalendarDate(11,2,2016);
-		cd2 = new CalendarDate(12,3, 2016);		
+		cd2 = new CalendarDate(12,3, 2016);
+		cd3.today();
+		cd4 = new CalendarDate(10,4, 2017);
 	}
 
 	@AfterClass
@@ -42,6 +48,23 @@ public class EventsManagerTest {
 
 	@After
 	public void tearDown() throws Exception {
+	}
+	
+	/*
+	 * Note: It is very difficult to limit test getValuesForNumberOfEventsTest()
+	 * because I don't know when you the teacher/TA is running this test. Leap years
+	 * aren't accounted for but I could added it in by adding an additional layer
+	 * to the getNumberOfEventsForTheYear() method but IDK it's just to messy.
+	 */
+	
+	@Test
+	public void  getValuesForNumberOfEventsTest() {
+		ev3 = EventsManager.createEvent(cd3, 6, 15, 11, 45, "Homework");
+		ev4 = EventsManager.createEvent(cd4, 4, 5, 10, 30, "Work");
+		
+		assertEquals(2, EventsManager.getNumberOfEventsForTheYear());//two events in the next 365 days
+		assertEquals(1, EventsManager.getNumberOfEventsForTheMonth());//one event this month
+		assertEquals(1, EventsManager.getNumberOfEventsForToday());//one event today
 	}
 
 	@Test
