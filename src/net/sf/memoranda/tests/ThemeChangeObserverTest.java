@@ -2,13 +2,10 @@ package net.sf.memoranda.tests;
 
 import static org.junit.Assert.*;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,17 +22,15 @@ import net.sf.memoranda.ui.WorkPanel;
  
 public class ThemeChangeObserverTest 
 {
-	private static AppFrame testFrame = null;
-	private static JButton testNightThemeChangeButton = null;
-	private static JButton testDayThemeChangeButton = null;
-	private static WorkPanel testWorkPanel = null;
-	private static EventsPanel testEventsPanel = null;
-	private static AgendaPanel testAgendaPanel = null;
-	private static TaskPanel testTaskPanel = null;
-	private static NotesControlPanel testNotesControlPanel = null;
-	private static NotesListPanel testNotesListPanel = null;
-	private static ProjectsPanel testProjectsPanel = null;
-	private static ResourcesPanel testResourcesPanel = null;
+	private static AppFrame testFrame;
+	private static WorkPanel testWorkPanel;
+	private static EventsPanel testEventsPanel;
+	private static AgendaPanel testAgendaPanel;
+	private static TaskPanel testTaskPanel;
+	private static NotesControlPanel testNotesControlPanel;
+	private static NotesListPanel testNotesListPanel;
+	private static ProjectsPanel testProjectsPanel;
+	private static ResourcesPanel testResourcesPanel;
 	
 	static String workPanelBackground = null;
 	static String workPanelForeground = null;
@@ -80,33 +75,12 @@ public class ThemeChangeObserverTest
 	static String black = "java.awt.Color[r=0,g=0,b=0]";
 	static String white = "java.awt.Color[r=255,g=255,b=255]";
 	static String darkGrey = "java.awt.Color[r=64,g=64,b=64]";
-	
-	
-	@Before
-	public void setUp() throws Exception 
+
+
+	@Test
+	public void test() 
 	{
 		testFrame = new AppFrame();
-		testNightThemeChangeButton = new JButton();
-		testNightThemeChangeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                jMenuThemeNightTheme_actionPerformed(e);
-            }
-			private void jMenuThemeNightTheme_actionPerformed(ActionEvent e) {
-				testFrame.setAppTheme("night");	
-			}
-        });
-		testDayThemeChangeButton = new JButton();
-		testDayThemeChangeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                jMenuThemeDayTheme_actionPerformed(e);
-            }
-			private void jMenuThemeDayTheme_actionPerformed(ActionEvent e) {
-				testFrame.setAppTheme("night");	
-			}
-        });
-		testFrame.add(testNightThemeChangeButton);
-		testFrame.add(testDayThemeChangeButton);
-		
 		testWorkPanel = new WorkPanel();
 		testEventsPanel = new EventsPanel(null);
 		testAgendaPanel = new AgendaPanel(null);
@@ -115,12 +89,7 @@ public class ThemeChangeObserverTest
 		testNotesListPanel = new NotesListPanel();
 		testProjectsPanel = new ProjectsPanel();
 		testResourcesPanel = new ResourcesPanel();
-		//testFrame.add(testWorkPanel);
-	}
-
-	@Test
-	public void test() 
-	{
+		
 		workPanelBackground = testWorkPanel.backgroundColorIndicator;
 		workPanelForeground = testWorkPanel.foregroundColorIndicator;
 		eventsPanelBackground = testEventsPanel.backgroundColorIndicator;
@@ -158,7 +127,7 @@ public class ThemeChangeObserverTest
 		
 		/////////////////////////////////////////////////////////////////////
 		testFrame.setAppTheme("night");
-	///////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////
 		
 		workPanelBackground2 = testWorkPanel.backgroundColorIndicator;
 		workPanelForeground2 = testWorkPanel.foregroundColorIndicator;
