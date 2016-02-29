@@ -21,23 +21,23 @@ public class EventsManagerTest {
 	private static CalendarDate eventDate;
 	private static CalendarDate cd1;
 	private static CalendarDate cd2;
-	/*private static CalendarDate cd3; 
-	private static CalendarDate cd4;*/ 
+	private static CalendarDate cd3; 
+	private static CalendarDate cd4;
 	/// Create Events to test 
 	private static Event ev;
 	private static Event ev2;
-	/*private static Event ev3;
-	private static Event ev4;*/
+	private static Event ev3;
+	private static Event ev4;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		eventDate = new CalendarDate(7,5,2016);
 		cd1 = new CalendarDate(11,2,2016);
 		cd2 = new CalendarDate(12,3, 2016);
-		/*cd3 = new CalendarDate(10,4, 2017);
-		cd4 = new CalendarDate(29,2, 2016);*/
+		cd3 = new CalendarDate(10,4, 2017);
+		cd4 = new CalendarDate(29,2, 2016);
 	}
-/*
+
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
@@ -57,7 +57,7 @@ public class EventsManagerTest {
 	 * to the getNumberOfEventsForTheYear() method but IDK it's just to messy.
 	 */
 	
-	/*@Test
+	@Test
 	public void  getValuesForNumberOfEventsTest() {
 		ev3 = EventsManager.createEvent(cd3, 6, 15, 11, 45, "Homework");
 		ev4 = EventsManager.createEvent(cd4, 4, 5, 10, 30, "Work");
@@ -65,9 +65,9 @@ public class EventsManagerTest {
 		assertEquals(2, EventsManager.getNumberOfEventsForTheYear());//two events in the next 365 days
 		assertEquals(1, EventsManager.getNumberOfEventsForTheMonth());//one event this month
 		assertEquals(0, EventsManager.getNumberOfEventsForToday());//one event today
-	}*/
+	}
 
-	/*@Test
+	@Test
 	public void getNumberOfStoredItemsTest()
 	{
 		assertEquals(0,EventsManager.getNumberOfStoredItems());
@@ -133,6 +133,6 @@ public class EventsManagerTest {
 		assertEquals(0,EventsManager.getNumberOfStoredItems()); 
 		/// Check to see if event was recovered. 
 		assertNotNull(EventsManager.getEvent(cd2, 10, 30, 11, 00));		
-	}*/
+	}
 	
 }
